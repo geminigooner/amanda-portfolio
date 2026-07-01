@@ -10,8 +10,9 @@ import { HiddenRoomModal } from './components/HiddenRoomModal';
 import { NavigationMenu } from './components/NavigationMenu';
 import { HeartStorm } from './components/HeartStorm';
 import { AICuratorChat } from './components/AICuratorChat';
+import { ContainmentWing } from './components/ContainmentWing';
 import { PROJECTS, MUSIC, HAIKU, type Project } from './data';
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
 import React, { useRef, useState, useEffect } from 'react';
 import { Play, ExternalLink, Network } from 'lucide-react';
 import { HollowMeridianEvent } from './components/HollowMeridianEvent';
@@ -155,7 +156,20 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [isConstellationOpen, setIsConstellationOpen] = useState(false);
   const [isHiddenRoomOpen, setIsHiddenRoomOpen] = useState(false);
+  const [isContainmentWingOpen, setIsContainmentWingOpen] = useState(false);
   const [authError, setAuthError] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Hidden shortcut: Ctrl+Shift+C (or Cmd+Shift+C on Mac)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'c') {
+        e.preventDefault();
+        setIsContainmentWingOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     try {
@@ -269,7 +283,7 @@ export default function App() {
       <ArchiveBackground />
       <div className="fixed inset-0 noise-overlay z-40 pointer-events-none" />
       <HeartStorm />
-      <AICuratorChat activeSection={activeSection} />
+      <AICuratorChat activeSection={activeSection} onOpenContainmentWing={() => setIsContainmentWingOpen(true)} />
       <ProgressIndicator />
       <HollowMeridianEvent isActive={isHollowEventActive} onClose={() => setIsHollowEventActive(false)} />
       <ProjectDetailModal project={selectedProject} onClose={() => setSelectedProject(null)} />
@@ -282,6 +296,11 @@ export default function App() {
         isOpen={isHiddenRoomOpen}
         onClose={() => setIsHiddenRoomOpen(false)}
       />
+      <AnimatePresence>
+        {isContainmentWingOpen && (
+          <ContainmentWing onClose={() => setIsContainmentWingOpen(false)} />
+        )}
+      </AnimatePresence>
       <Cursor />
       <FloatingPill />
       <NavigationMenu onNavigate={() => setActiveFilter(null)} />

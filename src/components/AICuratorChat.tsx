@@ -14,7 +14,7 @@ type CognitiveState = 'Idle' | 'Listening' | 'Observing' | 'Searching Archive' |
 
 import { initVisitor, getVisitorMemory, trackQuestionClick } from '../firebase';
 
-export function AICuratorChat({ activeSection = '' }: { activeSection?: string }) {
+export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { activeSection?: string, onOpenContainmentWing?: () => void }) {
   const valenImageUrl = "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/F4FFE20F-69BB-4B99-B4E1-224AB27AF33A.png";
 
   const SUGGESTIONS = [
@@ -181,6 +181,7 @@ export function AICuratorChat({ activeSection = '' }: { activeSection?: string }
       const lowerContent = contentToSend.toLowerCase();
       if (lowerContent.includes('vestige')) mockArtifacts.push({ title: 'Vestige Architecture', type: 'Design Notes' });
       if (lowerContent.includes('court')) mockArtifacts.push({ title: 'AI Court Logs', type: 'Database' });
+      if (lowerContent.includes('containment')) mockArtifacts.push({ title: 'Containment Wing', type: 'Classified Archive' });
 
       setMessages(prev => [...prev, {
         id: assistantMessageId,
@@ -341,6 +342,20 @@ export function AICuratorChat({ activeSection = '' }: { activeSection?: string }
                         {message.content.split(/(\[ARTIFACT:[^\]]+\])/).map((part, i) => {
                           if (part.startsWith('[ARTIFACT:') && part.endsWith(']')) {
                             const projectName = part.slice(10, -1);
+                            
+                            if (projectName === 'ContainmentWing') {
+                              return (
+                                <button
+                                  key={i}
+                                  onClick={() => onOpenContainmentWing?.()}
+                                  className="inline-flex items-center gap-1.5 px-2 py-0.5 mx-1 rounded-md bg-red-500/10 hover:bg-red-900/30 border border-red-500/20 hover:border-red-400/50 text-red-400 hover:text-red-300 font-mono text-[10px] uppercase tracking-widest transition-all"
+                                >
+                                  <ShieldAlert className="w-3 h-3" />
+                                  Access Containment Wing
+                                </button>
+                              );
+                            }
+
                             return (
                               <button
                                 key={i}
