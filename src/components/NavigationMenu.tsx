@@ -4,35 +4,33 @@ import { Layers, X } from 'lucide-react';
 
 interface NavigationMenuProps {
   onNavigate?: () => void;
+  onOpenValen?: () => void;
+  onOpenGraph?: () => void;
+  onOpenContainment?: () => void;
 }
 
 const DIVISIONS = [
-  { id: 'hero', label: 'Arrival' },
+  { id: 'hero', label: 'Archive Entrance' },
   { id: 'crown-works', label: 'Crown Works' },
-  { id: 'companion-systems', label: 'Companion Systems' },
-  { id: 'synthetic-media', label: 'Synthetic Media Lab' },
-  { id: 'browser-lab', label: 'Browser Laboratory' },
-  { id: 'philosophy', label: 'Philosophy + Research' },
-  { id: 'gallery', label: 'Digital Gallery' },
-  { id: 'archive', label: 'Archive' }
+  { id: 'hollow-meridian', label: 'Hollow Meridian' },
+  { id: 'publications', label: 'Publications' },
+  { id: 'field-notes', label: 'Field Notes' },
+  { id: 'about', label: 'About' }
 ];
 
-export function NavigationMenu({ onNavigate }: NavigationMenuProps) {
+export function NavigationMenu({ onNavigate, onOpenValen, onOpenGraph, onOpenContainment }: NavigationMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     if (onNavigate) {
       onNavigate();
     }
-    
-    // Use a small timeout to allow React to render the sections if they were hidden by a filter
     setTimeout(() => {
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
     }, 50);
-    
     setIsOpen(false);
   };
 
@@ -40,7 +38,7 @@ export function NavigationMenu({ onNavigate }: NavigationMenuProps) {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 left-6 z-[95] w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md"
+        className="fixed bottom-6 left-6 z-[95] w-12 h-12 bg-[#0a0a0a] border border-[#222] rounded-sm flex items-center justify-center text-[#888] hover:text-[#eaeaea] hover:bg-[#111] hover:border-[#444] transition-all"
       >
         <Layers size={18} />
       </button>
@@ -52,15 +50,15 @@ export function NavigationMenu({ onNavigate }: NavigationMenuProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-24 left-6 z-[95] w-64 glass-panel border border-white/10 rounded-2xl overflow-hidden p-2"
+            className="fixed bottom-24 left-6 z-[95] w-64 bg-[#0a0a0a] border border-[#222] rounded-sm overflow-hidden p-2 shadow-2xl"
           >
-            <div className="flex items-center justify-between p-4 mb-2 border-b border-white/5">
-              <span className="font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase">
+            <div className="flex items-center justify-between p-4 mb-2 border-b border-[#222]">
+              <span className="font-mono text-[10px] tracking-[0.2em] text-[#888] uppercase">
                 Directory
               </span>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="text-white/30 hover:text-white transition-colors"
+                className="text-[#888] hover:text-[#eaeaea] transition-colors"
               >
                 <X size={14} />
               </button>
@@ -71,14 +69,40 @@ export function NavigationMenu({ onNavigate }: NavigationMenuProps) {
                 <button
                   key={div.id}
                   onClick={() => scrollToSection(div.id)}
-                  className="text-left px-4 py-3 rounded-lg text-sm text-white/70 hover:text-white hover:bg-white/5 transition-all font-light tracking-wide flex items-center justify-between group"
+                  className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#eaeaea] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
                 >
                   <span>{div.label}</span>
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity text-teal-400 font-mono text-[9px] uppercase tracking-widest">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#06b6d4] font-mono text-[9px] uppercase tracking-widest">
                     Jump
                   </span>
                 </button>
               ))}
+              
+              <div className="h-px bg-[#222] my-2 mx-2" />
+              
+              <button
+                onClick={() => { onOpenValen?.(); setIsOpen(false); }}
+                className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#eaeaea] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
+              >
+                <span>Ask VΛLEN</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#06b6d4] font-mono text-[9px] uppercase tracking-widest">Open</span>
+              </button>
+
+              <button
+                onClick={() => { onOpenGraph?.(); setIsOpen(false); }}
+                className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#eaeaea] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
+              >
+                <span>Research Graph</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#06b6d4] font-mono text-[9px] uppercase tracking-widest">Open</span>
+              </button>
+
+              <button
+                onClick={() => { onOpenContainment?.(); setIsOpen(false); }}
+                className="text-left px-4 py-3 rounded-sm text-sm text-[#d946ef] hover:text-[#f0abfc] hover:bg-[#d946ef]/10 transition-all font-light tracking-wide flex items-center justify-between group"
+              >
+                <span>Restricted</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#d946ef] font-mono text-[9px] uppercase tracking-widest">Access</span>
+              </button>
             </div>
           </motion.div>
         )}

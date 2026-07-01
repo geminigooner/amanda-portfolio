@@ -26,7 +26,7 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="relative max-w-2xl w-full glass-panel border border-teal-900/50 rounded-2xl p-8 md:p-12 overflow-hidden"
+          className="relative max-w-2xl w-full bg-[#0a0a0a] border border-[#222] rounded-sm p-8 md:p-12 overflow-hidden shadow-2xl"
         >
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-teal-500/50 to-transparent" />
           
@@ -57,7 +57,7 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-4">
-            <div className="p-4 rounded-xl border border-white/5 bg-white/5 flex items-center justify-between group hover:border-teal-500/30 transition-all cursor-not-allowed opacity-60">
+            <div className="p-4 rounded-sm border border-[#222] bg-[#111] flex items-center justify-between group hover:border-[#888] transition-all cursor-not-allowed opacity-60">
                <div className="flex items-center gap-4">
                  <FileKey className="w-5 h-5 text-white/30 group-hover:text-teal-400 transition-colors" />
                  <div>

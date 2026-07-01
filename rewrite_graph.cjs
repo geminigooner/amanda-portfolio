@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+const fs = require('fs');
+const content = `import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import * as d3 from 'd3-force';
 import { PROJECTS, Project } from '../data';
@@ -64,7 +65,7 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
       });
 
     simulation.alpha(1).restart();
-    return () => { simulation.stop(); };
+    return () => simulation.stop();
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -143,7 +144,7 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
                 return (
                   <g
                     key={node.id}
-                    transform={`translate(${node.x},${node.y})`}
+                    transform={\`translate(\${node.x},\${node.y})\`}
                     onMouseEnter={() => setHoveredNode(node.id)}
                     onMouseLeave={() => setHoveredNode(null)}
                     onClick={() => {
@@ -167,7 +168,7 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
                       y={node.radius + 14}
                       textAnchor="middle"
                       fill={isHighlighted ? "#eaeaea" : "#888"}
-                      className={`font-mono text-[9px] tracking-widest uppercase transition-all duration-300 pointer-events-none ${isHighlighted ? 'opacity-100 font-bold' : 'opacity-0 group-hover:opacity-100'}`}
+                      className={\`font-mono text-[9px] tracking-widest uppercase transition-all duration-300 pointer-events-none \${isHighlighted ? 'opacity-100 font-bold' : 'opacity-0 group-hover:opacity-100'}\`}
                     >
                       {node.project.title}
                     </text>
@@ -188,3 +189,5 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
     </AnimatePresence>
   );
 }
+`;
+fs.writeFileSync('src/components/ConstellationGraph.tsx', content);

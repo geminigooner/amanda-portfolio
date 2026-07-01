@@ -64,15 +64,15 @@ export function GlobalAudio() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
-          className="fixed top-8 right-8 z-[100] w-72 glass-panel clinical-border rounded-2xl p-4 font-mono overflow-hidden"
+          className="fixed top-8 right-8 z-[100] w-72 bg-[#0a0a0a] border border-[#222] rounded-sm p-4 font-mono overflow-hidden shadow-2xl"
           style={{
             boxShadow: isPlaying ? `0 0 40px ${activeSong.color}20, inset 0 0 20px ${activeSong.color}10` : 'none'
           }}
         >
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Volume2 size={12} className="text-white/50" />
-              <span className="text-[9px] tracking-widest text-white/50 uppercase">
+              <Volume2 size={12} className="text-[#888]" />
+              <span className="text-[9px] tracking-widest text-[#888] uppercase">
                 Facility Audio
               </span>
             </div>
@@ -87,24 +87,24 @@ export function GlobalAudio() {
             </div>
           </div>
 
-          <div className="mb-1 truncate text-xs font-bold text-white">
+          <div className="mb-1 truncate text-xs font-bold text-[#eaeaea]">
             {activeSong.title}
           </div>
-          <div className="truncate text-[10px] text-white/50 mb-4">
+          <div className="truncate text-[10px] text-[#555] mb-4">
             {activeSong.vibe}
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={() => (window as any).playTrack(activeSong.id)}
-              className="w-8 h-8 rounded-full flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+              className="w-8 h-8 rounded-sm flex items-center justify-center bg-[#111] hover:bg-[#222] transition-colors border border-[#333] hover:border-[#555]"
               style={{ color: activeSong.color }}
             >
               {isPlaying ? <Square size={12} fill="currentColor" /> : <Play size={12} fill="currentColor" className="ml-0.5" />}
             </button>
-            <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
+            <div className="flex-1 h-1 bg-[#222] overflow-hidden">
               <motion.div 
-                className="h-full rounded-full"
+                className="h-full"
                 style={{ backgroundColor: activeSong.color }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.1, ease: "linear" }}

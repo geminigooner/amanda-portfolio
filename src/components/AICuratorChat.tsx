@@ -95,6 +95,12 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
     }
   }, [isLoading, isStreaming]);
 
+  useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('open-valen', handleOpen);
+    return () => window.removeEventListener('open-valen', handleOpen);
+  }, []);
+
   // Minimize automatically when inactive for 5 minutes
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -119,12 +125,12 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
 
   const getCogStateStyles = () => {
     switch(cogState) {
-      case 'Listening': return 'border-teal-400/50 shadow-[0_0_20px_rgba(45,212,191,0.2)] bg-gradient-to-b from-[#0f172a]/95 to-[#050608]/95';
-      case 'Searching Archive': return 'border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.3)] bg-gradient-to-b from-[#172554]/95 to-[#050608]/95';
-      case 'Dreaming': return 'border-purple-500/40 shadow-[0_0_40px_rgba(168,85,247,0.2)] bg-gradient-to-b from-[#2e1065]/95 to-[#050608]/95';
-      case 'Synthesizing': return 'border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.3)] bg-gradient-to-b from-[#064e3b]/95 to-[#050608]/95';
-      case 'Archive Breach': return 'border-red-500/60 shadow-[0_0_40px_rgba(239,68,68,0.4)] bg-gradient-to-b from-[#450a0a]/95 to-[#050608]/95';
-      default: return 'border-white/10 shadow-2xl bg-gradient-to-b from-[#0a0c10]/95 to-[#050608]/95';
+      case 'Listening': return 'border-teal-500 shadow-[0_0_20px_rgba(20,184,166,0.1)] bg-[#050505]';
+      case 'Searching Archive': return 'border-[#06b6d4] shadow-[0_0_30px_rgba(6,182,212,0.15)] bg-[#050505]';
+      case 'Dreaming': return 'border-[#d946ef] shadow-[0_0_40px_rgba(217,70,239,0.15)] bg-[#050505]';
+      case 'Synthesizing': return 'border-[#10b981] shadow-[0_0_30px_rgba(16,185,129,0.15)] bg-[#050505]';
+      case 'Archive Breach': return 'border-red-500 shadow-[0_0_40px_rgba(239,68,68,0.2)] bg-[#050505]';
+      default: return 'border-[#222] shadow-2xl bg-[#0a0a0a]';
     }
   };
 
@@ -181,7 +187,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
       const lowerContent = contentToSend.toLowerCase();
       if (lowerContent.includes('vestige')) mockArtifacts.push({ title: 'Vestige Architecture', type: 'Design Notes' });
       if (lowerContent.includes('court')) mockArtifacts.push({ title: 'AI Court Logs', type: 'Database' });
-      if (lowerContent.includes('containment')) mockArtifacts.push({ title: 'Containment Wing', type: 'Classified Archive' });
+      if (lowerContent.includes('containment') || lowerContent.includes('chaos') || lowerContent.includes('fail') || lowerContent.includes('weird') || lowerContent.includes('funny')) mockArtifacts.push({ title: 'Containment Wing', type: 'Classified Archive' });
 
       setMessages(prev => [...prev, {
         id: assistantMessageId,
@@ -246,15 +252,13 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
             }}
             className="fixed bottom-6 right-6 z-[99999] group cursor-pointer"
           >
-            <div className="w-16 h-24 rounded-lg overflow-hidden border border-white/10 bg-[#050002]/90 backdrop-blur-xl shadow-[0_0_20px_rgba(20,184,166,0.15)] group-hover:border-teal-500/40 group-hover:shadow-[0_0_30px_rgba(20,184,166,0.3)] transition-all duration-500 flex flex-col relative">
-               <div className="absolute -right-2 top-1/4 w-1 h-1/2 bg-purple-500/50 blur-[8px]" />
-               <div className="absolute -left-2 top-1/4 w-1 h-1/2 bg-teal-500/50 blur-[8px]" />
+            <div className="w-16 h-24 rounded-sm overflow-hidden border border-[#333] bg-[#0a0a0a] shadow-2xl group-hover:border-[#888] transition-all duration-500 flex flex-col relative">
                <div className="flex-1 relative overflow-hidden">
-                  <img src={valenImageUrl} alt="VΛLEN" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050002] via-transparent to-transparent opacity-90" />
+                  <img src={valenImageUrl} alt="VΛLEN" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105 grayscale" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-100" />
                </div>
-               <div className="h-6 flex items-center justify-center bg-[#050002] border-t border-white/5">
-                  <span className="font-mono text-[8px] tracking-[0.3em] text-white/60 group-hover:text-teal-400 transition-colors uppercase">
+               <div className="h-6 flex items-center justify-center bg-[#0a0a0a] border-t border-[#222]">
+                  <span className="font-mono text-[8px] tracking-[0.3em] text-[#888] group-hover:text-[#eaeaea] transition-colors uppercase">
                     VΛLEN
                   </span>
                </div>
@@ -270,7 +274,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className={`fixed bottom-6 right-6 h-[85vh] min-h-[400px] max-h-[850px] w-[calc(100vw-3rem)] md:w-[420px] flex flex-col backdrop-blur-3xl rounded-3xl border z-[99999] overflow-hidden transition-colors duration-1000 ${getCogStateStyles()}`}
+            className={`fixed bottom-6 right-6 h-[85vh] min-h-[400px] max-h-[850px] w-[calc(100vw-3rem)] md:w-[420px] flex flex-col rounded-sm border z-[99999] overflow-hidden transition-colors duration-1000 ${getCogStateStyles()}`}
             onMouseMove={handleActivity}
             onKeyDown={handleActivity}
           >
@@ -295,16 +299,16 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
             </div>
 
             {/* Header */}
-            <div className="flex flex-col items-center justify-center p-6 border-b border-white/5 bg-gradient-to-b from-black/40 to-transparent relative z-10 pt-10">
+            <div className="flex flex-col items-center justify-center p-6 border-b border-[#222] bg-[#0a0a0a] relative z-10 pt-10">
                <button
                   onClick={() => setIsOpen(false)}
-                  className="absolute top-6 right-6 p-2 text-white/40 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 text-[#888] hover:text-[#eaeaea] bg-[#111] hover:bg-[#222] rounded-sm transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
               
                <div className="relative mb-4">
-                  <div className={`w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-1000 overflow-hidden ${isLoading ? 'border-teal-400/80 shadow-[0_0_20px_rgba(45,212,191,0.6)]' : 'border-teal-500/50 shadow-[0_0_15px_rgba(20,184,166,0.3)]'}`}>
+                  <div className={`w-16 h-16 rounded-sm border flex items-center justify-center transition-all duration-1000 overflow-hidden ${isLoading ? 'border-[#06b6d4] shadow-[0_0_20px_rgba(6,182,212,0.3)]' : 'border-[#333]'}`}>
                       {valenImageUrl ? (
                         <img src={valenImageUrl} alt="VΛLEN" className={`w-full h-full object-cover opacity-90 ${isLoading ? 'animate-pulse' : ''}`} />
                       ) : (
@@ -313,9 +317,9 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
                   </div>
                </div>
                
-               <h3 className="font-mono text-sm tracking-[0.2em] text-white/90 uppercase mb-1">VΛLEN</h3>
-               <div className="font-mono text-[9px] tracking-widest text-teal-400 uppercase flex items-center gap-1.5 transition-all duration-500">
-                  <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-pulse" />
+               <h3 className="font-mono text-sm tracking-[0.2em] text-[#eaeaea] uppercase mb-1">VΛLEN</h3>
+               <div className="font-mono text-[9px] tracking-widest text-[#06b6d4] uppercase flex items-center gap-1.5 transition-all duration-500">
+                  <span className="w-1.5 h-1.5 bg-[#06b6d4] rounded-full animate-pulse" />
                   ONLINE
                </div>
             </div>
@@ -330,10 +334,10 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
                   key={message.id}
                   className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}
                 >
-                  <div className={`max-w-[85%] rounded-2xl p-5 ${
+                  <div className={`max-w-[85%] rounded-sm p-5 ${
                     message.role === 'user'
-                      ? 'bg-white/5 border border-white/10 text-white/90 backdrop-blur-md'
-                      : 'bg-black/20 border border-white/[0.03] text-white/70'
+                      ? 'bg-[#111] border border-[#333] text-[#eaeaea]'
+                      : 'bg-transparent border border-[#222] text-[#888]'
                   }`}>
                     {message.role === 'user' ? (
                       <p className="text-[13px] leading-[1.8] whitespace-pre-wrap font-light tracking-wide">{message.content}</p>
@@ -385,14 +389,14 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
                     
                     {/* Excavated Artifacts */}
                     {message.artifacts && message.artifacts.length > 0 && (
-                      <div className="mt-4 pt-4 border-t border-white/10 flex flex-col gap-2">
-                        <span className="font-mono text-[8px] tracking-[0.2em] text-white/40 uppercase">Recovered Artifacts</span>
+                      <div className="mt-4 pt-4 border-t border-[#333] flex flex-col gap-2">
+                        <span className="font-mono text-[8px] tracking-[0.2em] text-[#555] uppercase">Recovered Artifacts</span>
                         {message.artifacts.map((art, idx) => (
-                           <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer group">
-                             <FileText className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
+                           <div key={idx} onClick={() => { if (art.title === 'Containment Wing') onOpenContainmentWing?.(); }} className="flex items-center gap-3 p-3 rounded-sm bg-[#111] border border-[#333] hover:border-[#555] transition-colors cursor-pointer group">
+                             <FileText className="w-4 h-4 text-[#888] group-hover:text-[#eaeaea] transition-colors" />
                              <div>
-                               <div className="text-[11px] font-mono text-white/80 uppercase tracking-wider">{art.title}</div>
-                               <div className="text-[9px] font-mono text-white/40 uppercase tracking-widest">{art.type}</div>
+                               <div className="text-[11px] font-mono text-[#eaeaea] uppercase tracking-wider">{art.title}</div>
+                               <div className="text-[9px] font-mono text-[#555] uppercase tracking-widest">{art.type}</div>
                              </div>
                            </div>
                         ))}
@@ -435,7 +439,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
                           trackQuestionClick();
                           handleSubmit(e as any, suggestion);
                         }}
-                        className="text-[11px] font-light tracking-wide bg-white/[0.03] hover:bg-white/10 text-white/60 hover:text-white border border-white/5 rounded-full px-4 py-2 transition-all duration-500 text-left"
+                        className="text-[10px] font-mono uppercase tracking-widest bg-[#111] hover:bg-[#222] text-[#888] hover:text-[#eaeaea] border border-[#333] hover:border-[#888] rounded-sm px-4 py-2 transition-all duration-300 text-left"
                       >
                         {suggestion}
                       </button>
@@ -447,7 +451,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
             </div>
 
             {/* Input */}
-            <form onSubmit={handleSubmit} className="p-5 border-t border-white/5 bg-black/40 relative z-10">
+            <form onSubmit={handleSubmit} className="p-5 border-t border-[#222] bg-[#0a0a0a] relative z-10">
               <div className="relative flex items-center">
                 <input
                   type="text"
@@ -463,12 +467,12 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
                     if (cogState === 'Listening' && !inputValue) setCogState('Idle');
                   }}
                   placeholder="Ask VΛLEN..."
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl pl-5 pr-12 py-4 text-[13px] font-light tracking-wide text-white placeholder-white/30 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all duration-500"
+                  className="w-full bg-[#111] border border-[#333] rounded-sm pl-4 pr-12 py-4 text-sm font-mono tracking-wide text-[#eaeaea] placeholder-[#555] focus:outline-none focus:border-[#888] focus:bg-[#1a1a1a] transition-all duration-300"
                 />
                 <button
                   type="submit"
                   disabled={!inputValue.trim() || isLoading}
-                  className="absolute right-3 p-2 text-white/30 hover:text-white disabled:opacity-20 transition-colors"
+                  className="absolute right-3 p-2 text-[#555] hover:text-[#eaeaea] disabled:opacity-20 transition-colors"
                 >
                   <Share2 className="w-4 h-4" />
                 </button>

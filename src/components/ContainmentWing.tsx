@@ -116,7 +116,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
         </div>
         <button 
           onClick={onClose}
-          className="p-2 rounded-md hover:bg-[#222] transition-colors text-[#888] hover:text-[#eaeaea]"
+          className="p-2 rounded-sm bg-[#111] border border-[#333] hover:border-[#888] hover:bg-[#222] transition-colors text-[#888] hover:text-[#eaeaea]"
         >
           <X className="w-5 h-5" />
         </button>

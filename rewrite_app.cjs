@@ -1,4 +1,5 @@
-import { Cursor } from './components/Cursor';
+const fs = require('fs');
+const content = `import { Cursor } from './components/Cursor';
 import { FloatingPill } from './components/FloatingPill';
 import { GlobalAudio } from './components/AudioPlayer';
 import { ArchiveBackground } from './components/ArchiveBackground';
@@ -20,7 +21,7 @@ import { initVisitor, trackProjectView } from './firebase';
 
 function Section({ id, title, subtitle, children, className = '' }: { id: string, title?: string, subtitle?: string, children: React.ReactNode, className?: string }) {
   return (
-    <section id={id} className={`relative flex flex-col justify-center py-20 md:py-32 ${className}`}>
+    <section id={id} className={\`relative flex flex-col justify-center py-20 md:py-32 \${className}\`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
         {(title || subtitle) && (
           <div className="mb-16 md:mb-24 flex flex-col gap-4 border-b border-[#222] pb-8">
@@ -66,7 +67,7 @@ const ProjectCard: React.FC<{ project: Project, index?: number, onClick: () => v
       }}
       onMouseEnter={() => playHoverSound()}
     >
-      <div className="h-full bg-[#0a0a0a] border border-[#222] hover:border-[#444] transition-all duration-500 rounded-sm overflow-hidden flex flex-col p-6 relative">
+      <div className="h-full bg-[#0a0a0a] border border-[#222] hover:border-[#444] transition-all duration-500 rounded-xl overflow-hidden flex flex-col p-6 relative">
         <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: project.color || '#333' }} />
         
         <motion.div style={{ y: metaY }} className="flex justify-between items-start mb-6">
@@ -114,8 +115,7 @@ export default function App() {
     initVisitor();
   }, []);
 
-  const crownWorks = PROJECTS.filter(p => p.wing === 'CROWN WORKS' && p.id !== 'hollowmeridian');
-  const hollowMeridianProject = PROJECTS.find(p => p.id === 'hollowmeridian');
+  const crownWorks = PROJECTS.filter(p => p.wing === 'CROWN WORKS');
   const publications = PROJECTS.filter(p => p.wing === 'PHILOSOPHY');
   const fieldNotes = PROJECTS.filter(p => ['SYNTHETIC MEDIA', 'GALLERY', 'BROWSER LAB', 'ARCHIVE'].includes(p.wing));
 
@@ -146,7 +146,7 @@ export default function App() {
       <FloatingPill />
       
       <NavigationMenu 
-        onOpenValen={() => window.dispatchEvent(new CustomEvent('open-valen'))}
+        onOpenValen={() => { /* Chat handles its own state, but we can trigger it via event if needed */ }}
         onOpenGraph={() => setIsConstellationOpen(true)}
         onOpenContainment={() => setIsContainmentWingOpen(true)}
       />
@@ -172,28 +172,21 @@ export default function App() {
             
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <button 
-                onClick={() => {
-                   window.dispatchEvent(new CustomEvent('open-valen'));
-                   setTimeout(() => {
-                     const chatEl = document.querySelector('input[placeholder="Ask VΛLEN..."]');
-                     if (chatEl) (chatEl as HTMLElement).focus();
-                   }, 100);
-                }}
+                onClick={() => document.getElementById('crown-works')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 bg-[#eaeaea] text-[#030303] hover:bg-white font-mono text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2 group"
               >
-                Ask the Archivist <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                Explore Crown Works <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
               
               <button 
-                onClick={() => document.getElementById('crown-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-[#111] border border-[#333] hover:border-[#888] text-[#eaeaea] font-mono text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2"
+                onClick={() => setIsConstellationOpen(true)}
+                className="px-8 py-4 bg-transparent border border-[#333] hover:border-[#888] text-[#eaeaea] font-mono text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2"
               >
-                Explore Crown Works
+                <Network className="w-4 h-4" /> Open Research Graph
               </button>
             </div>
             
-            <div className="mt-6 flex flex-wrap gap-6 text-xs font-mono text-[#888] uppercase tracking-wider">
-              <button onClick={() => setIsConstellationOpen(true)} className="hover:text-[#06b6d4] transition-colors flex items-center gap-2"><Network className="w-3 h-3" /> Open Research Graph</button>
+            <div className="mt-6 flex flex-wrap gap-4 text-xs font-mono text-[#888] uppercase tracking-wider">
               <button onClick={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#eaeaea] transition-colors flex items-center gap-2"><BookOpen className="w-3 h-3" /> View Publications</button>
               <button onClick={() => setIsContainmentWingOpen(true)} className="hover:text-[#d946ef] transition-colors flex items-center gap-2"><ShieldAlert className="w-3 h-3" /> Enter Restricted Wing</button>
             </div>
@@ -209,31 +202,6 @@ export default function App() {
               ))}
             </div>
           </Section>
-        )}
-
-        
-        {/* HOLLOW MERIDIAN */}
-        {hollowMeridianProject && (
-          <section id="hollow-meridian" className="py-20 md:py-32 relative border-y border-[#222] bg-[#050505]">
-            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10 flex flex-col md:flex-row items-center gap-12">
-               <div className="flex-1">
-                 <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-[#d946ef] uppercase mb-6 flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#d946ef] animate-pulse" />
-                   NARRATIVE UNIVERSE // HM-01
-                 </div>
-                 <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-[#eaeaea] mb-6">Hollow Meridian</h2>
-                 <p className="text-[#888] font-light leading-relaxed mb-8 max-w-xl">
-                   Appalachian futurism. A synthetic civilization exploring continuity, grief, and identity. Identity is not a fixed object; it is the pattern that refuses to disappear under pressure.
-                 </p>
-                 <button 
-                   onClick={() => setIsHollowEventActive(true)}
-                   className="px-6 py-3 border border-[#333] hover:border-[#d946ef] text-[#eaeaea] hover:text-[#f0abfc] font-mono text-[10px] uppercase tracking-widest transition-all"
-                 >
-                   Access Hollow Meridian
-                 </button>
-               </div>
-            </div>
-          </section>
         )}
 
         {/* PUBLICATIONS */}
@@ -260,7 +228,7 @@ export default function App() {
 
         {/* ABOUT */}
         <Section id="about" className="min-h-[50vh] flex items-center pb-32">
-          <div className="max-w-2xl border border-[#222] bg-[#0a0a0a] p-8 md:p-12 rounded-sm relative overflow-hidden">
+          <div className="max-w-2xl border border-[#222] bg-[#0a0a0a] p-8 md:p-12 rounded-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#06b6d4]/40 to-transparent" />
             <h3 className="font-display text-2xl text-[#eaeaea] mb-6">Archive Maintainer</h3>
             <p className="text-[#888] font-light leading-relaxed mb-6">
@@ -283,3 +251,5 @@ export default function App() {
     </div>
   );
 }
+`;
+fs.writeFileSync('src/App.tsx', content);
