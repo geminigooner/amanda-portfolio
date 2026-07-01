@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: valen-service
+  labels:
+    app: valen
+spec:
+  type: LoadBalancer # Change to NodePort if testing locally on Minikube/Kind
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: valen

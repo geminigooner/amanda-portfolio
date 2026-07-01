@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valen-backend
+  labels:
+    app: valen
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: valen
+  template:
+    metadata:
+      labels:
+        app: valen
+    spec:
+      containers:
+      - name: valen-app
+        image: valen-backend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: valen-config
+        - secretRef:
+            name: valen-secrets
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10

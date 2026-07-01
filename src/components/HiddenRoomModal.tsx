@@ -1,0 +1,75 @@
+import React from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { X, Lock, FileKey } from 'lucide-react';
+
+interface HiddenRoomModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+        animate={{ opacity: 1, backdropFilter: "blur(12px)" }}
+        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+        transition={{ duration: 0.8 }}
+        className="fixed inset-0 z-[1000000] flex items-center justify-center p-4 md:p-12 bg-[#050002]/90"
+      >
+        <div className="absolute inset-0 pointer-events-none noise-overlay opacity-50" />
+        
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.9, opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          className="relative max-w-2xl w-full glass-panel border border-teal-900/50 rounded-2xl p-8 md:p-12 overflow-hidden"
+        >
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-teal-500/50 to-transparent" />
+          
+          <button 
+            onClick={onClose}
+            className="absolute top-6 right-6 p-2 text-white/30 hover:text-white transition-colors bg-white/5 hover:bg-white/10 rounded-full z-10"
+          >
+            <X size={16} />
+          </button>
+
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-12 h-12 rounded-full border border-teal-500/30 bg-teal-900/20 flex items-center justify-center animate-pulse">
+              <Lock className="w-5 h-5 text-teal-400" />
+            </div>
+            <div>
+              <h2 className="font-mono text-sm tracking-[0.3em] text-teal-400 uppercase">Classified Wing</h2>
+              <div className="font-mono text-[9px] text-white/30 uppercase tracking-widest mt-1">Access Level: Granted</div>
+            </div>
+          </div>
+
+          <div className="prose prose-invert prose-p:text-white/60 prose-p:font-light prose-p:leading-relaxed">
+            <p>
+              This is the archive's basement. Not everything here is meant to be seen. Some experiments break. Some ideas are too chaotic, too dangerous, or too personal.
+            </p>
+            <p>
+              I keep them anyway. You can't understand a structure without studying the scaffolding.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-4">
+            <div className="p-4 rounded-xl border border-white/5 bg-white/5 flex items-center justify-between group hover:border-teal-500/30 transition-all cursor-not-allowed opacity-60">
+               <div className="flex items-center gap-4">
+                 <FileKey className="w-5 h-5 text-white/30 group-hover:text-teal-400 transition-colors" />
+                 <div>
+                   <div className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">Project: Obsidian</div>
+                   <div className="font-mono text-[9px] text-red-400/80 uppercase tracking-widest">[REDACTED BY VΛLEN]</div>
+                 </div>
+               </div>
+               <Lock className="w-4 h-4 text-white/20" />
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
