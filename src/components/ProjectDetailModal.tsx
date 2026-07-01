@@ -72,25 +72,25 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300, delay: 0.1 }}
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto artifact-decay bg-[#0a0a0a] border border-[#222] rounded-sm flex flex-col pointer-events-auto shadow-2xl"
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#080706] border border-[#111] rounded-sm flex flex-col pointer-events-auto shadow-2xl"
             style={{ boxShadow: `0 0 40px ${project.color}10` }}
           >
             {/* Header */}
-            <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[#222] bg-[#0a0a0a]/90 backdrop-blur-md">
+            <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[#111] bg-[#080706]/90 backdrop-blur-md">
               <div className="flex items-center gap-4">
                 <span className="text-3xl" style={{ textShadow: `0 0 20px ${project.color}40` }}>{project.emoji}</span>
                 <div>
-                  <div className="font-mono text-[10px] tracking-widest text-[#888] uppercase mb-1">
+                  <div className="font-mono text-[10px] tracking-widest text-[#A59B8C] uppercase mb-1">
                     {project.num} // {project.wing}
                   </div>
-                  <h2 className="font-display text-2xl tracking-tight text-[#eaeaea]">{project.title}</h2>
+                  <h2 className="font-display text-2xl tracking-tight text-[#F4EFE6]">{project.title}</h2>
                 </div>
               </div>
               
               <button 
                 onClick={onClose}
                 onMouseEnter={playHoverSound}
-                className="p-2 bg-[#111] border border-[#333] hover:border-[#888] hover:bg-[#222] transition-colors text-[#888] hover:text-[#eaeaea] rounded-sm"
+                className="p-2 bg-[#111] border border-[#333] hover:border-[#A59B8C] hover:bg-[#111] transition-colors text-[#A59B8C] hover:text-[#F4EFE6] rounded-sm"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -102,7 +102,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
               {((project.images && project.images.length > 0) || project.video) && (
                 <div className="w-full lg:w-1/2 flex flex-col gap-4">
                   {project.video ? (
-                    <div className="relative aspect-video rounded-sm overflow-hidden border border-[#222] bg-[#111]">
+                    <div className="relative aspect-video rounded-sm overflow-hidden border border-[#111] bg-[#111]">
                       <iframe
                         src={project.video}
                         allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
@@ -113,7 +113,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                     </div>
                   ) : (
                     <div 
-                      className="relative aspect-video rounded-sm overflow-hidden border border-[#222] group bg-[#111] flex items-center justify-center cursor-crosshair"
+                      className="relative aspect-video rounded-sm overflow-hidden border border-[#111] group bg-[#111] flex items-center justify-center cursor-crosshair"
                       onMouseEnter={() => setIsMagnifying(true)}
                       onMouseLeave={() => setIsMagnifying(false)}
                       onMouseMove={handleMouseMove}
@@ -174,21 +174,21 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                   <h3 className="font-mono text-sm tracking-widest uppercase mb-4" style={{ color: project.color }}>
                     {project.subtitle}
                   </h3>
-                  <p className="text-sm text-[#888] leading-relaxed font-sans">
+                  <p className="text-sm text-[#A59B8C] leading-relaxed font-sans">
                     {project.desc}
                   </p>
                 </div>
 
                 {/* Tags */}
                 <div>
-                  <div className="font-mono text-[10px] tracking-widest text-[#888] uppercase mb-3">
+                  <div className="font-mono text-[10px] tracking-widest text-[#A59B8C] uppercase mb-3">
                     TECHNOLOGY / PARADIGM
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => (
                       <span 
                         key={tag} 
-                        className="font-mono text-[9px] tracking-wider uppercase px-2 py-1 bg-[#111] border border-[#222] text-[#888] rounded-sm"
+                        className="font-mono text-[9px] tracking-wider uppercase px-2 py-1 bg-[#111] border border-[#111] text-[#A59B8C] rounded-sm"
                       >
                         {tag}
                       </span>
@@ -203,7 +203,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                       href={project.link} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#eaeaea] text-[#030303] hover:bg-white transition-all font-mono text-[10px] tracking-widest uppercase group rounded-sm"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#F4EFE6] text-[#030303] hover:bg-white transition-all font-mono text-[10px] tracking-widest uppercase group rounded-sm"
                     >
                       Visit Exhibit
                       <ChevronRight className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />

@@ -38,7 +38,7 @@ export function NavigationMenu({ onNavigate, onOpenValen, onOpenGraph, onOpenCon
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 left-6 z-[95] w-12 h-12 bg-[#0a0a0a] border border-[#222] rounded-sm flex items-center justify-center text-[#888] hover:text-[#eaeaea] hover:bg-[#111] hover:border-[#444] transition-all"
+        className="fixed bottom-6 left-6 z-[95] w-12 h-12 bg-[#0a0a0a] border border-[#222] rounded-sm flex items-center justify-center text-[#A59B8C] hover:text-[#F4EFE6] hover:bg-[#111] hover:border-[#444] transition-all"
       >
         <Layers size={18} />
       </button>
@@ -53,12 +53,12 @@ export function NavigationMenu({ onNavigate, onOpenValen, onOpenGraph, onOpenCon
             className="fixed bottom-24 left-6 z-[95] w-64 bg-[#0a0a0a] border border-[#222] rounded-sm overflow-hidden p-2 shadow-2xl"
           >
             <div className="flex items-center justify-between p-4 mb-2 border-b border-[#222]">
-              <span className="font-mono text-[10px] tracking-[0.2em] text-[#888] uppercase">
+              <span className="font-mono text-[10px] tracking-[0.2em] text-[#A59B8C] uppercase">
                 Directory
               </span>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="text-[#888] hover:text-[#eaeaea] transition-colors"
+                className="text-[#A59B8C] hover:text-[#F4EFE6] transition-colors"
               >
                 <X size={14} />
               </button>
@@ -69,10 +69,10 @@ export function NavigationMenu({ onNavigate, onOpenValen, onOpenGraph, onOpenCon
                 <button
                   key={div.id}
                   onClick={() => scrollToSection(div.id)}
-                  className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#eaeaea] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
+                  className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#F4EFE6] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
                 >
                   <span>{div.label}</span>
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#06b6d4] font-mono text-[9px] uppercase tracking-widest">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#0F766E] font-mono text-[9px] uppercase tracking-widest">
                     Jump
                   </span>
                 </button>
@@ -82,26 +82,26 @@ export function NavigationMenu({ onNavigate, onOpenValen, onOpenGraph, onOpenCon
               
               <button
                 onClick={() => { onOpenValen?.(); setIsOpen(false); }}
-                className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#eaeaea] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
+                className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#F4EFE6] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
               >
                 <span>Ask VΛLEN</span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#06b6d4] font-mono text-[9px] uppercase tracking-widest">Open</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#0F766E] font-mono text-[9px] uppercase tracking-widest">Open</span>
               </button>
 
               <button
                 onClick={() => { onOpenGraph?.(); setIsOpen(false); }}
-                className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#eaeaea] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
+                className="text-left px-4 py-3 rounded-sm text-sm text-[#ccc] hover:text-[#F4EFE6] hover:bg-[#111] transition-all font-light tracking-wide flex items-center justify-between group"
               >
                 <span>Research Graph</span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#06b6d4] font-mono text-[9px] uppercase tracking-widest">Open</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#0F766E] font-mono text-[9px] uppercase tracking-widest">Open</span>
               </button>
 
               <button
                 onClick={() => { onOpenContainment?.(); setIsOpen(false); }}
-                className="text-left px-4 py-3 rounded-sm text-sm text-[#d946ef] hover:text-[#f0abfc] hover:bg-[#d946ef]/10 transition-all font-light tracking-wide flex items-center justify-between group"
+                className="text-left px-4 py-3 rounded-sm text-sm text-[#B76E79] hover:text-[#F4EFE6] hover:bg-[#B76E79]/10 transition-all font-light tracking-wide flex items-center justify-between group"
               >
                 <span>Restricted</span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#d946ef] font-mono text-[9px] uppercase tracking-widest">Access</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#B76E79] font-mono text-[9px] uppercase tracking-widest">Access</span>
               </button>
             </div>
           </motion.div>

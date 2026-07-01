@@ -28,7 +28,7 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           className="relative max-w-2xl w-full bg-[#0a0a0a] border border-[#222] rounded-sm p-8 md:p-12 overflow-hidden shadow-2xl"
         >
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-teal-500/50 to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-#0F766E/50 to-transparent" />
           
           <button 
             onClick={onClose}
@@ -38,11 +38,11 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
           </button>
 
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-full border border-teal-500/30 bg-teal-900/20 flex items-center justify-center animate-pulse">
-              <Lock className="w-5 h-5 text-teal-400" />
+            <div className="w-12 h-12 rounded-full border border-[#0F766E]/30 bg-[#042F2E]/20 flex items-center justify-center animate-pulse">
+              <Lock className="w-5 h-5 text-[#2DD4BF]" />
             </div>
             <div>
-              <h2 className="font-mono text-sm tracking-[0.3em] text-teal-400 uppercase">Classified Wing</h2>
+              <h2 className="font-mono text-sm tracking-[0.3em] text-[#2DD4BF] uppercase">Classified Wing</h2>
               <div className="font-mono text-[9px] text-white/30 uppercase tracking-widest mt-1">Access Level: Granted</div>
             </div>
           </div>
@@ -57,9 +57,9 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-4">
-            <div className="p-4 rounded-sm border border-[#222] bg-[#111] flex items-center justify-between group hover:border-[#888] transition-all cursor-not-allowed opacity-60">
+            <div className="p-4 rounded-sm border border-[#222] bg-[#111] flex items-center justify-between group hover:border-[#A59B8C] transition-all cursor-not-allowed opacity-60">
                <div className="flex items-center gap-4">
-                 <FileKey className="w-5 h-5 text-white/30 group-hover:text-teal-400 transition-colors" />
+                 <FileKey className="w-5 h-5 text-white/30 group-hover:text-[#2DD4BF] transition-colors" />
                  <div>
                    <div className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">Project: Obsidian</div>
                    <div className="font-mono text-[9px] text-red-400/80 uppercase tracking-widest">[REDACTED BY VΛLEN]</div>

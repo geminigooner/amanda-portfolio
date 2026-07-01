@@ -71,8 +71,8 @@ export function GlobalAudio() {
         >
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Volume2 size={12} className="text-[#888]" />
-              <span className="text-[9px] tracking-widest text-[#888] uppercase">
+              <Volume2 size={12} className="text-[#A59B8C]" />
+              <span className="text-[9px] tracking-widest text-[#A59B8C] uppercase">
                 Facility Audio
               </span>
             </div>
@@ -87,7 +87,7 @@ export function GlobalAudio() {
             </div>
           </div>
 
-          <div className="mb-1 truncate text-xs font-bold text-[#eaeaea]">
+          <div className="mb-1 truncate text-xs font-bold text-[#F4EFE6]">
             {activeSong.title}
           </div>
           <div className="truncate text-[10px] text-[#555] mb-4">

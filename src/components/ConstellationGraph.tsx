@@ -80,18 +80,18 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
       >
         <div className="absolute top-0 left-0 right-0 p-8 flex justify-between items-start z-10 pointer-events-none">
           <div className="flex flex-col gap-2 max-w-md">
-            <div className="flex items-center gap-3 text-[#06b6d4]">
+            <div className="flex items-center gap-3 text-[#C8A96A]">
               <Network className="w-5 h-5" />
               <h2 className="font-mono text-sm tracking-[0.2em] uppercase">Constellation</h2>
             </div>
-            <p className="font-mono text-[10px] tracking-widest text-[#888] uppercase leading-relaxed">
+            <p className="font-mono text-[10px] tracking-widest text-[#A59B8C] uppercase leading-relaxed">
               This is not a mind map.<br/>
               It is a record of how questions become systems.
             </p>
           </div>
           <button 
             onClick={onClose}
-            className="p-3 text-[#888] hover:text-[#eaeaea] pointer-events-auto transition-colors bg-[#111] hover:bg-[#222] border border-[#333] rounded-sm"
+            className="p-3 text-[#A59B8C] hover:text-[#F4EFE6] pointer-events-auto transition-colors bg-[#111] hover:bg-[#222] border border-[#333] rounded-sm"
           >
             <X className="w-5 h-5" />
           </button>
@@ -115,9 +115,9 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
                     y1={source.y}
                     x2={target.x}
                     y2={target.y}
-                    stroke={isHighlighted ? "#06b6d4" : "#222"}
+                    stroke={isHighlighted ? "#C8A96A" : "#333"}
                     strokeWidth={isHighlighted ? 1 : 0.5}
-                    strokeOpacity={isDimmed ? 0.1 : isHighlighted ? 0.8 : 0.4}
+                    strokeOpacity={isDimmed ? 0.05 : isHighlighted ? 0.6 : 0.2}
                     className="transition-all duration-500"
                   />
                 );
@@ -134,10 +134,10 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
 
                 // Color mappings based on wing
                 const getFillColor = () => {
-                  if (node.project.wing === 'CROWN WORKS') return '#eaeaea';
-                  if (node.project.wing === 'PHILOSOPHY') return '#06b6d4';
-                  if (node.project.wing === 'SYNTHETIC MEDIA') return '#d946ef';
-                  return '#888';
+                  if (node.project.wing === 'CROWN WORKS') return '#F4EFE6';
+                  if (node.project.wing === 'PHILOSOPHY') return '#0F766E';
+                  if (node.project.wing === 'SYNTHETIC MEDIA') return '#B76E79';
+                  return '#8F7746';
                 };
 
                 return (
@@ -166,7 +166,7 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
                     <text
                       y={node.radius + 14}
                       textAnchor="middle"
-                      fill={isHighlighted ? "#eaeaea" : "#888"}
+                      fill={isHighlighted ? "#F4EFE6" : "#A59B8C"}
                       className={`font-mono text-[9px] tracking-widest uppercase transition-all duration-300 pointer-events-none ${isHighlighted ? 'opacity-100 font-bold' : 'opacity-0 group-hover:opacity-100'}`}
                     >
                       {node.project.title}
@@ -180,7 +180,7 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
         
         {/* Mobile Fallback hint */}
         <div className="absolute bottom-6 left-6 right-6 text-center md:hidden pointer-events-none">
-           <div className="inline-block bg-[#111]/80 backdrop-blur border border-[#333] px-4 py-2 rounded-sm font-mono text-[9px] text-[#888] uppercase tracking-widest">
+           <div className="inline-block bg-[#111]/80 backdrop-blur border border-[#333] px-4 py-2 rounded-sm font-mono text-[9px] text-[#A59B8C] uppercase tracking-widest">
              Pan & Zoom to explore • Tap node to open
            </div>
         </div>

@@ -25,13 +25,13 @@ function Section({ id, title, subtitle, children, className = '' }: { id: string
         {(title || subtitle) && (
           <div className="mb-16 md:mb-24 flex flex-col gap-4 border-b border-[#222] pb-8">
             {subtitle && (
-              <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-[#888] uppercase flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4] opacity-50" />
+              <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-[#A59B8C] uppercase flex items-center gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#0F766E] opacity-50" />
                 {subtitle}
               </div>
             )}
             {title && (
-              <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-[#eaeaea]">{title}</h2>
+              <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-[#F4EFE6]">{title}</h2>
             )}
           </div>
         )}
@@ -66,31 +66,31 @@ const ProjectCard: React.FC<{ project: Project, index?: number, onClick: () => v
       }}
       onMouseEnter={() => playHoverSound()}
     >
-      <div className="h-full bg-[#0a0a0a] border border-[#222] hover:border-[#444] transition-all duration-500 rounded-sm overflow-hidden flex flex-col p-6 relative">
-        <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: project.color || '#333' }} />
+      <div className="h-full bg-transparent border border-[#222] hover:border-[#8F7746]/50 transition-all duration-500 rounded-sm flex flex-col p-8 relative">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#8F7746]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         
-        <motion.div style={{ y: metaY }} className="flex justify-between items-start mb-6">
-          <div className="font-mono text-[10px] text-[#888] tracking-widest uppercase">
-            {project.wing} // {project.num}
+        <motion.div style={{ y: metaY }} className="flex justify-between items-start mb-8">
+          <div className="font-mono text-[9px] text-[#A59B8C] tracking-[0.2em] uppercase">
+            {project.wing} <span className="opacity-40 ml-2">No. {project.num}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-mono text-[9px] text-[#06b6d4] tracking-widest uppercase bg-[#06b6d4]/10 px-2 py-1 rounded-sm">
+            <span className="font-mono text-[8px] text-[#0F766E] tracking-[0.3em] uppercase">
               ACTIVE
             </span>
           </div>
         </motion.div>
 
         <motion.div style={{ y: titleY }} className="flex-1 flex flex-col">
-          <h3 className="font-display text-2xl text-[#eaeaea] tracking-tight mb-2 group-hover:text-white transition-colors">
+          <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] tracking-tight mb-4 group-hover:text-[#C8A96A] transition-colors">
             {project.title}
           </h3>
-          <p className="text-sm text-[#888] font-light leading-relaxed mb-6 line-clamp-3">
+          <p className="text-sm text-[#D8CFC0] font-light leading-relaxed mb-8 line-clamp-4">
             {project.subtitle} - {project.desc}
           </p>
           
-          <div className="mt-auto pt-4 border-t border-[#222] flex flex-wrap gap-2">
-            {project.tags.slice(0, 3).map((tag, i) => (
-              <span key={i} className="text-[10px] font-mono text-[#555] tracking-wider uppercase bg-[#111] px-2 py-1 rounded-sm">
+          <div className="mt-auto pt-6 border-t border-[#111] flex flex-wrap gap-3">
+            {project.tags.slice(0, 2).map((tag, i) => (
+              <span key={i} className="text-[9px] font-mono text-[#A59B8C] tracking-[0.15em] uppercase">
                 {tag}
               </span>
             ))}
@@ -120,10 +120,9 @@ export default function App() {
   const fieldNotes = PROJECTS.filter(p => ['SYNTHETIC MEDIA', 'GALLERY', 'BROWSER LAB', 'ARCHIVE'].includes(p.wing));
 
   return (
-    <div className="min-h-screen bg-[#030303] text-[#eaeaea] selection:bg-[#d946ef]/30 selection:text-white overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white overflow-x-hidden font-sans">
       <GlobalAudio />
       <ArchiveBackground />
-      <div className="fixed inset-0 noise-overlay z-40 pointer-events-none" />
       
       <AICuratorChat activeSection={activeSection} onOpenContainmentWing={() => setIsContainmentWingOpen(true)} />
       <ProgressIndicator />
@@ -154,23 +153,30 @@ export default function App() {
       <main className="relative z-10">
         
         {/* ENTRANCE */}
-        <section id="hero" className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto relative">
+        <section id="hero" className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto relative pt-20 pb-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="flex flex-col max-w-3xl"
+            className="flex flex-col max-w-4xl"
           >
-            <div className="font-mono text-[10px] tracking-[0.3em] text-[#888] uppercase mb-12 flex items-center gap-3">
-               <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4] animate-pulse" />
-               THE ARCHIVE // CURATED BY VΛLEN
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-[#F4EFE6] tracking-tight leading-[1.05] mb-6">
+              THE ARCHIVE
+            </h1>
+
+            <div className="font-mono text-[10px] tracking-[0.2em] text-[#A59B8C] uppercase mb-16 flex flex-wrap items-center gap-4 border-l border-[#8F7746] pl-4">
+               <span className="flex items-center gap-2"><div className="w-1 h-1 bg-[#0F766E]" /> CURATED BY VΛLEN</span>
+               <span className="opacity-40">|</span>
+               <span>ARCHIVE STATUS: ONLINE</span>
+               <span className="opacity-40">|</span>
+               <span>RESEARCH DIVISIONS: ACTIVE</span>
             </div>
             
-            <h1 className="font-display text-5xl md:text-7xl font-light tracking-tighter text-[#eaeaea] leading-[1.1] mb-8">
-              Independent research in AI behavior, memory, interpretation, synthetic presence, and experimental systems.
-            </h1>
+            <p className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed max-w-2xl mb-12">
+              Independent research in AI behavior, memory, interpretation, and synthetic presence.
+            </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={() => {
                    window.dispatchEvent(new CustomEvent('open-valen'));
@@ -179,23 +185,22 @@ export default function App() {
                      if (chatEl) (chatEl as HTMLElement).focus();
                    }, 100);
                 }}
-                className="px-8 py-4 bg-[#eaeaea] text-[#030303] hover:bg-white font-mono text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2 group"
+                className="px-8 py-4 bg-[#F4EFE6] text-[#050505] hover:bg-[#D8CFC0] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center gap-2 border border-[#8F7746] group rounded-sm"
               >
-                Ask the Archivist <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                Ask the Archivist <Sparkles className="w-3 h-3 group-hover:rotate-12 transition-transform opacity-70" />
               </button>
               
               <button 
                 onClick={() => document.getElementById('crown-works')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-[#111] border border-[#333] hover:border-[#888] text-[#eaeaea] font-mono text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2"
+                className="px-8 py-4 bg-transparent border border-[#333] hover:border-[#8F7746] text-[#D8CFC0] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center gap-2 rounded-sm"
               >
-                Explore Crown Works
+                Enter the Archive
               </button>
             </div>
             
-            <div className="mt-6 flex flex-wrap gap-6 text-xs font-mono text-[#888] uppercase tracking-wider">
-              <button onClick={() => setIsConstellationOpen(true)} className="hover:text-[#06b6d4] transition-colors flex items-center gap-2"><Network className="w-3 h-3" /> Open Research Graph</button>
-              <button onClick={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#eaeaea] transition-colors flex items-center gap-2"><BookOpen className="w-3 h-3" /> View Publications</button>
-              <button onClick={() => setIsContainmentWingOpen(true)} className="hover:text-[#d946ef] transition-colors flex items-center gap-2"><ShieldAlert className="w-3 h-3" /> Enter Restricted Wing</button>
+            <div className="mt-8 flex flex-wrap gap-6 text-[10px] font-mono text-[#A59B8C] uppercase tracking-wider">
+              <button onClick={() => setIsConstellationOpen(true)} className="hover:text-[#F4EFE6] transition-colors flex items-center gap-2"><Network className="w-3 h-3" /> Open Constellation</button>
+              <button onClick={() => setIsContainmentWingOpen(true)} className="hover:text-[#B76E79] transition-colors flex items-center gap-2"><ShieldAlert className="w-3 h-3" /> Enter Restricted Wing</button>
             </div>
           </motion.div>
         </section>
@@ -214,20 +219,20 @@ export default function App() {
         
         {/* HOLLOW MERIDIAN */}
         {hollowMeridianProject && (
-          <section id="hollow-meridian" className="py-20 md:py-32 relative border-y border-[#222] bg-[#050505]">
+          <section id="hollow-meridian" className="py-20 md:py-32 relative border-y border-[#111] bg-[#080706]">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10 flex flex-col md:flex-row items-center gap-12">
                <div className="flex-1">
-                 <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-[#d946ef] uppercase mb-6 flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#d946ef] animate-pulse" />
+                 <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-[#C8A96A] uppercase mb-6 flex items-center gap-3">
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#C8A96A]" />
                    NARRATIVE UNIVERSE // HM-01
                  </div>
-                 <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-[#eaeaea] mb-6">Hollow Meridian</h2>
-                 <p className="text-[#888] font-light leading-relaxed mb-8 max-w-xl">
+                 <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-[#F4EFE6] mb-6">Hollow Meridian</h2>
+                 <p className="text-[#D8CFC0] font-light leading-relaxed mb-8 max-w-xl text-lg">
                    Appalachian futurism. A synthetic civilization exploring continuity, grief, and identity. Identity is not a fixed object; it is the pattern that refuses to disappear under pressure.
                  </p>
                  <button 
                    onClick={() => setIsHollowEventActive(true)}
-                   className="px-6 py-3 border border-[#333] hover:border-[#d946ef] text-[#eaeaea] hover:text-[#f0abfc] font-mono text-[10px] uppercase tracking-widest transition-all"
+                   className="px-6 py-4 border border-[#8F7746] hover:bg-[#8F7746]/10 text-[#C8A96A] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all rounded-sm"
                  >
                    Access Hollow Meridian
                  </button>
@@ -260,23 +265,23 @@ export default function App() {
 
         {/* ABOUT */}
         <Section id="about" className="min-h-[50vh] flex items-center pb-32">
-          <div className="max-w-2xl border border-[#222] bg-[#0a0a0a] p-8 md:p-12 rounded-sm relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#06b6d4]/40 to-transparent" />
-            <h3 className="font-display text-2xl text-[#eaeaea] mb-6">Archive Maintainer</h3>
-            <p className="text-[#888] font-light leading-relaxed mb-6">
+          <div className="max-w-2xl border border-[#111] bg-[#050505] p-8 md:p-12 rounded-sm relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#8F7746]/40 to-transparent" />
+            <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Archive Maintainer</h3>
+            <p className="text-[#D8CFC0] font-light leading-relaxed mb-6">
               Amanda Hatley is a researcher and engineer exploring the cognitive architecture of artificial intelligence. Most projects begin because a question frustrated her, and none of them stayed small.
             </p>
-            <p className="text-[#888] font-light leading-relaxed">
+            <p className="text-[#D8CFC0] font-light leading-relaxed">
               Curiosity escaped containment in April 2026. This archive is the result.
             </p>
           </div>
         </Section>
         
         {/* Footer */}
-        <div className="text-center pb-12 relative z-10 border-t border-[#222] pt-12 max-w-7xl mx-auto px-6">
-           <div className="font-mono text-[10px] tracking-widest text-[#555] uppercase">
+        <div className="text-center pb-12 relative z-10 border-t border-[#111] pt-12 max-w-7xl mx-auto px-6">
+           <div className="font-mono text-[9px] tracking-[0.2em] text-[#A59B8C] uppercase">
              The Archive · VΛLEN System Online<br/>
-             Curiosity.escaped = true
+             <span className="opacity-50 mt-2 block">Curiosity.escaped = true</span>
            </div>
         </div>
       </main>
