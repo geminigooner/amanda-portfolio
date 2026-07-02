@@ -34,7 +34,7 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
     const newNodes: Node[] = PROJECTS.map(p => ({
       id: p.id,
       project: p,
-      radius: p.wing === 'FLAGSHIP INVESTIGATIONS' ? 6 : p.wing === 'PHILOSOPHY' ? 4 : 3,
+      radius: p.wing === 'FLAGSHIP INVESTIGATIONS' ? 6 : ['EXPERIMENTAL SYSTEMS', 'PRACTICAL ENGINEERING'].includes(p.wing) ? 5 : p.wing === 'FIELD NOTES' ? 4 : 3,
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
     }));

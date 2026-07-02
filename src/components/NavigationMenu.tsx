@@ -12,9 +12,10 @@ interface NavigationMenuProps {
 const DIVISIONS = [
   { id: 'hero', label: 'Archive Entrance' },
   { id: 'flagship-investigations', label: 'Flagship Investigations' },
-  { id: 'commercial-systems', label: 'Commercial Systems' },
-  { id: 'archive', label: 'Archive / Early Experiments' },
-  { id: 'publications', label: 'Publications' },
+  { id: 'experimental-systems', label: 'Experimental Systems' },
+  { id: 'practical-engineering', label: 'Practical Engineering' },
+  { id: 'field-notes', label: 'Field Notes' },
+  { id: 'research-notebook', label: 'Research Notebook' },
   { id: 'origin', label: 'Origin' }
 ];
 

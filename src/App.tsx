@@ -118,9 +118,10 @@ export default function App() {
   }, []);
 
   const flagship = PROJECTS.filter(p => p.wing === 'FLAGSHIP INVESTIGATIONS');
-  const commercial = PROJECTS.filter(p => p.wing === 'COMMERCIAL SYSTEMS');
-  const publications = PROJECTS.filter(p => p.wing === 'PHILOSOPHY');
-  const archive = PROJECTS.filter(p => ['ARCHIVE', 'SYNTHETIC MEDIA', 'GALLERY', 'BROWSER LAB', 'COMPANION SYSTEMS'].includes(p.wing));
+  const experimental = PROJECTS.filter(p => p.wing === 'EXPERIMENTAL SYSTEMS');
+  const practical = PROJECTS.filter(p => p.wing === 'PRACTICAL ENGINEERING');
+  const fieldNotes = PROJECTS.filter(p => p.wing === 'FIELD NOTES');
+  const researchNotebook = PROJECTS.filter(p => !['FLAGSHIP INVESTIGATIONS', 'EXPERIMENTAL SYSTEMS', 'PRACTICAL ENGINEERING', 'FIELD NOTES'].includes(p.wing));
 
   return (
     <div className="min-h-screen bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white overflow-x-hidden font-sans">
@@ -204,7 +205,7 @@ export default function App() {
           <Section id="flagship-investigations" title="Flagship Investigations" subtitle="CORE RESEARCH DIVISIONS">
             <div className="mb-12 max-w-2xl">
               <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
-                "I thought these experiments would answer something. They gave me better questions instead."
+                "The questions that wouldn't leave me alone."
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -215,21 +216,37 @@ export default function App() {
           </Section>
         )}
 
-        {/* COMMERCIAL SYSTEMS */}
-        {commercial.length > 0 && (
-          <section id="commercial-systems" className="py-20 md:py-32 relative border-y border-[#111] bg-[#080706]">
+        {/* EXPERIMENTAL SYSTEMS */}
+        {experimental.length > 0 && (
+          <Section id="experimental-systems" title="Experimental Systems" subtitle="MECHANICS & INTERACTIONS">
+            <div className="mb-12 max-w-2xl">
+              <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
+                "I thought these experiments would answer something. They gave me better questions instead."
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+               {experimental.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
+              ))}
+            </div>
+          </Section>
+        )}
+
+        {/* PRACTICAL ENGINEERING */}
+        {practical.length > 0 && (
+          <section id="practical-engineering" className="py-20 md:py-32 relative border-y border-[#111] bg-[#080706]">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10 flex flex-col md:flex-row items-center gap-12">
                <div className="flex-1">
                  <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-[#C8A96A] uppercase mb-6 flex items-center gap-3">
                    <div className="w-1.5 h-1.5 rounded-full bg-[#C8A96A]" />
-                   PRACTICAL APPLICATION
+                   APPLIED CONSTRAINTS
                  </div>
-                 <h2 className="font-display text-4xl md:text-5xl font-light tracking-tight text-[#F4EFE6] mb-6">Commercial Systems</h2>
+                 <h2 className="font-display text-4xl md:text-5xl font-light tracking-tight text-[#F4EFE6] mb-6">Practical Engineering</h2>
                  <p className="text-[#D8CFC0] font-light leading-relaxed mb-12 max-w-2xl text-lg">
                    Not every problem is philosophical. Building practical software taught me constraints that speculative work never could.
                  </p>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   {commercial.map((project, index) => (
+                   {practical.map((project, index) => (
                     <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
                   ))}
                  </div>
@@ -238,32 +255,32 @@ export default function App() {
           </section>
         )}
 
-        {/* ARCHIVE / EARLY EXPERIMENTS */}
-        {archive.length > 0 && (
-          <Section id="archive" title="Archive / Early Experiments" subtitle="RESEARCH COLLECTION">
+        {/* FIELD NOTES */}
+        {fieldNotes.length > 0 && (
+          <Section id="field-notes" title="Field Notes" subtitle="THEORIES & FRAMEWORKS">
             <div className="mb-12 max-w-2xl">
               <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
-                "I've learned to trust curiosity more than certainty."
+                "Writing things down so I can stop thinking about them."
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-               {archive.map((project, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+               {fieldNotes.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
               ))}
             </div>
           </Section>
         )}
 
-        {/* PUBLICATIONS */}
-        {publications.length > 0 && (
-          <Section id="publications" title="Publications" subtitle="PHILOSOPHICAL & THEORETICAL FRAMEWORKS">
+        {/* RESEARCH NOTEBOOK */}
+        {researchNotebook.length > 0 && (
+          <Section id="research-notebook" title="Research Notebook" subtitle="RAW IDEAS & OBSERVATIONS">
             <div className="mb-12 max-w-2xl">
               <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
-                "I kept coming back to these questions."
+                "I've learned to trust curiosity more than certainty."
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-               {publications.map((project, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+               {researchNotebook.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
               ))}
             </div>

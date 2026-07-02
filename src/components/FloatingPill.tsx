@@ -5,9 +5,10 @@ import { Map, Navigation } from 'lucide-react';
 const ZONES = [
   { id: 'hero', label: 'ARRIVAL' },
   { id: 'flagship-investigations', label: 'FLAGSHIP INVESTIGATIONS' },
-  { id: 'commercial-systems', label: 'COMMERCIAL SYSTEMS' },
-  { id: 'archive', label: 'ARCHIVE / EARLY EXPERIMENTS' },
-  { id: 'publications', label: 'PUBLICATIONS' },
+  { id: 'experimental-systems', label: 'EXPERIMENTAL SYSTEMS' },
+  { id: 'practical-engineering', label: 'PRACTICAL ENGINEERING' },
+  { id: 'field-notes', label: 'FIELD NOTES' },
+  { id: 'research-notebook', label: 'RESEARCH NOTEBOOK' },
   { id: 'origin', label: 'ORIGIN' }
 ];
 
@@ -65,7 +66,7 @@ export function FloatingPill() {
               className="glass-panel border border-white/5 hover:border-white/20 rounded-full flex flex-col items-center justify-center overflow-hidden cursor-pointer backdrop-blur-xl"
               animate={{
                 width: isExpanded ? 300 : 160,
-                height: isExpanded ? 340 : 40,
+                height: isExpanded ? 380 : 40,
                 borderRadius: isExpanded ? 24 : 9999,
                 backgroundColor: isExpanded ? 'rgba(5, 0, 2, 0.95)' : 'rgba(5, 0, 2, 0.4)'
               }}
