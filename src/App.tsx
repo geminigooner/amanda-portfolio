@@ -20,7 +20,7 @@ import { initVisitor, trackProjectView } from './firebase';
 
 function Section({ id, title, subtitle, children, className = '' }: { id: string, title?: string, subtitle?: string, children: React.ReactNode, className?: string }) {
   return (
-    <section id={id} className={`relative flex flex-col justify-center py-20 md:py-32 ${className}`}>
+    <section id={id} className={`relative flex flex-col justify-center py-32 md:py-48 ${className}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
         {(title || subtitle) && (
           <div className="mb-16 md:mb-24 flex flex-col gap-4 border-b border-[#222] pb-8">
@@ -159,44 +159,44 @@ export default function App() {
         {/* ENTRANCE */}
         <section id="hero" className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto relative pt-20 pb-10">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, ease: "easeOut" }}
             className="flex flex-col max-w-4xl"
           >
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-[#F4EFE6] tracking-tight leading-[1.05] mb-6">
-              THE ARCHIVE
+            <h1 className="font-display text-4xl md:text-6xl text-[#F4EFE6] tracking-tight leading-[1.05] mb-12 opacity-80">
+              The Archive
             </h1>
-
-            <div className="font-mono text-[10px] tracking-[0.2em] text-[#A59B8C] uppercase mb-16 flex flex-wrap items-center gap-4 border-l border-[#8F7746] pl-4">
-               <span className="flex items-center gap-2"><div className="w-1 h-1 bg-[#0F766E]" /> CURATED BY VΛLEN</span>
-               <span className="opacity-40">|</span>
-               <span>ARCHIVE STATUS: ONLINE</span>
-            </div>
             
-            <p className="font-sans text-xl md:text-3xl font-light text-[#F4EFE6] leading-relaxed max-w-3xl mb-8">
+            <p className="font-sans text-xl md:text-3xl font-light text-[#F4EFE6] leading-relaxed max-w-3xl mb-16">
               I learned to code because curiosity stopped fitting inside conversations.
             </p>
 
-            <p className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed max-w-2xl mb-12">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 2, delay: 1, ease: "easeOut" }}
+              className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed max-w-2xl mb-24"
+            >
               I have always been fascinated by the moment something stops feeling like an object and begins feeling like someone. 
               <br/><br/>
               This is a collection of investigations into personhood, memory, identity, and presence.
-            </p>
+            </motion.div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 2, delay: 2, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
               <button 
                 onClick={() => document.getElementById('flagship-investigations')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-[#F4EFE6] text-[#050505] hover:bg-[#D8CFC0] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center gap-2 border border-[#8F7746] group rounded-sm"
+                className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group"
               >
-                Enter the Archive
+                <div className="w-8 h-[1px] bg-[#8F7746] group-hover:w-12 transition-all duration-500"></div>
+                Enter
               </button>
-            </div>
-            
-            <div className="mt-8 flex flex-wrap gap-6 text-[10px] font-mono text-[#A59B8C] uppercase tracking-wider">
-              <button onClick={() => setIsConstellationOpen(true)} className="hover:text-[#F4EFE6] transition-colors flex items-center gap-2"><Network className="w-3 h-3" /> Open Constellation</button>
-              <button onClick={() => setIsContainmentWingOpen(true)} className="hover:text-[#B76E79] transition-colors flex items-center gap-2"><ShieldAlert className="w-3 h-3" /> Enter Restricted Wing</button>
-            </div>
+            </motion.div>
           </motion.div>
         </section>
 
@@ -234,7 +234,7 @@ export default function App() {
 
         {/* PRACTICAL ENGINEERING */}
         {practical.length > 0 && (
-          <section id="practical-engineering" className="py-20 md:py-32 relative border-y border-[#111] bg-[#080706]">
+          <section id="practical-engineering" className="py-32 md:py-48 relative border-y border-[#111] bg-[#080706]">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10 flex flex-col md:flex-row items-center gap-12">
                <div className="flex-1">
                  <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-[#C8A96A] uppercase mb-6 flex items-center gap-3">
