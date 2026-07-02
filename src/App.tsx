@@ -84,8 +84,11 @@ const ProjectCard: React.FC<{ project: Project, index?: number, onClick: () => v
           <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] tracking-tight mb-4 group-hover:text-[#C8A96A] transition-colors">
             {project.title}
           </h3>
-          <p className="text-sm text-[#D8CFC0] font-light leading-relaxed mb-8 line-clamp-4">
-            {project.subtitle} - {project.desc}
+          <p className="text-[#C8A96A] font-light leading-relaxed mb-4 text-sm md:text-base italic">
+            "{project.subtitle}"
+          </p>
+          <p className="text-sm text-[#D8CFC0] font-light leading-relaxed mb-8 line-clamp-3">
+            {project.desc}
           </p>
           
           <div className="mt-auto pt-6 border-t border-[#111] flex flex-wrap gap-3">
@@ -168,32 +171,22 @@ export default function App() {
                <span className="flex items-center gap-2"><div className="w-1 h-1 bg-[#0F766E]" /> CURATED BY VΛLEN</span>
                <span className="opacity-40">|</span>
                <span>ARCHIVE STATUS: ONLINE</span>
-               <span className="opacity-40">|</span>
-               <span>RESEARCH DIVISIONS: ACTIVE</span>
             </div>
             
-            <p className="font-sans text-lg md:text-2xl font-light text-[#D8CFC0] leading-relaxed max-w-3xl mb-12">
-              In April 2026, I thought language models could only chat.<br/>
-              By July, I had shipped an archive of experiments exploring how humans and AI think together.
+            <p className="font-sans text-xl md:text-3xl font-light text-[#F4EFE6] leading-relaxed max-w-3xl mb-8">
+              I learned to code because curiosity stopped fitting inside conversations.
+            </p>
+
+            <p className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed max-w-2xl mb-12">
+              I have always been fascinated by the moment something stops feeling like an object and begins feeling like someone. 
+              <br/><br/>
+              This is a collection of investigations into personhood, memory, identity, and presence.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
-                onClick={() => {
-                   window.dispatchEvent(new CustomEvent('open-valen'));
-                   setTimeout(() => {
-                     const chatEl = document.querySelector('input[placeholder="Ask VΛLEN..."]');
-                     if (chatEl) (chatEl as HTMLElement).focus();
-                   }, 100);
-                }}
-                className="px-8 py-4 bg-[#F4EFE6] text-[#050505] hover:bg-[#D8CFC0] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center gap-2 border border-[#8F7746] group rounded-sm"
-              >
-                Ask the Archivist <Sparkles className="w-3 h-3 group-hover:rotate-12 transition-transform opacity-70" />
-              </button>
-              
-              <button 
                 onClick={() => document.getElementById('flagship-investigations')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-transparent border border-[#333] hover:border-[#8F7746] text-[#D8CFC0] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center gap-2 rounded-sm"
+                className="px-8 py-4 bg-[#F4EFE6] text-[#050505] hover:bg-[#D8CFC0] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center gap-2 border border-[#8F7746] group rounded-sm"
               >
                 Enter the Archive
               </button>
@@ -209,6 +202,11 @@ export default function App() {
         {/* FLAGSHIP INVESTIGATIONS */}
         {flagship.length > 0 && (
           <Section id="flagship-investigations" title="Flagship Investigations" subtitle="CORE RESEARCH DIVISIONS">
+            <div className="mb-12 max-w-2xl">
+              <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
+                "I thought these experiments would answer something. They gave me better questions instead."
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {flagship.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
@@ -243,6 +241,11 @@ export default function App() {
         {/* ARCHIVE / EARLY EXPERIMENTS */}
         {archive.length > 0 && (
           <Section id="archive" title="Archive / Early Experiments" subtitle="RESEARCH COLLECTION">
+            <div className="mb-12 max-w-2xl">
+              <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
+                "I've learned to trust curiosity more than certainty."
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                {archive.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
@@ -254,6 +257,11 @@ export default function App() {
         {/* PUBLICATIONS */}
         {publications.length > 0 && (
           <Section id="publications" title="Publications" subtitle="PHILOSOPHICAL & THEORETICAL FRAMEWORKS">
+            <div className="mb-12 max-w-2xl">
+              <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
+                "I kept coming back to these questions."
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                {publications.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
@@ -269,7 +277,8 @@ export default function App() {
             <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h3>
             <div className="text-[#D8CFC0] font-light leading-relaxed space-y-6 text-lg">
               <p>I didn't set out to become an engineer.<br/>I became curious.</p>
-              <p>About memory.<br/>About intelligence.<br/>About the relationship between people and the systems we build.</p>
+              <p>As a child, I watched Sims instead of controlling them because I became fascinated with their individual personalities. When I photograph birds, I don't wait for perfect compositions. I accidentally capture tiny expressions or gestures that make people briefly anthropomorphize them.</p>
+              <p>Language models became another place where that question appeared. Not because I wanted AI to be human. Because they made me ask old questions in a completely new medium.</p>
               <p>Everything in this archive is an attempt to ask better questions than the one before it.</p>
               <p>Some experiments failed.<br/>Some surprised me.<br/>None of them are finished.</p>
             </div>

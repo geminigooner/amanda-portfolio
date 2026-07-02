@@ -89,10 +89,9 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
             </p>
             
             <div className="max-w-md text-[#D8CFC0] font-sans text-lg font-light leading-relaxed mb-12">
-              <p>Engineering is serious.</p>
-              <p>This room is not.</p>
+              <p>Everything in the main archive is an attempt to ask better questions.</p>
               <br/>
-              <p>It documents the strange, chaotic, occasionally embarrassing process behind building everything else.</p>
+              <p>Everything here is the chaos required to find them.</p>
             </div>
 
             <button

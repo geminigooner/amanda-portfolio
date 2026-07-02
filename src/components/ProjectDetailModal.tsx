@@ -172,9 +172,9 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
               <div className={`flex flex-col gap-8 ${((project.images && project.images.length > 0) || project.video) ? 'w-full lg:w-1/2' : 'w-full'}`}>
                 <div>
                   <h3 className="font-mono text-sm tracking-widest uppercase mb-4" style={{ color: project.color }}>
-                    {project.subtitle}
+                    "{project.subtitle}"
                   </h3>
-                  <p className="text-sm text-[#A59B8C] leading-relaxed font-sans">
+                  <p className="text-base text-[#D8CFC0] leading-relaxed font-sans font-light">
                     {project.desc}
                   </p>
                 </div>
