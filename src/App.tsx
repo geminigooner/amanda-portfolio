@@ -114,10 +114,10 @@ export default function App() {
     initVisitor();
   }, []);
 
-  const crownWorks = PROJECTS.filter(p => p.wing === 'CROWN WORKS' && p.id !== 'hollowmeridian');
-  const hollowMeridianProject = PROJECTS.find(p => p.id === 'hollowmeridian');
+  const flagship = PROJECTS.filter(p => p.wing === 'FLAGSHIP INVESTIGATIONS');
+  const commercial = PROJECTS.filter(p => p.wing === 'COMMERCIAL SYSTEMS');
   const publications = PROJECTS.filter(p => p.wing === 'PHILOSOPHY');
-  const fieldNotes = PROJECTS.filter(p => ['SYNTHETIC MEDIA', 'GALLERY', 'BROWSER LAB', 'ARCHIVE'].includes(p.wing));
+  const archive = PROJECTS.filter(p => ['ARCHIVE', 'SYNTHETIC MEDIA', 'GALLERY', 'BROWSER LAB', 'COMPANION SYSTEMS'].includes(p.wing));
 
   return (
     <div className="min-h-screen bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white overflow-x-hidden font-sans">
@@ -172,8 +172,9 @@ export default function App() {
                <span>RESEARCH DIVISIONS: ACTIVE</span>
             </div>
             
-            <p className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed max-w-2xl mb-12">
-              Independent research in AI behavior, memory, interpretation, and synthetic presence.
+            <p className="font-sans text-lg md:text-2xl font-light text-[#D8CFC0] leading-relaxed max-w-3xl mb-12">
+              In April 2026, I thought language models could only chat.<br/>
+              By July, I had shipped an archive of experiments exploring how humans and AI think together.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -191,7 +192,7 @@ export default function App() {
               </button>
               
               <button 
-                onClick={() => document.getElementById('crown-works')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('flagship-investigations')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 bg-transparent border border-[#333] hover:border-[#8F7746] text-[#D8CFC0] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center gap-2 rounded-sm"
               >
                 Enter the Archive
@@ -205,40 +206,49 @@ export default function App() {
           </motion.div>
         </section>
 
-        {/* CROWN WORKS */}
-        {crownWorks.length > 0 && (
-          <Section id="crown-works" title="Crown Works" subtitle="FLAGSHIP RESEARCH DIVISIONS">
+        {/* FLAGSHIP INVESTIGATIONS */}
+        {flagship.length > 0 && (
+          <Section id="flagship-investigations" title="Flagship Investigations" subtitle="CORE RESEARCH DIVISIONS">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {crownWorks.map((project, index) => (
+              {flagship.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
               ))}
             </div>
           </Section>
         )}
 
-        
-        {/* HOLLOW MERIDIAN */}
-        {hollowMeridianProject && (
-          <section id="hollow-meridian" className="py-20 md:py-32 relative border-y border-[#111] bg-[#080706]">
+        {/* COMMERCIAL SYSTEMS */}
+        {commercial.length > 0 && (
+          <section id="commercial-systems" className="py-20 md:py-32 relative border-y border-[#111] bg-[#080706]">
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10 flex flex-col md:flex-row items-center gap-12">
                <div className="flex-1">
                  <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-[#C8A96A] uppercase mb-6 flex items-center gap-3">
                    <div className="w-1.5 h-1.5 rounded-full bg-[#C8A96A]" />
-                   NARRATIVE UNIVERSE // HM-01
+                   PRACTICAL APPLICATION
                  </div>
-                 <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-[#F4EFE6] mb-6">Hollow Meridian</h2>
-                 <p className="text-[#D8CFC0] font-light leading-relaxed mb-8 max-w-xl text-lg">
-                   Appalachian futurism. A synthetic civilization exploring continuity, grief, and identity. Identity is not a fixed object; it is the pattern that refuses to disappear under pressure.
+                 <h2 className="font-display text-4xl md:text-5xl font-light tracking-tight text-[#F4EFE6] mb-6">Commercial Systems</h2>
+                 <p className="text-[#D8CFC0] font-light leading-relaxed mb-12 max-w-2xl text-lg">
+                   Not every problem is philosophical. Building practical software taught me constraints that speculative work never could.
                  </p>
-                 <button 
-                   onClick={() => setIsHollowEventActive(true)}
-                   className="px-6 py-4 border border-[#8F7746] hover:bg-[#8F7746]/10 text-[#C8A96A] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all rounded-sm"
-                 >
-                   Access Hollow Meridian
-                 </button>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                   {commercial.map((project, index) => (
+                    <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
+                  ))}
+                 </div>
                </div>
             </div>
           </section>
+        )}
+
+        {/* ARCHIVE / EARLY EXPERIMENTS */}
+        {archive.length > 0 && (
+          <Section id="archive" title="Archive / Early Experiments" subtitle="RESEARCH COLLECTION">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+               {archive.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
+              ))}
+            </div>
+          </Section>
         )}
 
         {/* PUBLICATIONS */}
@@ -252,28 +262,17 @@ export default function App() {
           </Section>
         )}
 
-        {/* FIELD NOTES */}
-        {fieldNotes.length > 0 && (
-          <Section id="field-notes" title="Field Notes" subtitle="SYNTHETIC MEDIA, GALLERY & EXPERIMENTS">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-               {fieldNotes.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-              ))}
-            </div>
-          </Section>
-        )}
-
-        {/* ABOUT */}
-        <Section id="about" className="min-h-[50vh] flex items-center pb-32">
+        {/* ORIGIN */}
+        <Section id="origin" className="min-h-[50vh] flex items-center pb-32">
           <div className="max-w-2xl border border-[#111] bg-[#050505] p-8 md:p-12 rounded-sm relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#8F7746]/40 to-transparent" />
-            <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Archive Maintainer</h3>
-            <p className="text-[#D8CFC0] font-light leading-relaxed mb-6">
-              Amanda Hatley is a researcher and engineer exploring the cognitive architecture of artificial intelligence. Most projects begin because a question frustrated her, and none of them stayed small.
-            </p>
-            <p className="text-[#D8CFC0] font-light leading-relaxed">
-              Curiosity escaped containment in April 2026. This archive is the result.
-            </p>
+            <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h3>
+            <div className="text-[#D8CFC0] font-light leading-relaxed space-y-6 text-lg">
+              <p>I didn't set out to become an engineer.<br/>I became curious.</p>
+              <p>About memory.<br/>About intelligence.<br/>About the relationship between people and the systems we build.</p>
+              <p>Everything in this archive is an attempt to ask better questions than the one before it.</p>
+              <p>Some experiments failed.<br/>Some surprised me.<br/>None of them are finished.</p>
+            </div>
           </div>
         </Section>
         

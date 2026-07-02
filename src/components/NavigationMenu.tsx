@@ -11,11 +11,11 @@ interface NavigationMenuProps {
 
 const DIVISIONS = [
   { id: 'hero', label: 'Archive Entrance' },
-  { id: 'crown-works', label: 'Crown Works' },
-  { id: 'hollow-meridian', label: 'Hollow Meridian' },
+  { id: 'flagship-investigations', label: 'Flagship Investigations' },
+  { id: 'commercial-systems', label: 'Commercial Systems' },
+  { id: 'archive', label: 'Archive / Early Experiments' },
   { id: 'publications', label: 'Publications' },
-  { id: 'field-notes', label: 'Field Notes' },
-  { id: 'about', label: 'About' }
+  { id: 'origin', label: 'Origin' }
 ];
 
 export function NavigationMenu({ onNavigate, onOpenValen, onOpenGraph, onOpenContainment }: NavigationMenuProps) {

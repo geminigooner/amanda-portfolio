@@ -4,13 +4,11 @@ import { Map, Navigation } from 'lucide-react';
 
 const ZONES = [
   { id: 'hero', label: 'ARRIVAL' },
-  { id: 'crown-works', label: 'CROWN WORKS' },
-  { id: 'companion-systems', label: 'COMPANION SYSTEMS' },
-  { id: 'synthetic-media', label: 'SYNTHETIC MEDIA LAB' },
-  { id: 'browser-lab', label: 'BROWSER LABORATORY' },
-  { id: 'philosophy', label: 'PHILOSOPHY + RESEARCH' },
-  { id: 'gallery', label: 'DIGITAL GALLERY' },
-  { id: 'archive', label: 'ARCHIVE' }
+  { id: 'flagship-investigations', label: 'FLAGSHIP INVESTIGATIONS' },
+  { id: 'commercial-systems', label: 'COMMERCIAL SYSTEMS' },
+  { id: 'archive', label: 'ARCHIVE / EARLY EXPERIMENTS' },
+  { id: 'publications', label: 'PUBLICATIONS' },
+  { id: 'origin', label: 'ORIGIN' }
 ];
 
 export function FloatingPill() {

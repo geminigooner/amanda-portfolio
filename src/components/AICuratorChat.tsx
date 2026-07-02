@@ -51,7 +51,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
     {
       id: '1',
       role: 'assistant',
-      content: "Welcome.\n\nI'm VΛLEN.\n\nCurator of Amanda's archive.\n\nNothing here was built by accident.\n\nTell me what you're curious about."
+      content: "Welcome back.\n\nAccess granted."
     }
   ]);
   const [inputValue, setInputValue] = useState('');

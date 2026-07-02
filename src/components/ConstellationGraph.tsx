@@ -34,7 +34,7 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
     const newNodes: Node[] = PROJECTS.map(p => ({
       id: p.id,
       project: p,
-      radius: p.wing === 'CROWN WORKS' ? 6 : p.wing === 'PHILOSOPHY' ? 4 : 3,
+      radius: p.wing === 'FLAGSHIP INVESTIGATIONS' ? 6 : p.wing === 'PHILOSOPHY' ? 4 : 3,
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
     }));
@@ -134,7 +134,8 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
 
                 // Color mappings based on wing
                 const getFillColor = () => {
-                  if (node.project.wing === 'CROWN WORKS') return '#F4EFE6';
+                  if (node.project.wing === 'FLAGSHIP INVESTIGATIONS') return '#F4EFE6';
+                  if (node.project.wing === 'COMMERCIAL SYSTEMS') return '#C8A96A';
                   if (node.project.wing === 'PHILOSOPHY') return '#0F766E';
                   if (node.project.wing === 'SYNTHETIC MEDIA') return '#B76E79';
                   return '#8F7746';
