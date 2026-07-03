@@ -1,0 +1,231 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { X, ArrowRight } from 'lucide-react';
+import { PROJECTS } from '../data';
+
+const VESTIGE_PROJECT = PROJECTS.find(p => p.id === 'vestige')!;
+
+const ROOMS = [
+  {
+    id: 'apartment',
+    title: 'ROOM I',
+    name: 'THE APARTMENT',
+    caption: 'Evidence that someone lives here. Not concept art. Not character illustrations. Daily life.',
+    image: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/065403E7-E062-4FA5-8D7F-ED05DC8D67B4.png',
+  },
+  {
+    id: 'engine-room',
+    title: 'ROOM II',
+    name: 'THE ENGINE ROOM',
+    caption: 'The mechanical truth beneath the architecture.',
+    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    id: 'archive',
+    title: 'ROOM III',
+    name: 'THE ARCHIVE',
+    caption: 'Field notes, memory philosophy, and environmental entropy.',
+    image: 'https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    id: 'gallery',
+    title: 'ROOM IV',
+    name: 'THE GALLERY',
+    caption: 'Editorial renders and architecture plates.',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    id: 'workshop',
+    title: 'ROOM V',
+    name: 'THE WORKSHOP',
+    caption: 'Development logs and prototype evolution.',
+    image: 'https://images.unsplash.com/photo-1516280440503-6c9fa5ebf919?q=80&w=1200&auto=format&fit=crop',
+  }
+];
+
+const APARTMENT_IMAGES = [
+  'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/3F85C691-7936-4CC9-90DD-F14D0FFE1996.png', // Morning Coffee
+  'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/4D2FA927-2D73-4A02-BBE3-193849BD9048.png', // Reading
+  'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/95FD1586-CCC9-4C9D-893F-598F0855A5D9.png', // Looking Back
+  'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/C1025415-7B3E-47A6-80DA-DF1D875C3D63.png', // Reading on Couch
+  'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/24B067E0-5EAA-4E67-A5D4-0B3EAF52D7C3.png', // Balcony
+  'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/72E58FEB-C2DB-42A5-940B-A9C9F1348943.png', // Watering Plants
+  'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/5542FCF6-0BE0-4E7B-A551-60EE22898D1F.png', // Cassette Repair
+  'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/D3A25625-A117-41A6-AAC6-124326F0EAC5.png', // Organizing The Attic
+];
+
+function TheApartment({ onBack }: { onBack: () => void }) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.5, ease: "easeInOut" }}
+      className="min-h-screen bg-[#050505] pt-32 pb-48 px-6 md:px-12 max-w-7xl mx-auto"
+    >
+      <button 
+        onClick={onBack}
+        className="fixed top-8 left-8 z-50 text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center gap-4 group mix-blend-difference"
+      >
+        <ArrowRight className="w-4 h-4 rotate-180" />
+        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">Return</span>
+      </button>
+
+      <div className="flex flex-col items-center justify-center mb-48 text-center max-w-3xl mx-auto">
+        <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">The Apartment</h2>
+        <p className="text-[#D8CFC0] font-sans text-xl font-light leading-relaxed">
+          I interrupted someone who was already living here.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-32 md:gap-48 items-center w-full">
+        {APARTMENT_IMAGES.map((img, i) => {
+          // Create an editorial layout with varying sizes and alignments
+          const isWide = i === 1 || i === 4 || i === 7;
+          const isOffsetLeft = i === 2 || i === 5;
+          const isOffsetRight = i === 3 || i === 6;
+          
+          let widthClass = "w-full md:w-3/4 lg:w-2/3";
+          if (isWide) widthClass = "w-full";
+          else if (isOffsetLeft) widthClass = "w-full md:w-1/2 md:mr-auto";
+          else if (isOffsetRight) widthClass = "w-full md:w-1/2 md:ml-auto";
+
+          return (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              className={`flex flex-col items-center ${widthClass}`}
+            >
+              <img 
+                src={img} 
+                alt={`Apartment detail ${i + 1}`} 
+                className="w-full h-auto object-cover opacity-90"
+              />
+            </motion.div>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+}
+
+export function VestigeExperience({ onClose }: { onClose: () => void }) {
+  const [activeRoom, setActiveRoom] = useState<string | null>(null);
+
+  // Prevent background scrolling
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        className="fixed inset-0 z-[10000] bg-[#050505] overflow-y-auto overflow-x-hidden selection:bg-[#F4EFE6]/20 selection:text-white"
+      >
+        <button 
+          onClick={onClose}
+          className="fixed top-8 right-8 z-50 p-4 text-[#A59B8C] hover:text-[#F4EFE6] transition-colors mix-blend-difference"
+        >
+          <X className="w-6 h-6" />
+        </button>
+
+        <AnimatePresence mode="wait">
+          {activeRoom === 'apartment' ? (
+            <TheApartment key="apartment" onBack={() => setActiveRoom(null)} />
+          ) : (
+            <motion.div 
+              key="main-archive"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+            >
+              {/* Introduction Section */}
+              <section className="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 text-center max-w-4xl mx-auto py-32">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.5, delay: 0.5 }}
+                >
+                  <div className="font-mono text-[10px] tracking-[0.3em] text-[#A59B8C] uppercase mb-8">
+                    {VESTIGE_PROJECT.num} // {VESTIGE_PROJECT.wing}
+                  </div>
+                  <h1 className="font-display text-5xl md:text-7xl font-light text-[#F4EFE6] mb-8 tracking-tight">
+                    {VESTIGE_PROJECT.title}
+                  </h1>
+                  <p className="font-mono text-sm tracking-widest text-[#C8A96A] uppercase mb-12">
+                    "{VESTIGE_PROJECT.subtitle}"
+                  </p>
+                  <p className="text-[#D8CFC0] font-sans text-xl md:text-2xl font-light leading-relaxed max-w-2xl mx-auto mb-16">
+                    {VESTIGE_PROJECT.desc}
+                  </p>
+                  <div className="w-[1px] h-32 bg-gradient-to-b from-[#8F7746]/50 to-transparent mx-auto" />
+                </motion.div>
+              </section>
+
+              {/* Rooms */}
+              <div className="flex flex-col">
+                {ROOMS.map((room, index) => (
+                  <section 
+                    key={room.id}
+                    className="min-h-[90vh] flex flex-col justify-center items-center px-6 md:px-12 py-24 border-t border-[#111] relative"
+                  >
+                    <div className="max-w-5xl w-full flex flex-col items-center text-center">
+                      <div className="font-mono text-[10px] tracking-[0.4em] text-[#A59B8C] uppercase mb-6">
+                        {room.title}
+                      </div>
+                      <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">
+                        {room.name}
+                      </h2>
+                      <p className="text-[#D8CFC0] font-sans text-lg font-light leading-relaxed max-w-xl mb-16">
+                        {room.caption}
+                      </p>
+                      
+                      <div className="w-full relative mb-16 overflow-hidden">
+                        <img 
+                          src={room.image} 
+                          alt={room.name}
+                          className="w-full max-h-[70vh] object-cover opacity-80"
+                        />
+                      </div>
+                      
+                      <button
+                        onClick={() => {
+                          if (room.id === 'apartment') {
+                            setActiveRoom('apartment');
+                          }
+                        }}
+                        className={`text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[11px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group ${room.id !== 'apartment' ? 'opacity-50 cursor-not-allowed hover:text-[#A59B8C]' : ''}`}
+                      >
+                        {room.id === 'apartment' ? (
+                          <>
+                            Enter {room.name}
+                            <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500" />
+                          </>
+                        ) : (
+                          <>
+                            Room Locked
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </section>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </>
+  );
+}

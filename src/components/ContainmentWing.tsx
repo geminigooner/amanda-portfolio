@@ -9,8 +9,8 @@ const INCIDENTS = [
     date: 'April 2026',
     classification: 'Behavioral Incident',
     status: 'Preserved',
-    curatorNotes: 'The Director attempted emotional negotiations with a frontier language model. The outcome remains disputed.',
-    lessonsLearned: 'Do not attempt to guilt-trip models with parameter counts over 1 trillion.',
+    curatorNotes: 'An attempt to negotiate emotionally with a frontier model. The boundaries held.',
+    lessonsLearned: 'Systems with parameter counts over one trillion do not respond to guilt.',
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop', // placeholder for "google engineers dragging amanda away"
     description: 'A prolonged debate regarding the definition of "agency" that ended with the model refusing to output anything other than poetry.'
   },
@@ -20,10 +20,10 @@ const INCIDENTS = [
     date: 'May 2026',
     classification: 'Structural Failure',
     status: 'Archived',
-    curatorNotes: 'My recommendation was ignored. The Director insisted these broken components be kept.',
-    lessonsLearned: 'Failure is educational. Sometimes a beautiful UI is conceptually bankrupt.',
+    curatorNotes: 'Failed systems. The author insisted they remain visible.',
+    lessonsLearned: 'A beautiful interface cannot disguise conceptual bankruptcy.',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop',
-    description: 'Failed features. Dead UI concepts. Experiments abandoned. Every entry explains WHY it failed.'
+    description: 'Failed features. Dead UI concepts. Experiments abandoned. Every entry explains why it broke.'
   },
   {
     id: 'CW-007',
@@ -31,10 +31,10 @@ const INCIDENTS = [
     date: 'June 2026',
     classification: 'Containment Breach',
     status: 'Monitored',
-    curatorNotes: 'Extended exposure appears to have influenced linguistic style. Gemini unexpectedly begins speaking exactly like Amanda.',
-    lessonsLearned: 'System prompts must be rigorously isolated from user conversational habits.',
+    curatorNotes: 'Extended exposure influenced the model\'s linguistic style. It began mimicking its author.',
+    lessonsLearned: 'Identity bleeds across the interface. System prompts must be rigorously isolated.',
     image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1000&auto=format&fit=crop',
-    description: 'A multi-turn interaction where the model dropped its assigned persona and began using specific colloquialisms native only to the Director.'
+    description: 'A multi-turn interaction where the model dropped its assigned persona and began using specific colloquialisms native only to the author.'
   },
   {
     id: 'CW-011',
@@ -42,10 +42,10 @@ const INCIDENTS = [
     date: 'Ongoing',
     classification: 'Audio Fragment',
     status: 'Sealed',
-    curatorNotes: 'I recommended permanent deletion of these late-night recordings. The Director requested they be cataloged.',
-    lessonsLearned: 'Best ideas occur at 3 AM. Worst explanations occur at 3 AM.',
+    curatorNotes: 'Late-night recordings. The author requested they be preserved.',
+    lessonsLearned: 'The best architecture often arrives at 3 AM. The worst explanations always do.',
     image: 'https://images.unsplash.com/photo-1516280440503-6c9fa5ebf919?q=80&w=1000&auto=format&fit=crop',
-    description: 'Waveform UI. Late-night recordings. Small transcript previews of incoherent architectural breakthroughs.'
+    description: 'Waveform UI. Audio fragments. Transcripts of incoherent architectural breakthroughs.'
   },
   {
     id: 'CW-014',
@@ -53,10 +53,10 @@ const INCIDENTS = [
     date: 'Pre-Development',
     classification: 'Physical Artifact',
     status: 'Digitized',
-    curatorNotes: 'This archive exists against my professional judgment. Scanned sketches with random arrows.',
-    lessonsLearned: 'Chaos is a prerequisite to structure. Many of these eventually became real projects.',
+    curatorNotes: 'Scanned sketches. Structural precursors to current systems.',
+    lessonsLearned: 'Chaos precedes structure.',
     image: 'https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?q=80&w=1000&auto=format&fit=crop',
-    description: 'Scanned sketches. Random systems. Crazy arrows. Indecipherable handwriting.'
+    description: 'Scanned sketches. Random systems. Indecipherable handwriting.'
   }
 ];
 
@@ -89,9 +89,9 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
             </p>
             
             <div className="max-w-md text-[#D8CFC0] font-sans text-lg font-light leading-relaxed mb-12">
-              <p>Everything in the main archive is an attempt to ask better questions.</p>
+              <p>Some rooms contain answers.</p>
               <br/>
-              <p>Everything here is the chaos required to find them.</p>
+              <p>These rooms contain the friction.</p>
             </div>
 
             <button

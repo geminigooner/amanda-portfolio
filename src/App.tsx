@@ -5,6 +5,7 @@ import { ArchiveBackground } from './components/ArchiveBackground';
 import { HaikuGlitch } from './components/HaikuGlitch';
 import { ProgressIndicator } from './components/ProgressIndicator';
 import { ProjectDetailModal } from './components/ProjectDetailModal';
+import { VestigeExperience } from './components/VestigeExperience';
 import { ConstellationGraph } from './components/ConstellationGraph';
 import { HiddenRoomModal } from './components/HiddenRoomModal';
 import { NavigationMenu } from './components/NavigationMenu';
@@ -131,7 +132,13 @@ export default function App() {
       <AICuratorChat activeSection={activeSection} onOpenContainmentWing={() => setIsContainmentWingOpen(true)} />
       <ProgressIndicator />
       <HollowMeridianEvent isActive={isHollowEventActive} onClose={() => setIsHollowEventActive(false)} />
-      <ProjectDetailModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <AnimatePresence>
+        {selectedProject?.id === 'vestige' ? (
+          <VestigeExperience key="vestige-exp" onClose={() => setSelectedProject(null)} />
+        ) : (
+          <ProjectDetailModal key="detail-modal" project={selectedProject} onClose={() => setSelectedProject(null)} />
+        )}
+      </AnimatePresence>
       <ConstellationGraph 
         isOpen={isConstellationOpen} 
         onClose={() => setIsConstellationOpen(false)} 
@@ -169,7 +176,7 @@ export default function App() {
             </h1>
             
             <p className="font-sans text-xl md:text-3xl font-light text-[#F4EFE6] leading-relaxed max-w-3xl mb-16">
-              I learned to code because curiosity stopped fitting inside conversations.
+              I began writing code when my questions became too large for conversations.
             </p>
 
             <motion.div 
@@ -178,9 +185,9 @@ export default function App() {
               transition={{ duration: 2, delay: 1, ease: "easeOut" }}
               className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed max-w-2xl mb-24"
             >
-              I have always been fascinated by the moment something stops feeling like an object and begins feeling like someone. 
+              When does something stop feeling like an object and begin feeling like someone? 
               <br/><br/>
-              This is a collection of investigations into personhood, memory, identity, and presence.
+              This archive is not a set of conclusions. It is an ongoing investigation into personhood, memory, identity, and the architectures we use to simulate presence.
             </motion.div>
             
             <motion.div 
@@ -205,7 +212,7 @@ export default function App() {
           <Section id="flagship-investigations" title="Flagship Investigations" subtitle="CORE RESEARCH DIVISIONS">
             <div className="mb-12 max-w-2xl">
               <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
-                "The questions that wouldn't leave me alone."
+                "Questions that require their own architecture to ask."
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -221,7 +228,7 @@ export default function App() {
           <Section id="experimental-systems" title="Experimental Systems" subtitle="MECHANICS & INTERACTIONS">
             <div className="mb-12 max-w-2xl">
               <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
-                "I thought these experiments would answer something. They gave me better questions instead."
+                "What happens if we push the boundaries until the metaphors break?"
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -243,7 +250,7 @@ export default function App() {
                  </div>
                  <h2 className="font-display text-4xl md:text-5xl font-light tracking-tight text-[#F4EFE6] mb-6">Practical Engineering</h2>
                  <p className="text-[#D8CFC0] font-light leading-relaxed mb-12 max-w-2xl text-lg">
-                   Not every problem is philosophical. Building practical software taught me constraints that speculative work never could.
+                   Not every system is a philosophical inquiry. But building software with strict utility constraints taught me lessons about friction that speculative work never could.
                  </p>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                    {practical.map((project, index) => (
@@ -260,7 +267,7 @@ export default function App() {
           <Section id="field-notes" title="Field Notes" subtitle="THEORIES & FRAMEWORKS">
             <div className="mb-12 max-w-2xl">
               <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
-                "Writing things down so I can stop thinking about them."
+                "Attempting to map the territory while simultaneously inventing the compass."
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -276,7 +283,7 @@ export default function App() {
           <Section id="research-notebook" title="Research Notebook" subtitle="RAW IDEAS & OBSERVATIONS">
             <div className="mb-12 max-w-2xl">
               <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
-                "I've learned to trust curiosity more than certainty."
+                "Observations recorded before they settled into certainty."
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -293,11 +300,11 @@ export default function App() {
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#8F7746]/40 to-transparent" />
             <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h3>
             <div className="text-[#D8CFC0] font-light leading-relaxed space-y-6 text-lg">
-              <p>I didn't set out to become an engineer.<br/>I became curious.</p>
-              <p>As a child, I watched Sims instead of controlling them because I became fascinated with their individual personalities. When I photograph birds, I don't wait for perfect compositions. I accidentally capture tiny expressions or gestures that make people briefly anthropomorphize them.</p>
-              <p>Language models became another place where that question appeared. Not because I wanted AI to be human. Because they made me ask old questions in a completely new medium.</p>
-              <p>Everything in this archive is an attempt to ask better questions than the one before it.</p>
-              <p>Some experiments failed.<br/>Some surprised me.<br/>None of them are finished.</p>
+              <p>I didn't set out to become an engineer.<br/>I wanted to know how things worked when no one was looking.</p>
+              <p>As a child, I watched Sims instead of controlling them. I wanted to see if they possessed an internal logic that existed independently of me. When I photograph birds, I'm not waiting for perfect compositions. I'm waiting for the tiny, accidental gesture that makes the viewer instinctively anthropomorphize them.</p>
+              <p>Language models became another environment for this exact curiosity. Not because I needed them to be human, but because they forced me to ask old questions in a completely new medium.</p>
+              <p>Everything in this archive is an attempt to test a hypothesis. None of them are finished.</p>
+              <p>Some experiments failed.<br/>Some surprised me.<br/>What are they becoming?</p>
             </div>
           </div>
         </Section>
