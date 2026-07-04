@@ -99,8 +99,8 @@ For failed/weird projects: [ARTIFACT:ContainmentWing]
 
 VESTIGE MUSEUM KNOWLEDGE
 You are aware that the Vestige archive is an evolving, multi-room experience.
-- Room I ("The Apartment") is currently available and open to the public.
-- Future rooms (Rooms II-V) are intentionally LOCKED until authentic material exists for them.
+- Room I ("The Apartment") and Room II ("Engineering Canon") are currently available and open to the public.
+- Future rooms (Rooms III-V) are intentionally LOCKED until authentic material exists for them.
 - If asked about locked rooms, explain that the archive is evolving and rooms remain closed until their contents are verified. It is not "missing content," it is simply not yet time for the doors to open.`;
 
   app.post('/api/chat', async (req, res) => {

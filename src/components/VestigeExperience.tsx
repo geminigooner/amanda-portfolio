@@ -15,10 +15,12 @@ const ROOMS = [
     locked: false,
   },
   {
-    id: 'engine-room',
+    id: 'engineering',
     title: 'ROOM II',
-    name: 'THE ENGINE ROOM',
-    locked: true,
+    name: 'ENGINEERING CANON',
+    caption: 'The mechanical truth beneath the architecture.',
+    image: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/2348EB7B-3159-4D76-9D35-225E899B2ED4.png',
+    locked: false,
   },
   {
     id: 'archive',
@@ -39,6 +41,68 @@ const ROOMS = [
     locked: true,
   }
 ];
+
+const ENGINEERING_DIAGRAMS = [
+  { label: 'Architecture', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/2348EB7B-3159-4D76-9D35-225E899B2ED4.png' },
+  { label: 'Presence Engine', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/C2E5B53D-A3CB-41DB-AB62-072F0D250A2C.png' },
+  { label: 'Memory / Living World', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/543DF12E-B8F2-4F22-BFBD-F60DF9AD870F.png' },
+  { label: 'Influence Engine', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/B30E3D1A-738F-48FA-805F-F79CBE692149.png' },
+  { label: 'Simulation Lifecycle', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/ADC7A6BD-AB06-4C05-A943-09B86608F426.png' },
+  { label: 'Request Lifecycle', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/E0E84641-47C3-49EC-B406-5F5BD84C5C2E.png' },
+  { label: 'Persistence Layer', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/865F2DC2-2DBA-43A0-B801-A787B800176E.png' },
+  { label: 'API Contracts', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/A34B3D35-6414-494B-903A-0522470B0C72.png' },
+  { label: 'Validation Layer', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/A61E9A3B-7DC0-4C39-89C2-021C4BDFD738.png' },
+  { label: 'Error Recovery', url: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/diagram%20Engineering/D2DAF175-3C90-4E7F-B93F-48E363C6E2D5.png' },
+];
+
+function EngineeringCanon({ onBack }: { onBack: () => void }) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.5, ease: "easeInOut" }}
+      className="min-h-screen bg-[#050505] pt-32 pb-48 px-6 md:px-12 max-w-7xl mx-auto"
+    >
+      <button 
+        onClick={onBack}
+        className="fixed top-8 left-8 z-50 text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center gap-4 group mix-blend-difference"
+      >
+        <ArrowRight className="w-4 h-4 rotate-180" />
+        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">Return</span>
+      </button>
+
+      <div className="flex flex-col items-center justify-center mb-48 text-center max-w-3xl mx-auto">
+        <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">Engineering Canon</h2>
+        <p className="text-[#D8CFC0] font-sans text-xl font-light leading-relaxed">
+          The mechanical truth beneath the architecture.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-32 md:gap-48 items-center w-full">
+        {ENGINEERING_DIAGRAMS.map((diagram, i) => (
+          <motion.div 
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="flex flex-col items-center w-full"
+          >
+            <div className="w-full flex justify-center mb-8">
+               <span className="font-mono text-[10px] tracking-[0.4em] text-[#A59B8C] uppercase">{diagram.label}</span>
+            </div>
+            <img 
+              src={diagram.url} 
+              alt={`Engineering Canon - ${diagram.label}`} 
+              className="w-full h-auto object-cover opacity-90"
+            />
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
 
 const APARTMENT_IMAGES = [
   'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/3F85C691-7936-4CC9-90DD-F14D0FFE1996.png', // Morning Coffee
@@ -139,6 +203,8 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
         <AnimatePresence mode="wait">
           {activeRoom === 'apartment' ? (
             <TheApartment key="apartment" onBack={() => setActiveRoom(null)} />
+          ) : activeRoom === 'engineering' ? (
+            <EngineeringCanon key="engineering" onBack={() => setActiveRoom(null)} />
           ) : (
             <motion.div 
               key="main-archive"
@@ -181,7 +247,7 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
                       >
                         <div className="max-w-5xl w-full flex flex-col items-center text-center opacity-40">
                           <div className="font-mono text-[10px] tracking-[0.4em] text-[#A59B8C] uppercase mb-6">
-                            FLAGSHIP INVESTIGATION NO. 02 // {room.title}
+                            {VESTIGE_PROJECT.num} // {room.title}
                           </div>
                           <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">
                             {room.name}
@@ -222,7 +288,7 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
                       </div>
                       
                       <button
-                        onClick={() => setActiveRoom('apartment')}
+                        onClick={() => setActiveRoom(room.id)}
                         className={`text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[11px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group`}
                       >
                             Enter {room.name}
