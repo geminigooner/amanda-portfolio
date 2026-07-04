@@ -12,34 +12,31 @@ const ROOMS = [
     name: 'THE APARTMENT',
     caption: 'Evidence that someone lives here. Not concept art. Not character illustrations. Daily life.',
     image: 'https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/VESTIGE%20ART/065403E7-E062-4FA5-8D7F-ED05DC8D67B4.png',
+    locked: false,
   },
   {
     id: 'engine-room',
     title: 'ROOM II',
     name: 'THE ENGINE ROOM',
-    caption: 'The mechanical truth beneath the architecture.',
-    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200&auto=format&fit=crop',
+    locked: true,
   },
   {
     id: 'archive',
     title: 'ROOM III',
     name: 'THE ARCHIVE',
-    caption: 'Field notes, memory philosophy, and environmental entropy.',
-    image: 'https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1200&auto=format&fit=crop',
+    locked: true,
   },
   {
     id: 'gallery',
     title: 'ROOM IV',
     name: 'THE GALLERY',
-    caption: 'Editorial renders and architecture plates.',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop',
+    locked: true,
   },
   {
     id: 'workshop',
     title: 'ROOM V',
     name: 'THE WORKSHOP',
-    caption: 'Development logs and prototype evolution.',
-    image: 'https://images.unsplash.com/photo-1516280440503-6c9fa5ebf919?q=80&w=1200&auto=format&fit=crop',
+    locked: true,
   }
 ];
 
@@ -175,7 +172,32 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
 
               {/* Rooms */}
               <div className="flex flex-col">
-                {ROOMS.map((room, index) => (
+                {ROOMS.map((room, index) => {
+                  if (room.locked) {
+                    return (
+                      <section 
+                        key={room.id}
+                        className="min-h-[90vh] flex flex-col justify-center items-center px-6 md:px-12 py-24 border-t border-[#111]"
+                      >
+                        <div className="max-w-5xl w-full flex flex-col items-center text-center opacity-40">
+                          <div className="font-mono text-[10px] tracking-[0.4em] text-[#A59B8C] uppercase mb-6">
+                            FLAGSHIP INVESTIGATION NO. 02 // {room.title}
+                          </div>
+                          <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">
+                            {room.name}
+                          </h2>
+                          <div className="font-mono text-[11px] tracking-[0.3em] text-[#A59B8C] uppercase border border-[#A59B8C]/20 px-6 py-2 mb-8">
+                            LOCKED
+                          </div>
+                          <p className="text-[#D8CFC0] font-sans text-sm font-light leading-relaxed max-w-xl">
+                            Available in a future archive release.
+                          </p>
+                        </div>
+                      </section>
+                    );
+                  }
+
+                  return (
                   <section 
                     key={room.id}
                     className="min-h-[90vh] flex flex-col justify-center items-center px-6 md:px-12 py-24 border-t border-[#111] relative"
@@ -200,27 +222,15 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
                       </div>
                       
                       <button
-                        onClick={() => {
-                          if (room.id === 'apartment') {
-                            setActiveRoom('apartment');
-                          }
-                        }}
-                        className={`text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[11px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group ${room.id !== 'apartment' ? 'opacity-50 cursor-not-allowed hover:text-[#A59B8C]' : ''}`}
+                        onClick={() => setActiveRoom('apartment')}
+                        className={`text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[11px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group`}
                       >
-                        {room.id === 'apartment' ? (
-                          <>
                             Enter {room.name}
                             <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500" />
-                          </>
-                        ) : (
-                          <>
-                            Room Locked
-                          </>
-                        )}
                       </button>
                     </div>
                   </section>
-                ))}
+                )})}
               </div>
             </motion.div>
           )}

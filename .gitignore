@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+patch_*.cjs
+rewrite_*.cjs
+update_*.cjs
