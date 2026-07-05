@@ -78,7 +78,7 @@ export function GlobalAudio() {
             </div>
             <div className="flex items-center gap-1.5">
               <div 
-                className="w-1.5 h-1.5 rounded-full animate-pulse" 
+                className="w-1.5 h-1.5 rounded-full motion-safe:animate-pulse" 
                 style={{ backgroundColor: activeSong.color }} 
               />
               <span className="text-[9px] tracking-wider" style={{ color: activeSong.color }}>
@@ -97,7 +97,7 @@ export function GlobalAudio() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => (window as any).playTrack(activeSong.id)}
-              className="w-8 h-8 rounded-sm flex items-center justify-center bg-[#111] hover:bg-[#222] transition-colors border border-[#333] hover:border-[#555]"
+              className="w-8 h-8 rounded-sm flex items-center justify-center bg-[#111] hover:bg-[#222] transition-colors border border-[#333] hover:border-[#555] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]" aria-label={isPlaying ? "Pause music" : "Play music"}
               style={{ color: activeSong.color }}
             >
               {isPlaying ? <Square size={12} fill="currentColor" /> : <Play size={12} fill="currentColor" className="ml-0.5" />}

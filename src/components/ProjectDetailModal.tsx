@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PROJECTS, type Project } from '../data';
 import { playHoverSound } from '../utils/audioEffects';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 export function ProjectDetailModal({ project, onClose }: { project: Project | null, onClose: () => void }) {
+  const modalRef = useFocusTrap(!!project);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMagnifying, setIsMagnifying] = useState(false);
   const [magnifierPosition, setMagnifierPosition] = useState({ x: 0, y: 0 });
@@ -90,9 +92,9 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
               <button 
                 onClick={onClose}
                 onMouseEnter={playHoverSound}
-                className="p-2 bg-[#111] border border-[#333] hover:border-[#A59B8C] hover:bg-[#111] transition-colors text-[#A59B8C] hover:text-[#F4EFE6] rounded-sm"
+                className="p-2 bg-[#111] border border-[#333] hover:border-[#A59B8C] hover:bg-[#111] transition-colors text-[#A59B8C] hover:text-[#F4EFE6] rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]" aria-label="Close project details"
               >
-                <X className="w-5 h-5" />
+                <X aria-hidden="true" className="w-5 h-5" />
               </button>
             </div>
 
@@ -142,15 +144,15 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                         <>
                           <button 
                             onClick={prevImage}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 border border-white/10 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur opacity-0 group-hover:opacity-100 transition-all"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 border border-white/10 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur opacity-0 group-hover:opacity-100 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:opacity-100" aria-label="Previous image"
                           >
-                            <ChevronLeft className="w-5 h-5" />
+                            <ChevronLeft aria-hidden="true" className="w-5 h-5" />
                           </button>
                           <button 
                             onClick={nextImage}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 border border-white/10 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur opacity-0 group-hover:opacity-100 transition-all"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 border border-white/10 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur opacity-0 group-hover:opacity-100 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:opacity-100" aria-label="Next image"
                           >
-                            <ChevronRight className="w-5 h-5" />
+                            <ChevronRight aria-hidden="true" className="w-5 h-5" />
                           </button>
                           
                           <div className="absolute bottom-3 left-1/2 -translate-y-0 -translate-x-1/2 flex gap-1.5 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur border border-white/10">
@@ -204,10 +206,10 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                         href={project.link} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#F4EFE6] text-[#030303] hover:bg-white transition-all font-mono text-[10px] tracking-widest uppercase group rounded-sm flex-1 whitespace-nowrap"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#F4EFE6] text-[#030303] hover:bg-white transition-all font-mono text-[10px] tracking-widest uppercase group rounded-sm flex-1 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]"
                       >
                         {(project as any).sourceLink ? 'Live Demo' : 'Visit Exhibit'}
-                        <ChevronRight className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                        <ChevronRight aria-hidden="true" className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                       </a>
                     )}
                     {(project as any).sourceLink && (
@@ -215,10 +217,10 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                         href={(project as any).sourceLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-transparent border border-[#333] hover:border-[#A59B8C] transition-all font-mono text-[10px] tracking-widest uppercase text-[#A59B8C] hover:text-[#F4EFE6] group rounded-sm flex-1 whitespace-nowrap"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-transparent border border-[#333] hover:border-[#A59B8C] transition-all font-mono text-[10px] tracking-widest uppercase text-[#A59B8C] hover:text-[#F4EFE6] group rounded-sm flex-1 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]"
                       >
                         Source Code
-                        <ChevronRight className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                        <ChevronRight aria-hidden="true" className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                       </a>
                     )}
                   </div>

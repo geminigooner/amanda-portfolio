@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { X } from 'lucide-react';
 import { playHoverSound } from '../utils/audioEffects';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface ConvergencePageProps {
   onClose: () => void;
 }
 
 export function ConvergencePage({ onClose }: ConvergencePageProps) {
+  const modalRef = useFocusTrap(true);
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
+      ref={modalRef as any}
+      tabIndex={-1}
       className="fixed inset-0 z-[1000000] bg-[#050505] text-[#F4EFE6] overflow-y-auto selection:bg-[#B76E79]/30 selection:text-white"
     >
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#8F7746]/20 to-transparent" />
@@ -23,9 +34,9 @@ export function ConvergencePage({ onClose }: ConvergencePageProps) {
         <button 
           onClick={onClose}
           onMouseEnter={playHoverSound}
-          className="p-2 text-[#A59B8C] hover:text-[#F4EFE6] transition-colors rounded-sm"
+          className="p-2 text-[#A59B8C] hover:text-[#F4EFE6] transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]" aria-label="Close Convergence Page"
         >
-          <X className="w-6 h-6" />
+          <X aria-hidden="true" className="w-6 h-6" />
         </button>
       </div>
 

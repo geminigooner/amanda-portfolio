@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
 
 export function ArchiveBackground() {
+  const prefersReducedMotion = useReducedMotion();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -42,10 +44,13 @@ export function ArchiveBackground() {
         ctx.stroke();
       }
 
-      animationFrameId = requestAnimationFrame(draw);
+      if (!prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(draw);
+      }
     };
 
     const handleScroll = () => {
+      if (prefersReducedMotion) draw();
       scrollY = window.scrollY;
     };
     
@@ -60,7 +65,7 @@ export function ArchiveBackground() {
       window.removeEventListener('scroll', handleScroll);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <canvas

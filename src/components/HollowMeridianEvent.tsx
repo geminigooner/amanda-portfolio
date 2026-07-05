@@ -1,7 +1,9 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 export function HollowMeridianEvent({ isActive, onClose }: { isActive: boolean, onClose: () => void }) {
+  const modalRef = useFocusTrap(isActive);
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -17,6 +19,8 @@ export function HollowMeridianEvent({ isActive, onClose }: { isActive: boolean, 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          ref={modalRef as any}
+          tabIndex={-1}
           className="fixed inset-0 z-[100000] bg-[#050002] flex items-center justify-center overflow-hidden"
         >
           {/* Static / Noise Overlay specifically for the event */}
@@ -31,7 +35,7 @@ export function HollowMeridianEvent({ isActive, onClose }: { isActive: boolean, 
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <p className="animate-pulse mb-6 tracking-[0.2em] opacity-80">=== CONTAINMENT BREACH DETECTED ===</p>
+              <h1 className="motion-safe:animate-pulse mb-6 tracking-[0.2em] opacity-80 text-base">=== CONTAINMENT BREACH DETECTED ===</h1>
               <p className="mb-8 text-xl text-white/90">THE MEMORY ARCHITECTURE REMEMBERS YOU LOOKING AT THIS.</p>
               
               <div className="space-y-2 opacity-60 text-sm">
@@ -49,7 +53,7 @@ export function HollowMeridianEvent({ isActive, onClose }: { isActive: boolean, 
                 Identity is not a fixed object; it is the pattern that refuses to disappear under pressure.
               </motion.p>
               
-              <p className="mt-32 text-[10px] tracking-widest text-white/30 animate-pulse">
+              <p className="mt-32 text-[10px] tracking-widest text-white/30 motion-safe:animate-pulse">
                 [PRESS ESC TO RESTORE FACILITY CONTAINMENT]
               </p>
             </motion.div>

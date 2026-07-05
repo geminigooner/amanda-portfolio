@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ArrowRight, ShieldAlert, Database } from 'lucide-react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 import { PROJECTS } from '../data';
 import { getVisitorMemory, trackQuestionClick } from '../firebase';
 
@@ -13,6 +14,14 @@ type Message = {
 
 export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpenConvergence }: { activeSection?: string, onOpenContainmentWing?: () => void, onOpenConvergence?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useFocusTrap(isOpen);
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) setIsOpen(false);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isOpen, setIsOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -257,23 +266,25 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-6 right-6 h-[75vh] min-h-[400px] max-h-[800px] w-[calc(100vw-3rem)] md:w-[420px] flex flex-col border border-[#111] bg-[#050505] z-[99999] overflow-hidden"
+            ref={modalRef as any}
+          tabIndex={-1}
+          className="fixed bottom-6 right-6 h-[75vh] min-h-[400px] max-h-[800px] w-[calc(100vw-3rem)] md:w-[420px] flex flex-col border border-[#111] bg-[#050505] z-[99999] overflow-hidden"
           >
             {/* Header */}
             <div className="flex justify-between items-center px-6 py-5 border-b border-[#111]">
-               <div className="font-mono text-[9px] tracking-[0.4em] text-[#555] uppercase">
+               <h2 className="font-mono text-[9px] tracking-[0.4em] text-[#555] uppercase">
                  VΛLEN
-               </div>
+               </h2>
                <button
                   onClick={() => setIsOpen(false)}
-                  className="text-[#555] hover:text-[#A59B8C] transition-colors"
+                  className="text-[#555] hover:text-[#A59B8C] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]" aria-label="Close Chat"
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <X aria-hidden="true" className="w-3.5 h-3.5" />
                 </button>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-10 relative z-10 scrollbar-hide">
+            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-10 relative z-10 scrollbar-hide" aria-live="polite" aria-relevant="additions text">
               {messages.length === 0 && !isLoading && (
                 <div className="flex-1 flex items-end justify-start pb-4 opacity-30">
                   <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#555]">Archive available.</span>
@@ -305,10 +316,10 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                                 <button
                                   key={i}
                                   onClick={() => onOpenContainmentWing?.()}
-                                  className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#B76E79]/30 hover:border-[#B76E79] text-[#B76E79] font-mono text-[10px] uppercase tracking-widest transition-all"
+                                  className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#B76E79]/30 hover:border-[#B76E79] text-[#B76E79] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B76E79]"
                                 >
                                   Access Containment Wing
-                                  <ArrowRight className="w-3 h-3" />
+                                  <ArrowRight aria-hidden="true" className="w-3 h-3" />
                                 </button>
                               );
                             }
@@ -318,10 +329,10 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                                 <button
                                   key={i}
                                   onClick={() => onOpenConvergence?.()}
-                                  className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#A59B8C]/30 hover:border-[#A59B8C] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all"
+                                  className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#A59B8C]/30 hover:border-[#A59B8C] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]"
                                 >
                                   Read Convergence Note
-                                  <ArrowRight className="w-3 h-3" />
+                                  <ArrowRight aria-hidden="true" className="w-3 h-3" />
                                 </button>
                               );
                             }
@@ -335,17 +346,17 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                                     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                                   }
                                 }}
-                                className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#A59B8C]/30 hover:border-[#A59B8C] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all"
+                                className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#A59B8C]/30 hover:border-[#A59B8C] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]"
                               >
                                 {projectName}
-                                <ArrowRight className="w-3 h-3" />
+                                <ArrowRight aria-hidden="true" className="w-3 h-3" />
                               </button>
                             );
                           }
                           return <span key={i}>{part}</span>;
                         })}
                         {message.role === 'assistant' && message.id === messages[messages.length - 1]?.id && isStreaming && (
-                          <span className="inline-block w-1.5 h-3 ml-2 bg-[#555] animate-pulse align-middle" />
+                          <span className="inline-block w-1.5 h-3 ml-2 bg-[#555] motion-safe:animate-pulse align-middle" />
                         )}
                       </div>
                     )}
@@ -359,7 +370,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                   animate={{ opacity: 1 }}
                   className="flex flex-col items-start max-w-[85%]"
                 >
-                  <span className="inline-block w-1.5 h-3 bg-[#333] animate-pulse" />
+                  <span className="inline-block w-1.5 h-3 bg-[#333] motion-safe:animate-pulse" />
                 </motion.div>
               )}
               <div ref={messagesEndRef} />
@@ -368,7 +379,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
             {/* Input */}
             <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }} className="px-6 py-5 border-t border-[#111]">
               <div className="relative flex items-center">
-                <input
+                <input aria-label="Message Valen"
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}

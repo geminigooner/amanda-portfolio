@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Lock, FileKey } from 'lucide-react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface HiddenRoomModalProps {
   isOpen: boolean;
@@ -8,6 +9,14 @@ interface HiddenRoomModalProps {
 }
 
 export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
+  const modalRef = useFocusTrap(isOpen);
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
   if (!isOpen) return null;
 
   return (
@@ -26,6 +35,8 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          ref={modalRef as any}
+          tabIndex={-1}
           className="relative max-w-2xl w-full bg-[#0a0a0a] border border-[#222] rounded-sm p-8 md:p-12 overflow-hidden shadow-2xl"
         >
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-#0F766E/50 to-transparent" />
@@ -38,7 +49,7 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
           </button>
 
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-full border border-[#0F766E]/30 bg-[#042F2E]/20 flex items-center justify-center animate-pulse">
+            <div className="w-12 h-12 rounded-full border border-[#0F766E]/30 bg-[#042F2E]/20 flex items-center justify-center motion-safe:animate-pulse">
               <Lock className="w-5 h-5 text-[#2DD4BF]" />
             </div>
             <div>

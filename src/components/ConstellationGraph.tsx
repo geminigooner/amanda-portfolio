@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import * as d3 from 'd3-force';
 import { PROJECTS, Project } from '../data';
 import { X, Network } from 'lucide-react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface ConstellationGraphProps {
   isOpen: boolean;
@@ -23,6 +24,14 @@ interface Link extends d3.SimulationLinkDatum<Node> {
 }
 
 export function ConstellationGraph({ isOpen, onClose, onSelectProject }: ConstellationGraphProps) {
+  const modalRef = useFocusTrap(isOpen);
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
   const containerRef = useRef<HTMLDivElement>(null);
   const [nodes, setNodes] = useState<Node[]>([]);
   const [links, setLinks] = useState<Link[]>([]);
@@ -91,7 +100,7 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
           </div>
           <button 
             onClick={onClose}
-            className="p-3 text-[#A59B8C] hover:text-[#F4EFE6] pointer-events-auto transition-colors bg-[#111] hover:bg-[#222] border border-[#333] rounded-sm"
+            className="p-3 text-[#A59B8C] hover:text-[#F4EFE6] pointer-events-auto transition-colors bg-[#111] hover:bg-[#222] border border-[#333] rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]" aria-label="Close Constellation Graph"
           >
             <X className="w-5 h-5" />
           </button>

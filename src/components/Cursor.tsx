@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { motion, useSpring, useMotionValue } from 'motion/react';
+import { motion, useSpring, useMotionValue, useReducedMotion } from 'motion/react';
 
 export function Cursor() {
   const [isVisible, setIsVisible] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
+  const prefersReducedMotion = useReducedMotion();
+  const springConfig = prefersReducedMotion ? { damping: 100, stiffness: 10000, mass: 0.1 } : { damping: 25, stiffness: 300, mass: 0.5 };
   const smoothX = useSpring(cursorX, springConfig);
   const smoothY = useSpring(cursorY, springConfig);
 
@@ -36,6 +37,7 @@ export function Cursor() {
       />
       
       {/* Subtle trailing ring */}
+      {!prefersReducedMotion && (
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9998] border border-white/20 mix-blend-screen"
         style={{
@@ -44,6 +46,7 @@ export function Cursor() {
           opacity: isVisible ? 0.5 : 0,
         }}
       />
+      )}
     </div>
   );
 }

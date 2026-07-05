@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react';
 import { Map, Navigation } from 'lucide-react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 const ZONES = [
   { id: 'hero', label: 'ARRIVAL' },
@@ -22,6 +23,14 @@ export function FloatingPill() {
 
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const menuRef = useFocusTrap(isExpanded);
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isExpanded) setIsExpanded(false);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isExpanded, setIsExpanded]);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -71,7 +80,7 @@ export function FloatingPill() {
   }, []);
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[999999] font-mono mb-2 pointer-events-none">
+    <nav aria-label="Main Navigation" className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[999999] font-mono mb-2 pointer-events-none">
       <AnimatePresence>
         {isVisible && (
           <motion.div
@@ -82,7 +91,8 @@ export function FloatingPill() {
             className="pointer-events-auto"
           >
             <motion.div
-              className="glass-panel border border-white/5 hover:border-white/20 rounded-full flex flex-col items-center justify-center overflow-hidden cursor-pointer backdrop-blur-xl"
+              ref={menuRef as any}
+              className="glass-panel border border-white/5 hover:border-white/20 rounded-full flex flex-col items-center justify-center overflow-hidden cursor-pointer backdrop-blur-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]"
               animate={{
                 width: isExpanded ? 300 : 160,
                 height: isExpanded ? 500 : 40,
@@ -90,7 +100,7 @@ export function FloatingPill() {
                 backgroundColor: isExpanded ? 'rgba(5, 0, 2, 0.95)' : 'rgba(5, 0, 2, 0.4)'
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-              onClick={(e) => { e.stopPropagation();  if(!isExpanded) setIsExpanded(true); }}
+              onClick={(e) => { e.stopPropagation();  if(!isExpanded) setIsExpanded(true); }} onKeyDown={(e) => { if(e.key === "Enter" || e.key === " ") { e.stopPropagation(); if(!isExpanded) setIsExpanded(true); } }} tabIndex={0} aria-expanded={isExpanded} aria-label="Toggle Navigation Menu" role="button"
               
             >
               <AnimatePresence mode="wait">
@@ -102,7 +112,7 @@ export function FloatingPill() {
                     exit={{ opacity: 0 }}
                     className="flex items-center gap-3 px-4 h-10 w-full justify-center text-white/50 text-[10px] tracking-widest hover:text-white transition-colors"
                   >
-                    <Map size={12} />
+                    <Map size={12} aria-hidden="true" />
                     <span className="truncate max-w-[100px]">{activeZone}</span>
                   </motion.div>
                 ) : (
@@ -115,10 +125,10 @@ export function FloatingPill() {
                   >
                     <div className="flex items-center justify-between text-white/50 text-[10px] tracking-widest mb-6">
                       <div className="flex items-center gap-2">
-                        <Map size={12} />
+                        <Map size={12} aria-hidden="true" />
                         <span>INDEX</span>
                       </div>
-                      <button onClick={(e) => { e.stopPropagation(); setIsExpanded(false); }} className="hover:text-white transition-colors p-1">
+                      <button onClick={(e) => { e.stopPropagation(); setIsExpanded(false); }} className="hover:text-white transition-colors p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded" aria-label="Close navigation menu">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                       </button>
                     </div>
@@ -130,7 +140,7 @@ export function FloatingPill() {
                             document.getElementById(zone.id)?.scrollIntoView({ behavior: 'smooth' });
                             setIsExpanded(false);
                           }}
-                          className={`text-left text-xs tracking-widest transition-colors ${
+                          className={`text-left text-xs tracking-widest transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded ${
                             activeZone === zone.label 
                               ? 'text-[#c084fc]' 
                               : 'text-white/40 hover:text-white'
@@ -140,10 +150,10 @@ export function FloatingPill() {
                         </button>
                       ))}
                       <div className="h-px bg-white/10 my-2" />
-                      <button onClick={(e) => { e.stopPropagation();  handleOpenValen(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors">ASK VΛLEN</button>
-                      <button onClick={(e) => { e.stopPropagation();  handleOpenGraph(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors">RESEARCH GRAPH</button>
-                      <button onClick={(e) => { e.stopPropagation();  handleOpenConvergence(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors">ON CONVERGENCE</button>
-                      <button onClick={(e) => { e.stopPropagation();  handleOpenContainment(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#B76E79] hover:text-[#fb7185] transition-colors">RESTRICTED</button>
+                      <button onClick={(e) => { e.stopPropagation();  handleOpenValen(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">ASK VΛLEN</button>
+                      <button onClick={(e) => { e.stopPropagation();  handleOpenGraph(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">RESEARCH GRAPH</button>
+                      <button onClick={(e) => { e.stopPropagation();  handleOpenConvergence(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">ON CONVERGENCE</button>
+                      <button onClick={(e) => { e.stopPropagation();  handleOpenContainment(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#B76E79] hover:text-[#fb7185] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">RESTRICTED</button>
                     </div>
                   </motion.div>
                 )}
@@ -152,6 +162,6 @@ export function FloatingPill() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </nav>
   );
 }

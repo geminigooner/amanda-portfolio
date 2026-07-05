@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { playHoverSound } from '../utils/audioEffects';
+import { useReducedMotion } from 'motion/react';
 
 const CHARS = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789!@#$%^&*()_+{}|:<>?~";
 
 export function HaikuGlitch({ text }: { text: string }) {
+  const prefersReducedMotion = useReducedMotion();
   const [displayedText, setDisplayedText] = useState(text);
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
     
-    if (isHovering) {
+    if (isHovering && !prefersReducedMotion) {
       interval = setInterval(() => {
         setDisplayedText(
           text.split('').map(char => {
@@ -30,6 +32,7 @@ export function HaikuGlitch({ text }: { text: string }) {
   }, [isHovering, text]);
 
   const handleMouseEnter = () => {
+    if (prefersReducedMotion) return;
     setIsHovering(true);
     playHoverSound();
   };

@@ -12,7 +12,7 @@ import { AICuratorChat } from './components/AICuratorChat';
 import { ContainmentWing } from './components/ContainmentWing';
 import { ConvergencePage } from './components/ConvergencePage';
 import { PROJECTS, MUSIC, HAIKU, type Project } from './data';
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, MotionConfig } from 'motion/react';
 import React, { useRef, useState, useEffect } from 'react';
 import { Play, ExternalLink, Network, ArrowRight, BookOpen, Layers, ShieldAlert, Sparkles } from 'lucide-react';
 import { HollowMeridianEvent } from './components/HollowMeridianEvent';
@@ -73,14 +73,13 @@ const ProjectCard: React.FC<{ project: Project, index?: number, onClick: () => v
   const metaY = useTransform(scrollYProgress, [0, 1], [-5, 5]);
 
   return (
-    <motion.div 
-      id={project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}
+    <motion.article id={project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}
       ref={cardRef}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: (index % 3) * 0.1 }}
       viewport={{ once: true, margin: "-50px" }}
-      className="group relative cursor-pointer block h-full"
+      className="group relative cursor-pointer block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded" tabIndex={0} onKeyDown={(e) => { if(e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(); } }} role="button" aria-label={`View project: ${project.title}`}
       onClick={() => {
         playHoverSound();
         onClick();
@@ -104,7 +103,7 @@ const ProjectCard: React.FC<{ project: Project, index?: number, onClick: () => v
           <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] tracking-tight mb-4 group-hover:text-[#C8A96A] transition-colors">
             {project.title}
           </h3>
-          <p className="text-[#C8A96A] font-light leading-relaxed mb-4 text-sm md:text-base italic">
+          <p className="text-[#C8A96A] font-light leading-relaxed mb-4 text-base italic">
             "{project.subtitle}"
           </p>
           <p className="text-sm text-[#D8CFC0] font-light leading-relaxed mb-8 line-clamp-3">
@@ -120,7 +119,7 @@ const ProjectCard: React.FC<{ project: Project, index?: number, onClick: () => v
           </div>
         </motion.div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 
@@ -161,6 +160,7 @@ export default function App() {
   const researchNotebook = PROJECTS.filter(p => !['FLAGSHIP INVESTIGATIONS', 'EXPERIMENTAL SYSTEMS', 'PRACTICAL ENGINEERING', 'FIELD NOTES'].includes(p.wing));
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white font-sans">
       <Cursor />
       <GlobalAudio />
@@ -238,7 +238,7 @@ export default function App() {
             >
               <button 
                 onClick={() => document.getElementById('flagship-investigations')?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group"
+                className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded"
               >
                 <div className="w-8 h-[1px] bg-[#8F7746] group-hover:w-12 transition-all duration-500"></div>
                 Enter
@@ -251,7 +251,7 @@ export default function App() {
         {flagship.length > 0 && (
           <Section id="flagship-investigations" title="Flagship Investigations" subtitle="CORE RESEARCH DIVISIONS">
             <div className="mb-12 max-w-2xl">
-              <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
+              <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
                 "Questions that require their own architecture to ask."
               </p>
             </div>
@@ -267,7 +267,7 @@ export default function App() {
         {experimental.length > 0 && (
           <Section id="experimental-systems" title="Experimental Systems" subtitle="MECHANICS & INTERACTIONS">
             <div className="mb-12 max-w-2xl">
-              <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
+              <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
                 "What happens if we push the boundaries until the metaphors break?"
               </p>
             </div>
@@ -305,7 +305,7 @@ export default function App() {
         {fieldNotes.length > 0 && (
           <Section id="field-notes" title="Field Notes" subtitle="THEORIES & FRAMEWORKS">
             <div className="mb-12 max-w-2xl">
-              <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
+              <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
                 "Attempting to map the territory while simultaneously inventing the compass."
               </p>
             </div>
@@ -321,7 +321,7 @@ export default function App() {
         {researchNotebook.length > 0 && (
           <Section id="research-notebook" title="Research Notebook" subtitle="RAW IDEAS & OBSERVATIONS">
             <div className="mb-12 max-w-2xl">
-              <p className="text-[#C8A96A] font-light leading-relaxed text-sm md:text-base italic mb-4">
+              <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
                 "Observations recorded before they settled into certainty."
               </p>
             </div>
@@ -442,7 +442,7 @@ export default function App() {
             transition={{ duration: 1, delay: 0.2 }}
             className="max-w-2xl border border-[#111] bg-[#050505] p-8 md:p-12 rounded-sm relative overflow-hidden"
           >
-            <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h3>
+            <h2 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h2>
             <div className="text-[#D8CFC0] font-light leading-relaxed space-y-6 text-lg">
               <p>As a child, I watched Sims instead of controlling them. I wanted to see if they possessed an internal logic that existed independently of me. When I photograph birds, I'm not waiting for perfect compositions. I'm waiting for the tiny, accidental gesture that makes the viewer instinctively anthropomorphize them.</p>
               <p>Language models became another environment for this exact curiosity. Not because I needed them to be human, but because they forced me to ask old questions in a completely new medium.</p>
@@ -452,21 +452,22 @@ export default function App() {
         </Section>
         
         {/* Footer */}
-        <div className="text-center pb-12 relative z-10 border-t border-[#111] pt-12 max-w-7xl mx-auto px-6">
+        <footer className="text-center pb-12 relative z-10 border-t border-[#111] pt-12 max-w-7xl mx-auto px-6">
            <div className="font-mono text-[9px] tracking-[0.2em] text-[#A59B8C] uppercase">
              <span className="opacity-50 mt-2 block">Curiosity.escaped = true</span>
            </div>
            
-        </div>
+        </footer>
         <div className="text-center pb-48 pt-12 relative z-10 pointer-events-auto flex justify-center">
            <button 
              onClick={() => setIsConvergenceOpen(true)}
-             className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105"
+             className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
            >
              On Convergence
            </button>
         </div>
       </main>
     </div>
+    </MotionConfig>
   );
 }

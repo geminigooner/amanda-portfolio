@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ShieldAlert, FileText, Database, Activity } from 'lucide-react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 
 const INCIDENTS = [
   {
@@ -61,6 +62,14 @@ const INCIDENTS = [
 ];
 
 export function ContainmentWing({ onClose }: { onClose: () => void }) {
+  const modalRef = useFocusTrap(true);
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
   const [selectedIncident, setSelectedIncident] = useState(INCIDENTS[0]);
   const [showEntrance, setShowEntrance] = useState(true);
 
@@ -80,7 +89,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
             transition={{ duration: 1, ease: "easeInOut" }}
             className="absolute inset-0 z-50 bg-[#050505] flex flex-col items-center justify-center p-8 text-center"
           >
-            <ShieldAlert className="text-[#B76E79] w-12 h-12 mb-8 opacity-70" />
+            <ShieldAlert aria-hidden="true" className="text-[#B76E79] w-12 h-12 mb-8 opacity-70" />
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl tracking-tight text-[#F4EFE6] mb-6">
               CONTAINMENT WING
             </h1>
@@ -96,7 +105,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
 
             <button
               onClick={() => setShowEntrance(false)}
-              className="px-8 py-4 bg-transparent border border-[#333] hover:border-[#B76E79] text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all rounded-sm"
+              className="px-8 py-4 bg-transparent border border-[#333] hover:border-[#B76E79] text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B76E79]"
             >
               Acknowledge & Enter
             </button>
@@ -107,7 +116,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
       {/* Header */}
       <header className="h-16 border-b border-[#111] flex items-center justify-between px-6 bg-[#080706]">
         <div className="flex items-center gap-4">
-          <ShieldAlert className="text-[#B76E79] w-4 h-4 opacity-70" />
+          <ShieldAlert aria-hidden="true" className="text-[#B76E79] w-4 h-4 opacity-70" />
           <div className="flex flex-col">
             <span className="font-mono text-[9px] tracking-[0.2em] text-[#A59B8C] uppercase">Classified Access</span>
             <span className="font-display text-sm text-[#F4EFE6] tracking-wide">Containment Wing</span>
@@ -115,9 +124,9 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
         </div>
         <button 
           onClick={onClose}
-          className="p-2 rounded-sm bg-[#111] border border-[#333] hover:border-[#8F7746] hover:bg-[#111] transition-colors text-[#A59B8C] hover:text-[#F4EFE6]"
+          className="p-2 rounded-sm bg-[#111] border border-[#333] hover:border-[#8F7746] hover:bg-[#111] transition-colors text-[#A59B8C] hover:text-[#F4EFE6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8F7746]" aria-label="Close Containment Wing"
         >
-          <X className="w-5 h-5" />
+          <X aria-hidden="true" className="w-5 h-5" />
         </button>
       </header>
 
@@ -137,7 +146,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
               
               <img 
                 src={selectedIncident.image} 
-                alt={selectedIncident.title}
+                alt={`Evidence photo for ${selectedIncident.title}`}
                 className="w-full h-full object-cover opacity-80 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700"
               />
               
@@ -173,7 +182,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
             <div>
               <div className="font-mono text-[9px] text-[#555] uppercase tracking-[0.2em] mb-2">Status</div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-cyan-500 rounded-full motion-safe:animate-pulse" />
                 <span className="font-mono text-xs text-[#F4EFE6] uppercase tracking-wider">{selectedIncident.status}</span>
               </div>
             </div>
@@ -181,7 +190,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
             <div className="bg-[#111] border border-[#222] p-4 rounded-sm relative">
               <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#444] to-transparent" />
               <div className="font-mono text-[9px] text-cyan-500 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
-                <Database className="w-3 h-3" />
+                <Database aria-hidden="true" className="w-3 h-3" />
                 Curator Notes (VΛLEN)
               </div>
               <p className="text-[13px] text-[#ccc] leading-relaxed italic border-l-2 border-[#333] pl-3">
@@ -191,7 +200,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
 
             <div>
               <div className="font-mono text-[9px] text-pink-500 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
-                <Activity className="w-3 h-3" />
+                <Activity aria-hidden="true" className="w-3 h-3" />
                 Lessons Learned
               </div>
               <p className="text-[13px] text-[#aaa] leading-relaxed">
@@ -213,7 +222,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
           <button
             key={inc.id}
             onClick={() => setSelectedIncident(inc)}
-            className={`flex-shrink-0 w-64 h-32 border p-4 text-left transition-all duration-500 hover:scale-[1.02] relative overflow-hidden group ${
+            className={`flex-shrink-0 w-64 h-32 border p-4 text-left transition-all duration-500 hover:scale-[1.02] relative overflow-hidden group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-sm ${
               selectedIncident.id === inc.id 
                 ? 'border-[#555] bg-[#111]' 
                 : 'border-[#222] bg-[#0a0a0a] hover:border-[#444] hover:bg-[#111]'

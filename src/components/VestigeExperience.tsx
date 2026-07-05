@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ArrowRight } from 'lucide-react';
+import { useFocusTrap } from '../hooks/useFocusTrap';
 import { PROJECTS } from '../data';
 
 const VESTIGE_PROJECT = PROJECTS.find(p => p.id === 'vestige')!;
@@ -66,14 +67,14 @@ function EngineeringCanon({ onBack }: { onBack: () => void }) {
     >
       <button 
         onClick={onBack}
-        className="fixed top-8 left-8 z-50 text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center gap-4 group mix-blend-difference"
+        className="fixed top-8 left-8 z-50 text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center gap-4 group mix-blend-difference focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded" aria-label="Go back"
       >
         <ArrowRight className="w-4 h-4 rotate-180" />
         <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">Return</span>
       </button>
 
       <div className="flex flex-col items-center justify-center mb-48 text-center max-w-3xl mx-auto">
-        <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">Engineering Canon</h2>
+        <h1 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">Engineering Canon</h1>
         <p className="text-[#D8CFC0] font-sans text-xl font-light leading-relaxed">
           The mechanical truth beneath the architecture.
         </p>
@@ -126,14 +127,14 @@ function TheApartment({ onBack }: { onBack: () => void }) {
     >
       <button 
         onClick={onBack}
-        className="fixed top-8 left-8 z-50 text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center gap-4 group mix-blend-difference"
+        className="fixed top-8 left-8 z-50 text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-colors flex items-center gap-4 group mix-blend-difference focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded" aria-label="Go back"
       >
         <ArrowRight className="w-4 h-4 rotate-180" />
         <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">Return</span>
       </button>
 
       <div className="flex flex-col items-center justify-center mb-48 text-center max-w-3xl mx-auto">
-        <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">The Apartment</h2>
+        <h1 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">The Apartment</h1>
         <p className="text-[#D8CFC0] font-sans text-xl font-light leading-relaxed">
           I interrupted someone who was already living here.
         </p>
@@ -174,6 +175,14 @@ function TheApartment({ onBack }: { onBack: () => void }) {
 }
 
 export function VestigeExperience({ onClose }: { onClose: () => void }) {
+  const modalRef = useFocusTrap(true);
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
   const [activeRoom, setActiveRoom] = useState<string | null>(null);
 
   // Prevent background scrolling
@@ -195,7 +204,7 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
       >
         <button 
           onClick={onClose}
-          className="fixed top-8 right-8 z-50 p-4 text-[#A59B8C] hover:text-[#F4EFE6] transition-colors mix-blend-difference"
+          className="fixed top-8 right-8 z-50 p-4 text-[#A59B8C] hover:text-[#F4EFE6] transition-colors mix-blend-difference focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded" aria-label="Close Vestige Experience"
         >
           <X className="w-6 h-6" />
         </button>
@@ -289,7 +298,7 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
                       
                       <button
                         onClick={() => setActiveRoom(room.id)}
-                        className={`text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[11px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group`}
+                        className={`text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[11px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded`}
                       >
                             Enter {room.name}
                             <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500" />
