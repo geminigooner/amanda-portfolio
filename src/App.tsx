@@ -16,6 +16,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSp
 import React, { useRef, useState, useEffect } from 'react';
 import { Play, ExternalLink, Network, ArrowRight, BookOpen, Layers, ShieldAlert, Sparkles } from 'lucide-react';
 import { HollowMeridianEvent } from './components/HollowMeridianEvent';
+import { InfoModal } from './components/InfoModal';
 import { playHoverSound } from './utils/audioEffects';
 import { initVisitor, trackProjectView } from './firebase';
 
@@ -131,6 +132,8 @@ export default function App() {
   const [isConvergenceOpen, setIsConvergenceOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isHollowEventActive, setIsHollowEventActive] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
@@ -193,6 +196,15 @@ export default function App() {
           <ConvergencePage onClose={() => setIsConvergenceOpen(false)} />
         )}
       </AnimatePresence>
+      <InfoModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} title="Privacy Policy">
+        <p>This site is a personal portfolio and does not require user accounts.</p>
+        <p>It does not intentionally collect personally identifiable information (PII). If anonymous analytics are enabled, they are used only to understand site traffic and improve the experience.</p>
+        <p>No personal information is sold.</p>
+      </InfoModal>
+      <InfoModal isOpen={isAccessibilityOpen} onClose={() => setIsAccessibilityOpen(false)} title="Accessibility Statement">
+        <p>This portfolio is intended to be accessible to as many people as possible. I believe the web should be an inclusive space, and accessibility improvements are an ongoing part of this project.</p>
+        <p>If you encounter any barriers while navigating the archive, please feel free to reach out. Your feedback is welcome and appreciated.</p>
+      </InfoModal>
       
       <AnimatePresence>
         {isHiddenRoomOpen && (
@@ -205,7 +217,7 @@ export default function App() {
       <main className="relative z-10">
         
         {/* ENTRANCE */}
-        <section id="hero" className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto relative pt-20 pb-10">
+        <header id="hero" className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto relative pt-20 pb-10">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -245,7 +257,7 @@ export default function App() {
               </button>
             </motion.div>
           </motion.div>
-        </section>
+        </header>
 
         {/* FLAGSHIP INVESTIGATIONS */}
         {flagship.length > 0 && (
@@ -453,10 +465,13 @@ export default function App() {
         
         {/* Footer */}
         <footer className="text-center pb-12 relative z-10 border-t border-[#111] pt-12 max-w-7xl mx-auto px-6">
+           <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-6">
+             <button onClick={() => setIsPrivacyOpen(true)} className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[9px] uppercase tracking-[0.2em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">Privacy</button>
+             <button onClick={() => setIsAccessibilityOpen(true)} className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[9px] uppercase tracking-[0.2em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">Accessibility</button>
+           </div>
            <div className="font-mono text-[9px] tracking-[0.2em] text-[#A59B8C] uppercase">
              <span className="opacity-50 mt-2 block">Curiosity.escaped = true</span>
            </div>
-           
         </footer>
         <div className="text-center pb-48 pt-12 relative z-10 pointer-events-auto flex justify-center">
            <button 

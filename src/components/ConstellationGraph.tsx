@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import * as d3 from 'd3-force';
 import { PROJECTS, Project } from '../data';
 import { X, Network } from 'lucide-react';
+import { useReducedMotion } from 'motion/react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
 interface ConstellationGraphProps {
@@ -25,6 +26,7 @@ interface Link extends d3.SimulationLinkDatum<Node> {
 
 export function ConstellationGraph({ isOpen, onClose, onSelectProject }: ConstellationGraphProps) {
   const modalRef = useFocusTrap(isOpen);
+  const prefersReducedMotion = useReducedMotion();
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) onClose();
@@ -72,7 +74,14 @@ export function ConstellationGraph({ isOpen, onClose, onSelectProject }: Constel
         setLinks([...newLinks]);
       });
 
-    simulation.alpha(1).restart();
+    if (prefersReducedMotion) {
+      simulation.tick(300);
+      setNodes([...simulation.nodes()]);
+      setLinks([...newLinks]);
+      simulation.stop();
+    } else {
+      simulation.alpha(1).restart();
+    }
     return () => { simulation.stop(); };
   }, [isOpen]);
 

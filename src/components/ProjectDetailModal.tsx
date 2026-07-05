@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PROJECTS, type Project } from '../data';
@@ -6,6 +6,7 @@ import { playHoverSound } from '../utils/audioEffects';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
 export function ProjectDetailModal({ project, onClose }: { project: Project | null, onClose: () => void }) {
+  const prefersReducedMotion = useReducedMotion();
   const modalRef = useFocusTrap(!!project);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMagnifying, setIsMagnifying] = useState(false);
@@ -64,16 +65,18 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: "easeOut" }}
             className="absolute inset-0 bg-[#050002]/80 cursor-pointer pointer-events-auto"
             onClick={onClose}
           />
           
           <motion.div
+            ref={modalRef as any}
+            tabIndex={-1}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300, delay: 0.1 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", damping: 25, stiffness: 300, delay: 0.1 }}
             className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#080706] border border-[#111] rounded-sm flex flex-col pointer-events-auto shadow-2xl"
             style={{ boxShadow: `0 0 40px ${project.color}10` }}
           >

@@ -1,10 +1,11 @@
-import { motion, useScroll, useSpring } from 'motion/react';
+import { motion, useScroll, useSpring, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
 import { playHoverSound } from '../utils/audioEffects';
 
 export function ProgressIndicator() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
+  const prefersReducedMotion = useReducedMotion();
+  const scaleX = useSpring(scrollYProgress, prefersReducedMotion ? { stiffness: 10000, damping: 100, mass: 0.1 } : {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001

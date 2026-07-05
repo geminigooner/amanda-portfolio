@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { X, Lock, FileKey } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
@@ -9,6 +9,7 @@ interface HiddenRoomModalProps {
 }
 
 export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
+  const prefersReducedMotion = useReducedMotion();
   const modalRef = useFocusTrap(isOpen);
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -25,7 +26,7 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
         initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
         animate={{ opacity: 1, backdropFilter: "blur(12px)" }}
         exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.8 }}
         className="fixed inset-0 z-[1000000] flex items-center justify-center p-4 md:p-12 bg-[#050002]/90"
       >
         <div className="absolute inset-0 pointer-events-none noise-overlay opacity-50" />
@@ -34,7 +35,7 @@ export function HiddenRoomModal({ isOpen, onClose }: HiddenRoomModalProps) {
           initial={{ scale: 0.9, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1], delay: prefersReducedMotion ? 0 : 0.2 }}
           ref={modalRef as any}
           tabIndex={-1}
           className="relative max-w-2xl w-full bg-[#0a0a0a] border border-[#222] rounded-sm p-8 md:p-12 overflow-hidden shadow-2xl"

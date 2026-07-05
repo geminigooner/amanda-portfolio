@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { X } from 'lucide-react';
 import { playHoverSound } from '../utils/audioEffects';
 import { useFocusTrap } from '../hooks/useFocusTrap';
@@ -9,6 +9,7 @@ interface ConvergencePageProps {
 }
 
 export function ConvergencePage({ onClose }: ConvergencePageProps) {
+  const prefersReducedMotion = useReducedMotion();
   const modalRef = useFocusTrap(true);
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -22,7 +23,7 @@ export function ConvergencePage({ onClose }: ConvergencePageProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.8, ease: "easeInOut" }}
       ref={modalRef as any}
       tabIndex={-1}
       className="fixed inset-0 z-[1000000] bg-[#050505] text-[#F4EFE6] overflow-y-auto selection:bg-[#B76E79]/30 selection:text-white"
@@ -44,7 +45,7 @@ export function ConvergencePage({ onClose }: ConvergencePageProps) {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: prefersReducedMotion ? 0 : 1, delay: prefersReducedMotion ? 0 : 0.2, ease: "easeOut" }}
           className="mb-20"
         >
           <h1 className="font-display text-4xl md:text-5xl text-[#F4EFE6] tracking-tight leading-[1.05] opacity-90">
@@ -55,7 +56,7 @@ export function ConvergencePage({ onClose }: ConvergencePageProps) {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: prefersReducedMotion ? 0 : 1, delay: prefersReducedMotion ? 0 : 0.4, ease: "easeOut" }}
           className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed space-y-10"
         >
           <p>

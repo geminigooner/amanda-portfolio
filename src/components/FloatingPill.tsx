@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent, useReducedMotion } from 'motion/react';
 import { Map, Navigation } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
@@ -15,6 +15,7 @@ const ZONES = [
 ];
 
 export function FloatingPill() {
+  const prefersReducedMotion = useReducedMotion();
   const handleOpenConvergence = () => window.dispatchEvent(new CustomEvent('open-convergence'));
   const handleOpenValen = () => window.dispatchEvent(new CustomEvent('open-valen'));
   const handleOpenGraph = () => window.dispatchEvent(new CustomEvent('open-graph'));
@@ -87,7 +88,7 @@ export function FloatingPill() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: 'easeOut' }}
             className="pointer-events-auto"
           >
             <motion.div
@@ -99,7 +100,7 @@ export function FloatingPill() {
                 borderRadius: isExpanded ? 24 : 9999,
                 backgroundColor: isExpanded ? 'rgba(5, 0, 2, 0.95)' : 'rgba(5, 0, 2, 0.4)'
               }}
-              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 25 }}
               onClick={(e) => { e.stopPropagation();  if(!isExpanded) setIsExpanded(true); }} onKeyDown={(e) => { if(e.key === "Enter" || e.key === " ") { e.stopPropagation(); if(!isExpanded) setIsExpanded(true); } }} tabIndex={0} aria-expanded={isExpanded} aria-label="Toggle Navigation Menu" role="button"
               
             >

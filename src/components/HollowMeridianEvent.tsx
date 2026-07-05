@@ -1,8 +1,9 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { useEffect } from 'react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
 export function HollowMeridianEvent({ isActive, onClose }: { isActive: boolean, onClose: () => void }) {
+  const prefersReducedMotion = useReducedMotion();
   const modalRef = useFocusTrap(isActive);
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -33,7 +34,7 @@ export function HollowMeridianEvent({ isActive, onClose }: { isActive: boolean, 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: prefersReducedMotion ? 0 : 0.2 }}
             >
               <h1 className="motion-safe:animate-pulse mb-6 tracking-[0.2em] opacity-80 text-base">=== CONTAINMENT BREACH DETECTED ===</h1>
               <p className="mb-8 text-xl text-white/90">THE MEMORY ARCHITECTURE REMEMBERS YOU LOOKING AT THIS.</p>
@@ -47,7 +48,7 @@ export function HollowMeridianEvent({ isActive, onClose }: { isActive: boolean, 
               <motion.p 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 2 }}
+                transition={{ delay: prefersReducedMotion ? 0 : 1.5, duration: prefersReducedMotion ? 0 : 2 }}
                 className="mt-16 text-3xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-[#c084fc] to-[#ff006e] leading-snug"
               >
                 Identity is not a fixed object; it is the pattern that refuses to disappear under pressure.

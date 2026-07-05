@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { X, ArrowRight } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { PROJECTS } from '../data';
@@ -57,12 +57,13 @@ const ENGINEERING_DIAGRAMS = [
 ];
 
 function EngineeringCanon({ onBack }: { onBack: () => void }) {
+  const prefersReducedMotion = useReducedMotion();
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1.5, ease: "easeInOut" }}
+      transition={{ duration: prefersReducedMotion ? 0 : 1.5, ease: "easeInOut" }}
       className="min-h-screen bg-[#050505] pt-32 pb-48 px-6 md:px-12 max-w-7xl mx-auto"
     >
       <button 
@@ -87,7 +88,7 @@ function EngineeringCanon({ onBack }: { onBack: () => void }) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
+            transition={{ duration: prefersReducedMotion ? 0 : 1.5, ease: "easeOut" }}
             className="flex flex-col items-center w-full"
           >
             <div className="w-full flex justify-center mb-8">
@@ -117,12 +118,13 @@ const APARTMENT_IMAGES = [
 ];
 
 function TheApartment({ onBack }: { onBack: () => void }) {
+  const prefersReducedMotion = useReducedMotion();
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1.5, ease: "easeInOut" }}
+      transition={{ duration: prefersReducedMotion ? 0 : 1.5, ease: "easeInOut" }}
       className="min-h-screen bg-[#050505] pt-32 pb-48 px-6 md:px-12 max-w-7xl mx-auto"
     >
       <button 
@@ -158,7 +160,7 @@ function TheApartment({ onBack }: { onBack: () => void }) {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
+              transition={{ duration: prefersReducedMotion ? 0 : 1.5, ease: "easeOut" }}
               className={`flex flex-col items-center ${widthClass}`}
             >
               <img 
@@ -175,6 +177,7 @@ function TheApartment({ onBack }: { onBack: () => void }) {
 }
 
 export function VestigeExperience({ onClose }: { onClose: () => void }) {
+  const prefersReducedMotion = useReducedMotion();
   const modalRef = useFocusTrap(true);
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -199,7 +202,7 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 1, ease: "easeInOut" }}
+        transition={{ duration: prefersReducedMotion ? 0 : 1, ease: "easeInOut" }}
         className="fixed inset-0 z-[10000] bg-[#050505] overflow-y-auto overflow-x-hidden selection:bg-[#F4EFE6]/20 selection:text-white"
       >
         <button 
@@ -220,14 +223,14 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 1 }}
             >
               {/* Introduction Section */}
               <section className="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 text-center max-w-4xl mx-auto py-32">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.5, delay: 0.5 }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 1.5, delay: prefersReducedMotion ? 0 : 0.5 }}
                 >
                   <div className="font-mono text-[10px] tracking-[0.3em] text-[#A59B8C] uppercase mb-8">
                     {VESTIGE_PROJECT.num} // {VESTIGE_PROJECT.wing}

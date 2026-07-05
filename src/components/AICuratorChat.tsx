@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { X, ArrowRight, ShieldAlert, Database } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { PROJECTS } from '../data';
@@ -13,6 +13,7 @@ type Message = {
 };
 
 export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpenConvergence }: { activeSection?: string, onOpenContainmentWing?: () => void, onOpenConvergence?: () => void }) {
+  const prefersReducedMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useFocusTrap(isOpen);
   useEffect(() => {
@@ -248,7 +249,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: prefersReducedMotion ? 0 : 1, ease: "easeOut" }}
             onClick={() => setIsOpen(true)}
             className="fixed bottom-6 right-6 z-[99999] group cursor-pointer"
           >
@@ -265,7 +266,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
             ref={modalRef as any}
           tabIndex={-1}
           className="fixed bottom-6 right-6 h-[75vh] min-h-[400px] max-h-[800px] w-[calc(100vw-3rem)] md:w-[420px] flex flex-col border border-[#111] bg-[#050505] z-[99999] overflow-hidden"
@@ -294,7 +295,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                 <motion.div
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
                   key={message.id}
                   className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}
                 >

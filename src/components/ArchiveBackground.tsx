@@ -29,7 +29,7 @@ export function ArchiveBackground() {
       ctx.strokeStyle = 'rgba(216, 207, 192, 0.03)'; // muted cream grid
       ctx.lineWidth = 1;
       
-      const offsetY = (scrollY * 0.1) % gridSize;
+      const offsetY = prefersReducedMotion ? 0 : (scrollY * 0.1) % gridSize;
       
       for(let x = 0; x < canvas.width; x += gridSize) {
         ctx.beginPath();

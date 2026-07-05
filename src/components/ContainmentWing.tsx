@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { X, ShieldAlert, FileText, Database, Activity } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
@@ -62,6 +62,7 @@ const INCIDENTS = [
 ];
 
 export function ContainmentWing({ onClose }: { onClose: () => void }) {
+  const prefersReducedMotion = useReducedMotion();
   const modalRef = useFocusTrap(true);
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -78,7 +79,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
       className="fixed inset-0 z-[100000] bg-[#050505] text-[#F4EFE6] overflow-hidden flex flex-col font-sans"
     >
       <AnimatePresence>
@@ -86,7 +87,7 @@ export function ContainmentWing({ onClose }: { onClose: () => void }) {
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            transition={{ duration: prefersReducedMotion ? 0 : 1, ease: "easeInOut" }}
             className="absolute inset-0 z-50 bg-[#050505] flex flex-col items-center justify-center p-8 text-center"
           >
             <ShieldAlert aria-hidden="true" className="text-[#B76E79] w-12 h-12 mb-8 opacity-70" />
