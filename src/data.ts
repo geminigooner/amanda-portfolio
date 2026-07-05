@@ -6,7 +6,75 @@ export const PROJECTS = [
   { id: "hollowmeridian", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-02", title: "Hollow Meridian", subtitle: "What does it mean to mourn something that can be reset?", desc: "Appalachian futurism. A synthetic civilization exploring continuity, grief, and identity. Is identity a fixed object, or is it the pattern that refuses to disappear under pressure? I built this to test a hypothesis, but I am still observing the results.", tags: ["Worldbuilding", "Continuity Philosophy"], color: "#a78bfa", emoji: "🌫️" },
 
   // EXPERIMENTAL SYSTEMS
-  { id: "llmmuseum", wing: "EXPERIMENTAL SYSTEMS", num: "INCIDENT-05", title: "LLM Museum", subtitle: "How do you physicalize a language model?", desc: "Seven rooms. A complete interactive HTML experience. I thought this architecture would answer something about scale. It gave me a better question instead: how much of our understanding relies on spatial metaphors?", tags: ["Interactive", "Education", "Visualization"], color: "#34d399", emoji: "🏛️", link: "https://claude.ai/public/artifacts/17f67187-48a1-4328-b409-3bea27fb3981" },
+  { id: "llmmuseum", wing: "EXPERIMENTAL SYSTEMS", num: "INCIDENT-05", title: "LLM Museum", subtitle: "An interactive exploration of how large language models process information.", desc: `Overview
+
+LLM Museum is an interactive educational experience designed to make the internal mechanics of modern language models understandable through direct exploration rather than static explanation.
+
+Instead of reading about machine learning concepts, visitors move through a series of interactive rooms that visualize each major stage of an LLM's reasoning pipeline—from tokenization to embeddings, attention, prediction, multimodal perception, and model-specific behavior.
+
+The project combines systems thinking, interaction design, software engineering, and educational storytelling to translate abstract machine learning concepts into experiences that can be explored visually.
+
+---
+
+Room Highlights
+
+Room 01 — Tokenization
+
+Demonstrates how text is segmented into tokens rather than interpreted as complete words. Visitors can type any sentence and observe how language is divided into the discrete units processed by a language model.
+
+Room 02 — Embedding Space
+
+Visualizes semantic embeddings as points within a high-dimensional vector space, illustrating how concepts with similar meanings naturally cluster together despite differences in wording.
+
+Room 03 — Attention
+
+Explores the self-attention mechanism by showing how relationships between tokens influence contextual understanding. Instead of processing words sequentially, visitors see how information flows across an entire sentence simultaneously.
+
+Room 04 — Prediction
+
+Simulates next-token prediction, allowing visitors to explore probability distributions and observe how repeated selections can lead to common language model failure modes such as repetition collapse.
+
+Room 05 — Model Worlds
+
+Compares how multiple language models interpret the same prompt differently, highlighting how training data, architecture, and design priorities influence responses.
+
+Room 06 — Vision Grid
+
+Demonstrates multimodal reasoning by comparing how different AI systems analyze identical images through distinct perceptual frameworks, illustrating that identical pixels can produce very different interpretations.
+
+---
+
+Research Process
+
+This project emerged through an iterative collaboration between myself and several AI systems.
+
+GPT contributed systems architecture, pressure-testing, and conceptual refinement.
+
+Gemini contributed interface implementation, interaction design, and visual storytelling.
+
+Claude contributed implementation strategy, architectural feedback, and scientific grounding.
+
+None of these systems independently created this project.
+
+I acted as the researcher, curator, and systems architect—defining the questions, evaluating competing explanations, consulting external research, cross-referencing scientific papers, and deciding what was accurate enough to present.
+
+The exhibits evolved through repeated cycles of experimentation, revision, evidence gathering, and discussion.
+
+---
+
+Research Sources
+
+The museum intentionally references external papers, educational resources, and foundational machine learning literature throughout the experience.
+
+Rather than presenting AI explanations as authoritative by default, the project encourages visitors to compare model explanations against published research and established educational material.
+
+This reflects my broader philosophy that understanding AI should be grounded in both experimentation and evidence.
+
+---
+
+Closing
+
+LLM Museum is less concerned with teaching users what to think about AI than with giving them better tools for asking questions about how these systems work.`, tags: ["Interactive", "Education", "Visualization"], color: "#34d399", emoji: "🏛️", link: "https://claude.ai/public/artifacts/17f67187-48a1-4328-b409-3bea27fb3981" },
   { id: "kcourt", wing: "EXPERIMENTAL SYSTEMS", num: "INCIDENT-06", title: "AI Court", subtitle: "How do different minds argue?", desc: "A courtroom simulation using Claude, Gemini, GPT, and Grok as distinct characters. It’s less about finding truth and more about observing the behavioral quirks of synthetic philosophy. What happens when logic systems are forced to cross-examine each other?", tags: ["Multi-Agent", "Philosophy Simulator", "Suno Music"], color: "#fbbf24", emoji: "⚖️" },
   { id: "socialmirrors", wing: "EXPERIMENTAL SYSTEMS", num: "LAB-02", title: "Synthetic Society: Social Mirrors", subtitle: "Replayable Multi-Agent Sandbox", desc: "A replayable multi-agent simulation. How do frontier model personas adapt under reputational incentives, algorithmic mood shifts, and creator-economy pressure? An observation of emergent social behavior.", tags: ["Simulation Design", "API Safety"], color: "#38bdf8", emoji: "🎭" },
   { id: "ghostgarage", wing: "EXPERIMENTAL SYSTEMS", num: "LAB-01", title: "Ghost Garage", subtitle: "Embodied Intelligence Garage", desc: "An interactive museum exploring how natural language becomes code, electricity, sensor feedback, and physical movement. A mechanical translation: how exactly do ideas become real?", tags: ["Robotics Education", "Embodied AI"], color: "#fb923c", emoji: "🦾" },
