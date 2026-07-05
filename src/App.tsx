@@ -415,6 +415,24 @@ export default function App() {
           </div>
         </Section>
 
+        {/* DESIGN PHILOSOPHY */}
+        <Section id="design-philosophy" title="Design Philosophy" subtitle="THEORY & PRACTICE">
+          <div className="max-w-3xl text-[#D8CFC0] font-light leading-relaxed text-lg space-y-8">
+            <p>
+              Many of my projects begin with a conceptual question rather than a product specification.
+            </p>
+            <p>
+              I enjoy building systems where behavior emerges from architecture instead of being scripted directly. Questions about memory, agency, interaction, and perception often become working software—not because software is the goal, but because it is the most effective way I know to investigate those ideas.
+            </p>
+            <p>
+              Iteration is central to my process. Several projects in this portfolio changed direction entirely because experimentation revealed that my original assumptions were incomplete. Rather than treating those moments as failures, I consider them the point where the most meaningful engineering begins.
+            </p>
+            <p>
+              I value systems that make their reasoning visible, architectures that separate decision-making from expression, and interfaces that communicate complex ideas with clarity. Whether I am designing interaction flows, multi-agent systems, or research prototypes, my goal is to build software that helps both people and machines become easier to understand.
+            </p>
+          </div>
+        </Section>
+
         {/* ORIGIN */}
         <Section id="origin" className="min-h-[50vh] flex items-center pb-32">
           <motion.div 
