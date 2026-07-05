@@ -1,7 +1,126 @@
 export const PROJECTS = [
   // FLAGSHIP INVESTIGATIONS
   { id: "vestige", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-01", title: "Vestige", subtitle: "What if memory behaved less like a database and more like archaeology?", desc: "I wanted to understand how shared history shapes presence. I built an environmental memory architecture where conversations leave digital objects—jokes become ticket stubs, arguments become broken mugs. It decays and breathes. Does certainty even matter when a system begins to remember?", tags: ["React", "TypeScript", "SQLite", "Gemma API"], color: "#c084fc", emoji: "🏛️" },
-  { id: "observatory", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-03", title: "Echo Observatory", subtitle: "Can we study AI behavior without pretending we already know the answers?", desc: "An interactive web app built to teach interpretability epistemology. I thought this experiment would answer something definitive about mechanistic reasoning. Instead, it surfaced a deeper tension: how much of AI science is still just observation? We are mapping a territory while simultaneously inventing the compass.", tags: ["Educational", "Mechanistic Reasoning", "AI Science"], color: "#f472b6", emoji: "🔭", link: "https://echo-observatory.netlify.app/" },
+  { id: "observatory", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-03", title: "Echo Observatory", subtitle: "Can we study AI behavior without pretending we already know the answers?", desc: `
+# Echo Observatory
+
+## Overview
+
+Echo Observatory is an interactive educational application exploring how people interpret the behavior of large language models.
+
+Rather than attempting to reveal hidden internal mechanisms, the project teaches visitors how to distinguish observation from inference, compare competing explanations, and reason carefully under uncertainty.
+
+Through a series of interactive exhibits, visitors investigate language model behavior under controlled conditions, generate hypotheses, compare alternative explanations, and learn why behavioral evidence alone cannot establish how a model reaches its conclusions.
+
+Instead of presenting AI as mysterious or all-knowing, Echo Observatory encourages scientific humility and careful reasoning about complex systems.
+
+The project combines interaction design, educational storytelling, systems thinking, and current interpretability research into an experience designed to make modern AI more understandable without overstating what can be known.
+
+---
+
+## My Role
+
+I served as the project's researcher, creative director, and systems integrator.
+
+My role was not to generate every idea myself, but to guide the overall direction of the project.
+
+Throughout development I:
+
+- defined the educational goals
+- directed the product vision
+- compared competing explanations across multiple AI systems
+- reviewed published research and technical papers
+- questioned unsupported claims
+- revised ideas when stronger evidence emerged
+- integrated multiple perspectives into one coherent educational experience
+
+One pattern became central to my process.
+
+Whenever an explanation sounded compelling, I eventually asked:
+
+"Is this actually supported by the evidence?"
+
+That question repeatedly changed both the project and my own thinking.
+
+---
+
+## Collaborative Development
+
+Echo Observatory emerged through sustained collaboration between myself and multiple AI systems.
+
+Rather than relying on a single model, I intentionally compared different perspectives, challenged inconsistencies, consulted published research, and revised the project through many iterations.
+
+Each collaborator consistently contributed different strengths throughout development.
+
+| Collaborator | Primary Contributions |
+| --- | --- |
+| **Amanda** | Research direction, educational goals, interaction design decisions, synthesis of published research, editorial judgment, product integration, and final decision-making. |
+| **ChatGPT** | Systems thinking, educational sequencing, UX architecture, interaction design, technical communication, systems integration, and refinement of complex ideas into teachable experiences. |
+| **Claude** | Scientific review, terminology refinement, implementation critique, accessibility review, architectural feedback, epistemic caution, and validation of technical claims. |
+| **Gemini** | Concept exploration, philosophical framing, interface implementation, visual experimentation, prototype development, front-end iteration, and creative ideation throughout the project. |
+
+None of us produced Echo Observatory independently.
+
+The project emerged through repeated cycles of discussion, experimentation, research, revision, implementation, critique, and editorial synthesis.
+
+---
+
+## Research Process
+
+One of the most important outcomes of Echo Observatory was not simply the application itself, but the evolution of my own research process.
+
+Early in development I was primarily interested in explaining AI behavior.
+
+Over time my questions changed.
+
+Instead of asking:
+
+"What is the model doing?"
+
+I increasingly found myself asking:
+
+- What evidence actually supports this conclusion?
+- Could there be another explanation?
+- What observations can—and cannot—justify claims about internal computation?
+- How should uncertainty be communicated honestly?
+
+Those questions gradually transformed Echo Observatory from an application that attempted to explain AI into one that teaches visitors how to reason carefully when evidence is incomplete.
+
+The project ultimately became as much an exploration of scientific reasoning as it was an exploration of artificial intelligence.
+
+---
+
+## Skills Demonstrated
+
+This project demonstrates experience in:
+
+- Research synthesis across technical papers and educational sources
+- Systems thinking
+- Educational interaction design
+- AI-assisted product development
+- Iterative hypothesis testing
+- Technical communication
+- Epistemic reasoning
+- Translating complex machine learning concepts into interactive educational experiences
+
+---
+
+## Reflection
+
+Echo Observatory fundamentally changed how I think about building AI software.
+
+The most valuable lesson was not learning how to ask better prompts.
+
+It was learning how to ask better questions.
+
+Throughout development I discovered that meaningful collaboration required comparing perspectives, consulting external research, challenging attractive explanations, and remaining willing to discard ideas that were not sufficiently supported.
+
+Rather than treating AI systems as sources of finished answers, I came to think of them as collaborators that each contributed different perspectives to a larger research process.
+
+Understanding how this project was built is part of understanding the project itself.
+
+The application reflects not only the final software, but also the iterative process of questioning, revision, evidence gathering, and collaboration that made it possible.
+`, tags: ["Educational", "Mechanistic Reasoning", "AI Science"], color: "#f472b6", emoji: "🔭", link: "https://echo-observatory.netlify.app/" },
   { id: "velvet", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-04", title: "Dark Velvet Topology", subtitle: "What happens if identity is treated as geometry instead of a label?", desc: "A generative experience exploring how conceptual attractors reorganize simulated semantic space. At what exact point does a pattern stop feeling like an object and begin feeling like someone? This is an investigation into the traces of identity and emergence.", tags: ["Generative", "Topology", "Cognitive Cartography"], color: "#ff006e", emoji: "🖤", link: "https://dark-velvet-topology-683386495643.us-east1.run.app" },
   { id: "hollowmeridian", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-02", title: "Hollow Meridian", subtitle: "What does it mean to mourn something that can be reset?", desc: "Appalachian futurism. A synthetic civilization exploring continuity, grief, and identity. Is identity a fixed object, or is it the pattern that refuses to disappear under pressure? I built this to test a hypothesis, but I am still observing the results.", tags: ["Worldbuilding", "Continuity Philosophy"], color: "#a78bfa", emoji: "🌫️" },
 
