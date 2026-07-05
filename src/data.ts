@@ -50,7 +50,39 @@ export const PROJECTS = [
   { id: "deprecated-concepts", wing: "ARCHIVE", num: "ARC-03", title: "Deprecated Concepts", subtitle: "Outdated Models", desc: "Interfaces built for models that no longer exist or behave the same way.", tags: ["Deprecated", "History"], color: "#475569", emoji: "🕰️" },
   { id: "sketchbooks", wing: "ARCHIVE", num: "ARC-04", title: "Sketchbooks", subtitle: "Raw Ideas", desc: "Unfiltered, unorganized thoughts spanning code, philosophy, and design.", tags: ["Sketches", "Raw"], color: "#334155", emoji: "📓" },
   { id: "incident-logs", wing: "ARCHIVE", num: "ARC-05", title: "Incident Logs", subtitle: "Containment Breaches", desc: "Detailed reports on moments when the systems behaved in unexpectedly human or deeply alien ways.", tags: ["Logs", "Anomalies"], color: "#1e293b", emoji: "📋" },
-  { id: "failed-ideas", wing: "ARCHIVE", num: "ARC-06", title: "Failed Ideas", subtitle: "Post-Mortems", desc: "Why certain concepts didn't work, and what was learned from their collapse.", tags: ["Failure", "Learning"], color: "#0f172a", emoji: "💥" },
+  { id: "failed-ideas", wing: "ARCHIVE", num: "ARC-06", title: "Autonomous Companion Prototype", subtitle: "Post-Mortems", desc: `Overview
+
+This was the first AI application I built while learning conversational systems. Its original purpose was to explore persistent memory, long-term interaction, and personalized conversation. As development progressed, I realized the more interesting engineering problem was not personality—it was agency.
+
+What Changed
+
+Building this prototype fundamentally changed how I think about AI systems.
+
+I learned that memory alone does not create presence.
+
+Personality alone does not create autonomy.
+
+An AI that always complies remains fundamentally reactive.
+
+That realization shifted my focus from designing conversational companions to designing architectures capable of investigating agency itself.
+
+Lasting Impact
+
+The questions raised by this prototype directly informed my later work.
+
+K-ONSET explores autonomous social architecture through an Agency Layer that separates decision-making from language generation.
+
+Vestige explores presence as an architectural property rather than a conversational illusion.
+
+Although this prototype was never completed as a product, it became the bridge between building AI companions and designing systems that investigate agency.
+
+Lessons Learned
+
+• Persistent memory does not create presence.
+• Personality is not the same as agency.
+• Internal state should influence behavior before language generation.
+• Friction can be be an intentional design feature.
+• Failed prototypes often reveal the most important research questions.`, tags: ["Failure", "Learning"], color: "#0f172a", emoji: "💥" },
   { id: "abandoned-prototypes", wing: "ARCHIVE", num: "ARC-07", title: "Abandoned Prototypes", subtitle: "Unfinished Business", desc: "Half-built UI components and data pipelines that were left to gather digital dust.", tags: ["Prototypes", "Abandoned"], color: "#020617", emoji: "🏚️" },
   { id: "technical-notes", wing: "ARCHIVE", num: "ARC-08", title: "Technical Notes", subtitle: "Architecture References", desc: "Dry, clinical documentation of stack choices, database schemas, and API configurations.", tags: ["Documentation", "Tech"], color: "#cbd5e1", emoji: "🗄️" },
   { id: "micro", wing: "ARCHIVE", num: "ARC-10", title: "MICRO", subtitle: "Creator Systems Dashboard", desc: "A creator-focused dashboard experience aimed at helping smaller creators manage growth effectively.", tags: ["Creator Tools", "Dashboard"], color: "#a78bfa", emoji: "📱" },
