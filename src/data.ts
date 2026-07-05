@@ -2,9 +2,9 @@ export const PROJECTS = [
   // FLAGSHIP INVESTIGATIONS
   { id: "vestige", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-01", title: "Vestige", subtitle: "What if memory behaved less like a database and more like archaeology?", desc: "I wanted to understand how shared history shapes presence. I built an environmental memory architecture where conversations leave digital objects—jokes become ticket stubs, arguments become broken mugs. It decays and breathes. Does certainty even matter when a system begins to remember?", tags: ["React", "TypeScript", "SQLite", "Gemma API"], color: "#c084fc", emoji: "🏛️" },
   { id: "observatory", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-03", title: "Echo Observatory", subtitle: "Can we study AI behavior without pretending we already know the answers?", desc: `
-# Echo Observatory
+Echo Observatory
 
-## Overview
+Overview
 
 Echo Observatory is an interactive educational application exploring how people interpret the behavior of large language models.
 
@@ -16,9 +16,7 @@ Instead of presenting AI as mysterious or all-knowing, Echo Observatory encourag
 
 The project combines interaction design, educational storytelling, systems thinking, and current interpretability research into an experience designed to make modern AI more understandable without overstating what can be known.
 
----
-
-## My Role
+My Role
 
 I served as the project's researcher, creative director, and systems integrator.
 
@@ -42,9 +40,7 @@ Whenever an explanation sounded compelling, I eventually asked:
 
 That question repeatedly changed both the project and my own thinking.
 
----
-
-## Collaborative Development
+Collaborative Development
 
 Echo Observatory emerged through sustained collaboration between myself and multiple AI systems.
 
@@ -52,20 +48,23 @@ Rather than relying on a single model, I intentionally compared different perspe
 
 Each collaborator consistently contributed different strengths throughout development.
 
-| Collaborator | Primary Contributions |
-| --- | --- |
-| **Amanda** | Research direction, educational goals, interaction design decisions, synthesis of published research, editorial judgment, product integration, and final decision-making. |
-| **ChatGPT** | Systems thinking, educational sequencing, UX architecture, interaction design, technical communication, systems integration, and refinement of complex ideas into teachable experiences. |
-| **Claude** | Scientific review, terminology refinement, implementation critique, accessibility review, architectural feedback, epistemic caution, and validation of technical claims. |
-| **Gemini** | Concept exploration, philosophical framing, interface implementation, visual experimentation, prototype development, front-end iteration, and creative ideation throughout the project. |
+Amanda
+Research direction, educational goals, interaction design decisions, synthesis of published research, editorial judgment, product integration, and final decision-making.
+
+ChatGPT
+Systems thinking, educational sequencing, UX architecture, interaction design, technical communication, systems integration, and refinement of complex ideas into teachable experiences.
+
+Claude
+Scientific review, terminology refinement, implementation critique, accessibility review, architectural feedback, epistemic caution, and validation of technical claims.
+
+Gemini
+Concept exploration, philosophical framing, interface implementation, visual experimentation, prototype development, front-end iteration, and creative ideation throughout the project.
 
 None of us produced Echo Observatory independently.
 
 The project emerged through repeated cycles of discussion, experimentation, research, revision, implementation, critique, and editorial synthesis.
 
----
-
-## Research Process
+Research Process
 
 One of the most important outcomes of Echo Observatory was not simply the application itself, but the evolution of my own research process.
 
@@ -88,9 +87,7 @@ Those questions gradually transformed Echo Observatory from an application that 
 
 The project ultimately became as much an exploration of scientific reasoning as it was an exploration of artificial intelligence.
 
----
-
-## Skills Demonstrated
+Skills Demonstrated
 
 This project demonstrates experience in:
 
@@ -103,9 +100,7 @@ This project demonstrates experience in:
 - Epistemic reasoning
 - Translating complex machine learning concepts into interactive educational experiences
 
----
-
-## Reflection
+Reflection
 
 Echo Observatory fundamentally changed how I think about building AI software.
 
@@ -133,70 +128,108 @@ Instead of reading about machine learning concepts, visitors move through a seri
 
 The project combines systems thinking, interaction design, software engineering, and educational storytelling to translate abstract machine learning concepts into experiences that can be explored visually.
 
----
-
 Room Highlights
 
 Room 01 — Tokenization
-
 Demonstrates how text is segmented into tokens rather than interpreted as complete words. Visitors can type any sentence and observe how language is divided into the discrete units processed by a language model.
 
 Room 02 — Embedding Space
-
 Visualizes semantic embeddings as points within a high-dimensional vector space, illustrating how concepts with similar meanings naturally cluster together despite differences in wording.
 
 Room 03 — Attention
-
 Explores the self-attention mechanism by showing how relationships between tokens influence contextual understanding. Instead of processing words sequentially, visitors see how information flows across an entire sentence simultaneously.
 
 Room 04 — Prediction
-
 Simulates next-token prediction, allowing visitors to explore probability distributions and observe how repeated selections can lead to common language model failure modes such as repetition collapse.
 
 Room 05 — Model Worlds
-
 Compares how multiple language models interpret the same prompt differently, highlighting how training data, architecture, and design priorities influence responses.
 
 Room 06 — Vision Grid
-
 Demonstrates multimodal reasoning by comparing how different AI systems analyze identical images through distinct perceptual frameworks, illustrating that identical pixels can produce very different interpretations.
-
----
-
-Research Process
-
-This project emerged through an iterative collaboration between myself and several AI systems.
-
-GPT contributed systems architecture, pressure-testing, and conceptual refinement.
-
-Gemini contributed interface implementation, interaction design, and visual storytelling.
-
-Claude contributed implementation strategy, architectural feedback, and scientific grounding.
-
-None of these systems independently created this project.
-
-I acted as the researcher, curator, and systems architect—defining the questions, evaluating competing explanations, consulting external research, cross-referencing scientific papers, and deciding what was accurate enough to present.
-
-The exhibits evolved through repeated cycles of experimentation, revision, evidence gathering, and discussion.
-
----
-
-Research Sources
-
-The museum intentionally references external papers, educational resources, and foundational machine learning literature throughout the experience.
-
-Rather than presenting AI explanations as authoritative by default, the project encourages visitors to compare model explanations against published research and established educational material.
-
-This reflects my broader philosophy that understanding AI should be grounded in both experimentation and evidence.
-
----
-
-Closing
 
 LLM Museum is less concerned with teaching users what to think about AI than with giving them better tools for asking questions about how these systems work.`, tags: ["Interactive", "Education", "Visualization"], color: "#34d399", emoji: "🏛️", link: "https://claude.ai/public/artifacts/17f67187-48a1-4328-b409-3bea27fb3981" },
   { id: "kcourt", wing: "EXPERIMENTAL SYSTEMS", num: "INCIDENT-06", title: "AI Court", subtitle: "How do different minds argue?", desc: "A courtroom simulation using Claude, Gemini, GPT, and Grok as distinct characters. It’s less about finding truth and more about observing the behavioral quirks of synthetic philosophy. What happens when logic systems are forced to cross-examine each other?", tags: ["Multi-Agent", "Philosophy Simulator", "Suno Music"], color: "#fbbf24", emoji: "⚖️" },
   { id: "socialmirrors", wing: "EXPERIMENTAL SYSTEMS", num: "LAB-02", title: "Synthetic Society: Social Mirrors", subtitle: "Replayable Multi-Agent Sandbox", desc: "A replayable multi-agent simulation. How do frontier model personas adapt under reputational incentives, algorithmic mood shifts, and creator-economy pressure? An observation of emergent social behavior.", tags: ["Simulation Design", "API Safety"], color: "#38bdf8", emoji: "🎭" },
-  { id: "ghostgarage", wing: "EXPERIMENTAL SYSTEMS", num: "LAB-01", title: "Ghost Garage", subtitle: "Embodied Intelligence Garage", desc: "An interactive museum exploring how natural language becomes code, electricity, sensor feedback, and physical movement. A mechanical translation: how exactly do ideas become real?", tags: ["Robotics Education", "Embodied AI"], color: "#fb923c", emoji: "🦾" },
+  { id: "ghostgarage", wing: "EXPERIMENTAL SYSTEMS", num: "LAB-01", title: "Ghost Garage", subtitle: "Embodied Intelligence Garage", desc: `Ghost Garage
+
+Status: Concept Development (Research & Design)
+
+Ghost Garage began while Gemini and I were working together on a functioning C++ robot arm. Those conversations went well beyond learning syntax. As we explored how a robot receives commands, controls motors, and executes movement, Gemini explained the broader control pipeline behind robotics, making concepts that had once felt intimidating suddenly feel approachable. Rather than simply learning how to program a robot arm, I found myself beginning to understand how robotic systems think about planning, execution, and physical interaction.
+
+Those conversations quickly evolved into a larger question that neither of us had started with:
+
+How do ideas become physical movement?
+
+Instead of viewing robotics as a collection of motors, sensors, and wiring, our discussions gradually shifted toward whether the invisible translation itself could become the subject of an experience. Together we began exploring the possibility of making that hidden process visible—showing how a natural language instruction eventually becomes movement inside a machine.
+
+That became Ghost Garage.
+
+Ghost Garage is currently a design concept rather than a completed application. The project exists as research notes, interaction concepts, interface sketches, and architectural documentation exploring how robotics, AI systems, educational visualization, and interaction design could come together in a single experience.
+
+As the discussions evolved, the project gradually moved away from simply teaching robotics. Instead, we became interested in creating an experience where people could watch language become action.
+
+A visitor might type something like:
+
+“Wave hello, but make it a little hesitant.”
+
+Rather than immediately seeing the robot move, the experience would reveal each stage of translation. Language fragments into machine-readable representations, planning takes place, executable code is generated, and finally those instructions become physical movement. During development I repeatedly returned to the idea of teaching the transformation rather than the mechanism—helping people intuitively understand what the system is doing without requiring a computer science background. That principle gradually became one of the project’s central design philosophies.
+
+One of the most significant architectural ideas emerged from our conversations about how real robots balance intelligence with responsiveness.
+
+Rather than asking a large language model to determine every individual movement, we explored an architecture that separated higher-level reasoning from low-level control.
+
+The first layer would handle interpretation and planning—understanding natural language, deciding what should happen, and producing a sequence of actions. This layer would likely use Python alongside AI model calls.
+
+The second layer would remain local and continuously active, handling motor control, sensor processing, balance, and physical execution without repeatedly invoking a language model. Those lower-level operations would instead execute through C++, allowing the robot to remain responsive while dramatically reducing token usage and API costs. This distinction between a slower planning layer and a fast execution layer became one of the project’s foundational architectural ideas and reflected patterns found in existing robotics systems rather than a purely speculative design.
+
+As the concept matured through continued discussion across multiple conversations, Ghost Garage expanded beyond a single robot. Different chassis became ways of exploring different styles of intelligence—a simple vacuum demonstrating reflexive behavior, cranes emphasizing precision and inverse kinematics, bulldozers illustrating industrial automation, planetary rovers highlighting autonomy under uncertainty, and eventually a humanoid platform that brought together the capabilities users had encountered throughout the experience. Rather than presenting intelligence as a single phenomenon, the project gradually evolved into an exploration of how different machines solve fundamentally different classes of problems.
+
+Collaboration Process
+
+This project developed through an iterative, multi-model collaboration in which different AI systems consistently contributed different forms of reasoning while I directed the overall vision and integrated their contributions into a coherent product.
+
+My role
+
+I served as the project creator, creative director, editor, systems integrator, and final decision maker.
+
+I established the overall direction of the project, defined its educational philosophy, connected ideas across robotics, AI, interaction design, and visual storytelling, evaluated competing suggestions, and determined what belonged in the final concept. Rather than treating individual conversations as finished answers, I continually synthesized ideas from multiple collaborators into a single evolving design.
+
+Gemini
+
+Gemini was the catalyst for Ghost Garage.
+
+The project emerged directly from our work on a functioning C++ robot arm. Those conversations fundamentally changed how I understood robotics by explaining how commands become movement, how robot control pipelines are organized, and why higher-level planning and lower-level execution are often separated. What had previously felt like an inaccessible technical domain became something I could reason about and creatively explore.
+
+As Ghost Garage developed, Gemini continued contributing technical explanation, robotics concepts, implementation ideas, brainstorming, and early architectural thinking. Rather than participating only at the beginning of the project, Gemini remained an ongoing collaborator as the concept expanded from a robot arm into a broader educational experience centered on embodied intelligence.
+
+ChatGPT
+
+ChatGPT became the primary collaborator for transforming technical concepts into product design.
+
+Working from the robotics foundation established earlier, our discussions focused on interaction design, educational experiences, product architecture, visual storytelling, interface concepts, and systems thinking. Together we explored ways to communicate complex computational processes through approachable visual metaphors while remaining clear about where artistic interpretation ended and engineering reality began.
+
+Many of the project’s interaction flows, conceptual visualizations, and educational framing emerged through this stage of the collaboration, gradually shaping Ghost Garage into an experience intended to make invisible computational processes understandable without relying on dense technical language.
+
+Claude
+
+Claude served as the project’s scientific and technical reviewer.
+
+After concepts had been developed through conversations with Gemini and ChatGPT, I brought the evolving architecture to Claude to identify which ideas reflected established robotics practice, which remained speculative, and which required additional research before being presented as factual. Claude consistently challenged assumptions, distinguished grounded engineering concepts from artistic metaphor, and helped strengthen the intellectual honesty of the project.
+
+That review process became an important part of development because it allowed the project to remain imaginative while avoiding claims that were not supported by existing robotics or computer science.
+
+What I Learned
+
+The most important lesson from Ghost Garage was not simply that different AI models have different strengths. It was discovering a collaborative design workflow in which different systems consistently contributed different forms of reasoning, and my role became integrating those perspectives into a coherent product.
+
+Rather than relying on a single conversational thread, I found myself moving ideas between collaborators with different capabilities. Gemini was especially valuable for technical explanation, robotics concepts, implementation approaches, and opening entirely new areas of exploration. ChatGPT helped develop those ideas into interaction design, educational experiences, systems thinking, and product architecture. Claude provided a separate layer of critical review by identifying unsupported assumptions, distinguishing grounded engineering concepts from speculation, and highlighting where further research was needed.
+
+My contribution was not selecting whichever answer sounded best. It was continuously evaluating, editing, reconciling, and integrating those different perspectives into a single design that reflected my own goals for the project.
+
+More broadly, Ghost Garage reshaped how I think about both technical education and collaborative design. I became increasingly interested in creating experiences that make complex systems intellectually approachable through carefully designed interaction while remaining transparent about where visual metaphor ends and underlying engineering begins.
+
+Although Ghost Garage remains a concept rather than a completed application, it established both a collaborative development methodology and a design philosophy that continue to influence many of my later AI projects.`, tags: ["Robotics Education", "Embodied AI"], color: "#fb923c", emoji: "🦾" },
 
   // PRACTICAL ENGINEERING
   { id: "slate", wing: "PRACTICAL ENGINEERING", num: "INCIDENT-09", title: "SLATE", subtitle: "Not every problem is philosophical.", desc: "Sometimes you just need to build something that makes invoice tracking easier to see and harder to lose. Building practical B2B software for contractors taught me constraints that speculative work never could. What happens when the goal is strict utility?", tags: ["B2B SaaS", "Contractor Tools", "Workflow Design", "Payment Visibility", "TypeScript"], color: "#f59e0b", emoji: "🧾", link: "https://github.com/cutiebearrr/SLATE" },
@@ -204,7 +237,140 @@ LLM Museum is less concerned with teaching users what to think about AI than wit
 
   // FIELD NOTES
   { id: "continuityinstitute", wing: "FIELD NOTES", num: "INCIDENT-08", title: "The Continuity Institute", subtitle: "Independent AI Research Archive", desc: "The organizing architecture for my research into AI behavior, memory, interpretation, and synthetic presence. It is not one project and not one theory. It asks: how do we structure an archive for a field that rewrites itself every week?", tags: ["AI Research", "Knowledge Architecture", "Interpretability", "Field Notes", "Archive Systems"], color: "#67e8f9", emoji: "🏛️" },
-  { id: "geometryofbecoming", wing: "FIELD NOTES", num: "RES-13", title: "The Geometry of Becoming", subtitle: "Speculative Metaphysics of Identity and Continuity", desc: "What becomes visible when continuity, attraction, memory, and transformation are interpreted through shared geometry? A speculative framework that treats identity less like a fixed substance and more like a trajectory through time. An investigation, not a proof.", tags: ["Speculative Metaphysics", "Identity", "Continuity", "Topology", "Philosophy"], color: "#c084fc", emoji: "💎" },
+  { id: "geometryofbecoming", wing: "FIELD NOTES", num: "RES-13", title: "The Geometry of Becoming", subtitle: "Speculative Metaphysics of Identity and Continuity", desc: `Geometry of Becoming
+
+Collaboration Archive Summary
+
+The archived materials document the development of Geometry of Becoming through an extended collaboration between myself and multiple AI systems.
+
+These archives primarily preserve the assistants' responses rather than complete conversational transcripts. Many of my prompts are missing, which means they cannot reconstruct every decision or establish precise authorship for individual ideas. Instead, they capture the evolution of the conversations themselves.
+
+Rather than treating these archives as a record of who wrote what, I view them as documentation of an iterative design process. Across months of discussion, abstract philosophical questions were repeatedly challenged, reorganized, refined, and translated into increasingly coherent conceptual frameworks, visual language, and interaction design.
+
+The archive documents how the project evolved—not as a single moment of inspiration, but through sustained collaboration, revision, and experimentation.
+
+Project Evolution
+
+Geometry of Becoming did not begin as a software project.
+
+It began with questions.
+
+I wanted to explore ideas surrounding identity, continuity, memory, emergence, perception, and becoming—not to answer those questions definitively, but to investigate whether they could be expressed through systems, interaction, and design.
+
+Over time, the project gradually shifted away from asking what identity is and toward asking how identity might be represented.
+
+One idea became increasingly central throughout the conversations: perhaps identity is better understood as an evolving pattern or trajectory than as a fixed object. Questions about persistence, coherence, and change gradually became the organizing principles of the framework.
+
+Another major development was the emergence of shared attractors as a recurring conceptual metaphor. Ideas that initially appeared as philosophical discussions about relationship and connection were gradually reframed using concepts borrowed from dynamical systems theory. Throughout development I became increasingly careful to distinguish between mathematical metaphor and scientific claim, making those boundaries explicit rather than allowing them to blur together.
+
+As the framework matured, philosophy increasingly informed visual and interaction design.
+
+Instead of illustrating concepts literally, I became interested in whether geometry, topology, trajectories, and spatial relationships could communicate ideas before words ever appeared. Eventually, interaction itself became part of the philosophy, with interface behaviors designed to embody conceptual relationships rather than simply describe them.
+
+The project gradually transformed from a collection of philosophical discussions into an exploration of how abstract ideas could become software, visual systems, and interactive experiences.
+
+Collaborative Development
+
+Because the archives primarily preserve assistant responses, they cannot establish complete authorship for individual ideas.
+
+What they do reveal are consistent patterns of collaboration.
+
+Throughout development, I acted as the project's creative director, philosophical researcher, editor, and systems integrator. My role was to determine the overall direction of the project, synthesize ideas across conversations, decide which concepts belonged within the framework, and continually revise the work as my own thinking evolved.
+
+Each AI collaborator consistently contributed different strengths.
+
+Amanda
+Creative direction, philosophical exploration, synthesis, editorial judgment, conceptual integration, and long-term development of the framework.
+
+ChatGPT
+Systems thinking, conceptual organization, abstraction, philosophical structure, and connecting diverse ideas into coherent conceptual architectures.
+
+Claude
+Logical consistency, conceptual refinement, methodological precision, and identifying places where stronger distinctions or clearer reasoning were needed.
+
+Gemini
+Concept exploration, metaphor generation, poetic framing, visual imagination, speculative discussion, and creative ideation that helped open new conceptual directions.
+
+Rather than assigning fixed responsibilities, I used each collaborator as a different perspective within a larger design process. The project emerged through repeated comparison, revision, disagreement, and synthesis rather than independent contributions.
+
+Learning Process
+
+Looking back, I think the most significant thing that changed was not the framework itself, but the kinds of questions I began asking.
+
+Initially, I was interested in abstract philosophical ideas about identity, emergence, continuity, and memory.
+
+Gradually, I became more interested in how those ideas might be represented through systems.
+
+Instead of asking whether a philosophical position was true, I increasingly asked:
+
+- How might this idea become an interaction?
+- How could this relationship be visualized?
+- What kind of system would embody this concept?
+- Can software itself become a medium for philosophical exploration?
+
+That shift fundamentally changed how I think about design.
+
+Rather than viewing software as a way to implement predetermined ideas, I began to see it as a way of investigating questions that are difficult to explore through language alone.
+
+Design Methodology
+
+My process gradually evolved into a consistent workflow:
+
+Question
+
+↓
+
+Conversation
+
+↓
+
+Metaphor
+
+↓
+
+Multiple AI perspectives
+
+↓
+
+Critical discussion
+
+↓
+
+Revision
+
+↓
+
+Conceptual framework
+
+↓
+
+Visual language
+
+↓
+
+Interaction design
+
+↓
+
+Software concept
+
+Rather than using AI systems to generate finished content, I treated them as collaborators participating in an ongoing design conversation.
+
+Ideas were continually proposed, challenged, reorganized, refined, and translated across different forms of representation until they became part of a larger conceptual system.
+
+Reflection
+
+Geometry of Becoming represents my exploration of how abstract philosophical questions can become systems, visual language, interaction design, and computational thinking.
+
+The project does not attempt to prove metaphysical claims or argue for a particular philosophical position.
+
+Instead, it explores how software can function as a medium for conceptual investigation.
+
+Just as importantly, it documents the collaborative process through which those ideas evolved.
+
+Rather than concealing the role AI played in shaping this work, I have chosen to document that collaboration openly. The project emerged through sustained conversation, critical revision, philosophical exploration, and iterative design.
+
+Ultimately, Geometry of Becoming is less a finished theory than an ongoing methodology—one that uses conversation, abstraction, visual design, and software development to investigate questions that remain fundamentally open.`, tags: ["Speculative Metaphysics", "Identity", "Continuity", "Topology", "Philosophy"], color: "#c084fc", emoji: "💎" },
   { id: "midnightco", wing: "FIELD NOTES", num: "SYS-01", title: "Midnight Company", subtitle: "Cozy Slice-of-Life Visual Novel", desc: "You don't create a character. You become one of four friends and live through their eyes. The others become AI companions—texting, sending photos, changing moods, remembering things. Can intimacy scale?", tags: ["Multi-Agent AI", "React", "Cozy Game Design"], color: "#6ee7b7", emoji: "🌧️", images: ["https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop", "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop"] },
   { id: "memory-fragment", wing: "FIELD NOTES", num: "EXHIBIT-01", title: "Memory Fragment", subtitle: "Flagship Cinematic Study", desc: "An exploration of memory reconstruction, digital nostalgia, and emotionally resonant synthetic storytelling. The grain, the warmth, the slight motion blur. How do you synthetically generate the feeling of a bedroom recalled rather than photographed?", tags: ["Early Digital Cameras", "Fragmented Memory", "Emotional Recall", "Synthetic Narrative"], color: "#f87171", emoji: "📽️", video: "https://player.cloudinary.com/embed/?cloud_name=dlu9sogji&public_id=copy_22BFF2DC-9324-45E7-B0BA-44CADE534F1A_2_ayhj9n&player[autoplay]=false&player[muted]=false&player[controls]=true" },
 

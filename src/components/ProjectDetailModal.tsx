@@ -179,7 +179,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                   <h3 className="font-mono text-sm tracking-widest uppercase mb-4" style={{ color: project.color }}>
                     "{project.subtitle}"
                   </h3>
-                  <p className="text-base text-[#D8CFC0] leading-relaxed font-sans font-light">
+                  <p className="text-base text-[#D8CFC0] leading-relaxed font-sans font-light whitespace-pre-wrap">
                     {project.desc}
                   </p>
                 </div>
