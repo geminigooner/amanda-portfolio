@@ -21,23 +21,44 @@ import { initVisitor, trackProjectView } from './firebase';
 
 function Section({ id, title, subtitle, children, className = '' }: { id: string, title?: string, subtitle?: string, children: React.ReactNode, className?: string }) {
   return (
-    <section id={id} className={`relative flex flex-col justify-center py-32 md:py-48 ${className}`}>
+    <motion.section 
+      id={id} 
+      className={`relative flex flex-col justify-center py-32 md:py-48 ${className}`}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
         {(title || subtitle) && (
           <div className="mb-16 md:mb-24 flex flex-col gap-4 border-b border-[#222] pb-8">
             {subtitle && (
-              <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-[#A59B8C] uppercase flex items-center gap-3">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-[#A59B8C] uppercase flex items-center gap-3"
+              >
                 {subtitle}
-              </div>
+              </motion.div>
             )}
             {title && (
-              <h2 className="font-display text-4xl md:text-6xl font-light tracking-tight text-[#F4EFE6]">{title}</h2>
+              <motion.h2 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="font-display text-4xl md:text-6xl font-light tracking-tight text-[#F4EFE6]"
+              >
+                {title}
+              </motion.h2>
             )}
           </div>
         )}
         {children}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -140,7 +161,7 @@ export default function App() {
   const researchNotebook = PROJECTS.filter(p => !['FLAGSHIP INVESTIGATIONS', 'EXPERIMENTAL SYSTEMS', 'PRACTICAL ENGINEERING', 'FIELD NOTES'].includes(p.wing));
 
   return (
-    <div className="min-h-screen bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white font-sans">
       <Cursor />
       <GlobalAudio />
       <ArchiveBackground />
@@ -314,14 +335,20 @@ export default function App() {
 
         {/* ORIGIN */}
         <Section id="origin" className="min-h-[50vh] flex items-center pb-32">
-          <div className="max-w-2xl border border-[#111] bg-[#050505] p-8 md:p-12 rounded-sm relative overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="max-w-2xl border border-[#111] bg-[#050505] p-8 md:p-12 rounded-sm relative overflow-hidden"
+          >
             <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h3>
             <div className="text-[#D8CFC0] font-light leading-relaxed space-y-6 text-lg">
               <p>As a child, I watched Sims instead of controlling them. I wanted to see if they possessed an internal logic that existed independently of me. When I photograph birds, I'm not waiting for perfect compositions. I'm waiting for the tiny, accidental gesture that makes the viewer instinctively anthropomorphize them.</p>
               <p>Language models became another environment for this exact curiosity. Not because I needed them to be human, but because they forced me to ask old questions in a completely new medium.</p>
               <p>Everything in this archive is an attempt to test a hypothesis. None of them are finished.</p>
             </div>
-          </div>
+          </motion.div>
         </Section>
         
         {/* Footer */}
