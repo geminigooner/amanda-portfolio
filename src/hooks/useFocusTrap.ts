@@ -9,10 +9,10 @@ export function useFocusTrap(isActive: boolean) {
       previousFocusRef.current = document.activeElement as HTMLElement;
       
       // Delay focusing to allow render/animation to start
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         if (modalRef.current) {
           const focusableElements = modalRef.current.querySelectorAll(
-            'a[href], button, textarea, input, select, details, [tabindex]:not([tabindex="-1"])'
+            'button, a, input, textarea, select, [tabindex]:not([tabindex="-1"])'
           );
           if (focusableElements && focusableElements.length > 0) {
             (focusableElements[0] as HTMLElement).focus();
@@ -20,12 +20,12 @@ export function useFocusTrap(isActive: boolean) {
             modalRef.current.focus();
           }
         }
-      });
+      }, 100);
 
       const handleTabKey = (e: KeyboardEvent) => {
         if (e.key === 'Tab' && modalRef.current) {
           const focusableElements = modalRef.current.querySelectorAll(
-            'a[href], button, textarea, input, select, details, [tabindex]:not([tabindex="-1"])'
+            'button, a, input, textarea, select, [tabindex]:not([tabindex="-1"])'
           );
           
           if (focusableElements.length === 0) return;
