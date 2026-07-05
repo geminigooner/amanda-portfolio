@@ -196,18 +196,31 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                   </div>
                 </div>
 
-                {/* Visit Link */}
-                {project.link && (
-                  <div className="pt-4 border-t border-white/5 mt-2">
-                    <a 
-                      href={project.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#F4EFE6] text-[#030303] hover:bg-white transition-all font-mono text-[10px] tracking-widest uppercase group rounded-sm"
-                    >
-                      Visit Exhibit
-                      <ChevronRight className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                    </a>
+                {/* Links */}
+                {(project.link || (project as any).sourceLink) && (
+                  <div className="pt-4 border-t border-white/5 mt-2 flex flex-wrap gap-3">
+                    {project.link && (
+                      <a 
+                        href={project.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#F4EFE6] text-[#030303] hover:bg-white transition-all font-mono text-[10px] tracking-widest uppercase group rounded-sm flex-1 whitespace-nowrap"
+                      >
+                        {(project as any).sourceLink ? 'Live Demo' : 'Visit Exhibit'}
+                        <ChevronRight className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      </a>
+                    )}
+                    {(project as any).sourceLink && (
+                      <a 
+                        href={(project as any).sourceLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-transparent border border-[#333] hover:border-[#A59B8C] transition-all font-mono text-[10px] tracking-widest uppercase text-[#A59B8C] hover:text-[#F4EFE6] group rounded-sm flex-1 whitespace-nowrap"
+                      >
+                        Source Code
+                        <ChevronRight className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      </a>
+                    )}
                   </div>
                 )}
               </div>

@@ -43,7 +43,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
   const triggerInitialGreeting = async () => {
     setIsLoading(true);
     try {
-      const projectContext = `Visitor is currently observing section: ${activeSection}\n\n` + PROJECTS.map(p => `${p.title} (${p.wing}): ${p.desc} [Tags: ${p.tags.join(', ')}]`).join('\n');
+      const projectContext = `Visitor is currently observing section: ${activeSection}\n\n` + PROJECTS.map(p => `${p.title} (${p.wing}): ${p.desc} [Tags: ${p.tags.join(', ')}]${(p as any).sourceLink ? ' [Source code available]' : ''}`).join('\n');
 
 `\n\n` + PROJECTS.map(p => `${p.title} (${p.wing}): ${p.desc} [Tags: ${p.tags.join(', ')}]`).join('\n');
       const visitorMemory = await getVisitorMemory();
@@ -128,7 +128,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
     setIsLoading(true);
 
     try {
-      const projectContext = `Visitor is currently observing section: ${activeSection}\n\n` + PROJECTS.map(p => `${p.title} (${p.wing}): ${p.desc} [Tags: ${p.tags.join(', ')}]`).join('\n');
+      const projectContext = `Visitor is currently observing section: ${activeSection}\n\n` + PROJECTS.map(p => `${p.title} (${p.wing}): ${p.desc} [Tags: ${p.tags.join(', ')}]${(p as any).sourceLink ? ' [Source code available]' : ''}`).join('\n');
       const visitorMemory = await getVisitorMemory();
 
       const response = await fetch('/api/chat', {
