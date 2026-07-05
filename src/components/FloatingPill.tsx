@@ -9,6 +9,7 @@ const ZONES = [
   { id: 'practical-engineering', label: 'PRACTICAL ENGINEERING' },
   { id: 'field-notes', label: 'FIELD NOTES' },
   { id: 'research-notebook', label: 'RESEARCH NOTEBOOK' },
+  { id: 'research-interests', label: 'RESEARCH INTERESTS' },
   { id: 'origin', label: 'ORIGIN' }
 ];
 
@@ -118,7 +119,7 @@ export function FloatingPill() {
                         <span>INDEX</span>
                       </div>
                       <button onClick={(e) => { e.stopPropagation(); setIsExpanded(false); }} className="hover:text-white transition-colors p-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                       </button>
                     </div>
                     <div className="flex flex-col gap-3">

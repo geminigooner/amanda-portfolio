@@ -333,6 +333,88 @@ export default function App() {
           </Section>
         )}
 
+        {/* RESEARCH INTERESTS */}
+        <Section id="research-interests" title="Research Interests" subtitle="THEMES & METHODS">
+          <div className="max-w-3xl text-[#D8CFC0] font-light leading-relaxed text-lg space-y-8">
+            <p>
+              I build software to investigate questions as much as to implement features.
+            </p>
+            <p>
+              Across my projects, I repeatedly return to the same themes: agency, memory, interaction, and the ways complex systems produce behavior through relationships rather than isolated components.
+            </p>
+            <p>
+              Rather than treating engineering and design as separate disciplines, I approach both as tools for exploring how intelligent systems behave over time.
+            </p>
+
+            <div className="pt-8 pb-4">
+              <div className="text-[#C8A96A] font-mono text-[10px] tracking-[0.2em] uppercase mb-8">Core Themes</div>
+              <ul className="space-y-4 text-base">
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>AI agency and autonomous behavior</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>Human–AI interaction</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>Multi-agent systems</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>Persistent memory architectures</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>Context assembly and decision systems</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>Emergent behavior in interactive software</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>State-driven interaction design</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>System architecture and information flow</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                  <span>Explainability and reasoning representations</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-8 pb-4 space-y-8">
+              <div className="text-[#C8A96A] font-mono text-[10px] tracking-[0.2em] uppercase mb-4">Technical Interests</div>
+              <p>
+                My approach bridges engineering and exploration, relying on a diverse technical foundation. I build primarily with TypeScript, structuring persistent environments through Firebase and integrating reasoning capabilities via Cloudflare Workers AI and various REST APIs. 
+              </p>
+              <p>
+                These systems take shape through rapid prototyping, deliberate system architecture, and interaction design. Working natively from the Linux command line and managing iteration via Git and GitHub keeps the process fluid and direct.
+              </p>
+              <p>
+                Alongside traditional development, methods like prompt engineering and open-source intelligence (OSINT) research serve as essential investigative tools, helping to map the problem space before any code is written.
+              </p>
+            </div>
+
+            <div className="pt-12 space-y-8 border-t border-[#111]">
+              <p>
+                My projects rarely begin with a product idea.
+              </p>
+              <p>
+                They usually begin with a question.
+              </p>
+              <p>
+                The software is simply the method I use to explore it.
+              </p>
+            </div>
+          </div>
+        </Section>
+
         {/* ORIGIN */}
         <Section id="origin" className="min-h-[50vh] flex items-center pb-32">
           <motion.div 
