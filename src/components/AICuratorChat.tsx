@@ -11,8 +11,24 @@ type Message = {
   artifacts?: { title: string; type: string }[];
 };
 
-export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { activeSection?: string, onOpenContainmentWing?: () => void }) {
+export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpenConvergence }: { activeSection?: string, onOpenContainmentWing?: () => void, onOpenConvergence?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      window.dispatchEvent(new CustomEvent('close-index'));
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleCloseValen = () => setIsOpen(false);
+    window.addEventListener('close-valen', handleCloseValen);
+    window.addEventListener('open-index', handleCloseValen);
+    return () => {
+      window.removeEventListener('close-valen', handleCloseValen);
+      window.removeEventListener('open-index', handleCloseValen);
+    }
+  }, []);
   
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -161,6 +177,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
       if (lowerContent.includes('vestige')) mockArtifacts.push({ title: 'Vestige', type: 'Investigation' });
       if (lowerContent.includes('court')) mockArtifacts.push({ title: 'AI Court', type: 'Observation' });
       if (lowerContent.includes('containment') || lowerContent.includes('chaos') || lowerContent.includes('fail') || lowerContent.includes('weird') || lowerContent.includes('funny')) mockArtifacts.push({ title: 'Containment Wing', type: 'Restricted' });
+      if (lowerContent.includes('convergence')) mockArtifacts.push({ title: 'Convergence', type: 'Note' });
 
       setMessages(prev => [...prev, {
         id: assistantMessageId,
@@ -291,6 +308,19 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing }: { a
                                   className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#B76E79]/30 hover:border-[#B76E79] text-[#B76E79] font-mono text-[10px] uppercase tracking-widest transition-all"
                                 >
                                   Access Containment Wing
+                                  <ArrowRight className="w-3 h-3" />
+                                </button>
+                              );
+                            }
+                            
+                            if (projectName === 'Convergence') {
+                              return (
+                                <button
+                                  key={i}
+                                  onClick={() => onOpenConvergence?.()}
+                                  className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#A59B8C]/30 hover:border-[#A59B8C] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all"
+                                >
+                                  Read Convergence Note
                                   <ArrowRight className="w-3 h-3" />
                                 </button>
                               );

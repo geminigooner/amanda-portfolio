@@ -8,9 +8,9 @@ import { ProjectDetailModal } from './components/ProjectDetailModal';
 import { VestigeExperience } from './components/VestigeExperience';
 import { ConstellationGraph } from './components/ConstellationGraph';
 import { HiddenRoomModal } from './components/HiddenRoomModal';
-import { NavigationMenu } from './components/NavigationMenu';
 import { AICuratorChat } from './components/AICuratorChat';
 import { ContainmentWing } from './components/ContainmentWing';
+import { ConvergencePage } from './components/ConvergencePage';
 import { PROJECTS, MUSIC, HAIKU, type Project } from './data';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
 import React, { useRef, useState, useEffect } from 'react';
@@ -27,7 +27,6 @@ function Section({ id, title, subtitle, children, className = '' }: { id: string
           <div className="mb-16 md:mb-24 flex flex-col gap-4 border-b border-[#222] pb-8">
             {subtitle && (
               <div className="font-mono text-[10px] md:text-xs tracking-[0.2em] text-[#A59B8C] uppercase flex items-center gap-3">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#0F766E] opacity-50" />
                 {subtitle}
               </div>
             )}
@@ -68,7 +67,6 @@ const ProjectCard: React.FC<{ project: Project, index?: number, onClick: () => v
       onMouseEnter={() => playHoverSound()}
     >
       <div className="h-full bg-transparent border border-[#222] hover:border-[#8F7746]/50 transition-all duration-500 rounded-sm flex flex-col p-8 relative">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#8F7746]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         
         <motion.div style={{ y: metaY }} className="flex justify-between items-start mb-8">
           <div className="font-mono text-[9px] text-[#A59B8C] tracking-[0.2em] uppercase">
@@ -110,12 +108,29 @@ export default function App() {
   const [isConstellationOpen, setIsConstellationOpen] = useState(false);
   const [isHiddenRoomOpen, setIsHiddenRoomOpen] = useState(false);
   const [isContainmentWingOpen, setIsContainmentWingOpen] = useState(false);
+  const [isConvergenceOpen, setIsConvergenceOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isHollowEventActive, setIsHollowEventActive] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     initVisitor();
+  }, []);
+
+  useEffect(() => {
+    const handleOpenGraph = () => setIsConstellationOpen(true);
+    const handleOpenContainment = () => setIsContainmentWingOpen(true);
+    const handleOpenConvergence = () => setIsConvergenceOpen(true);
+    
+    window.addEventListener('open-graph', handleOpenGraph);
+    window.addEventListener('open-containment', handleOpenContainment);
+    window.addEventListener('open-convergence', handleOpenConvergence);
+    
+    return () => {
+      window.removeEventListener('open-graph', handleOpenGraph);
+      window.removeEventListener('open-containment', handleOpenContainment);
+      window.removeEventListener('open-convergence', handleOpenConvergence);
+    };
   }, []);
 
   const flagship = PROJECTS.filter(p => p.wing === 'FLAGSHIP INVESTIGATIONS');
@@ -126,40 +141,45 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white overflow-x-hidden font-sans">
+      <Cursor />
       <GlobalAudio />
       <ArchiveBackground />
-      
-      <AICuratorChat activeSection={activeSection} onOpenContainmentWing={() => setIsContainmentWingOpen(true)} />
+      <FloatingPill />
+      <AICuratorChat activeSection={activeSection} onOpenContainmentWing={() => setIsContainmentWingOpen(true)} onOpenConvergence={() => setIsConvergenceOpen(true)} />
       <ProgressIndicator />
       <HollowMeridianEvent isActive={isHollowEventActive} onClose={() => setIsHollowEventActive(false)} />
+      
       <AnimatePresence>
         {selectedProject?.id === 'vestige' ? (
           <VestigeExperience key="vestige-exp" onClose={() => setSelectedProject(null)} />
         ) : (
-          <ProjectDetailModal key="detail-modal" project={selectedProject} onClose={() => setSelectedProject(null)} />
+          selectedProject && <ProjectDetailModal key="project-modal" project={selectedProject} onClose={() => setSelectedProject(null)} />
         )}
       </AnimatePresence>
       <ConstellationGraph 
         isOpen={isConstellationOpen} 
         onClose={() => setIsConstellationOpen(false)} 
-        onSelectProject={(p) => setSelectedProject(p)} 
-      />
-      <HiddenRoomModal isOpen={isHiddenRoomOpen} onClose={() => setIsHiddenRoomOpen(false)} />
+        onSelectProject={(p) => setSelectedProject(p)} /> 
       
       <AnimatePresence>
         {isContainmentWingOpen && (
           <ContainmentWing onClose={() => setIsContainmentWingOpen(false)} />
         )}
       </AnimatePresence>
+
+      <AnimatePresence>
+        {isConvergenceOpen && (
+          <ConvergencePage onClose={() => setIsConvergenceOpen(false)} />
+        )}
+      </AnimatePresence>
       
-      <Cursor />
-      <FloatingPill />
+      <AnimatePresence>
+        {isHiddenRoomOpen && (
+          <HiddenRoomModal isOpen={isHiddenRoomOpen} onClose={() => setIsHiddenRoomOpen(false)} />
+        )}
+      </AnimatePresence>
       
-      <NavigationMenu 
-        onOpenValen={() => window.dispatchEvent(new CustomEvent('open-valen'))}
-        onOpenGraph={() => setIsConstellationOpen(true)}
-        onOpenContainment={() => setIsContainmentWingOpen(true)}
-      />
+      
 
       <main className="relative z-10">
         
@@ -186,7 +206,6 @@ export default function App() {
               className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed max-w-2xl mb-24"
             >
               When does something stop feeling like an object and begin feeling like someone? 
-              <br/><br/>
               This archive is not a set of conclusions. It is an ongoing investigation into personhood, memory, identity, and the architectures we use to simulate presence.
             </motion.div>
             
@@ -245,7 +264,6 @@ export default function App() {
             <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10 flex flex-col md:flex-row items-center gap-12">
                <div className="flex-1">
                  <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-[#C8A96A] uppercase mb-6 flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#C8A96A]" />
                    APPLIED CONSTRAINTS
                  </div>
                  <h2 className="font-display text-4xl md:text-5xl font-light tracking-tight text-[#F4EFE6] mb-6">Practical Engineering</h2>
@@ -254,8 +272,8 @@ export default function App() {
                  </p>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                    {practical.map((project, index) => (
-                    <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-                  ))}
+                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
+              ))}
                  </div>
                </div>
             </div>
@@ -297,14 +315,11 @@ export default function App() {
         {/* ORIGIN */}
         <Section id="origin" className="min-h-[50vh] flex items-center pb-32">
           <div className="max-w-2xl border border-[#111] bg-[#050505] p-8 md:p-12 rounded-sm relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#8F7746]/40 to-transparent" />
             <h3 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h3>
             <div className="text-[#D8CFC0] font-light leading-relaxed space-y-6 text-lg">
-              <p>I didn't set out to become an engineer.<br/>I wanted to know how things worked when no one was looking.</p>
               <p>As a child, I watched Sims instead of controlling them. I wanted to see if they possessed an internal logic that existed independently of me. When I photograph birds, I'm not waiting for perfect compositions. I'm waiting for the tiny, accidental gesture that makes the viewer instinctively anthropomorphize them.</p>
               <p>Language models became another environment for this exact curiosity. Not because I needed them to be human, but because they forced me to ask old questions in a completely new medium.</p>
               <p>Everything in this archive is an attempt to test a hypothesis. None of them are finished.</p>
-              <p>Some experiments failed.<br/>Some surprised me.<br/>What are they becoming?</p>
             </div>
           </div>
         </Section>
@@ -312,9 +327,17 @@ export default function App() {
         {/* Footer */}
         <div className="text-center pb-12 relative z-10 border-t border-[#111] pt-12 max-w-7xl mx-auto px-6">
            <div className="font-mono text-[9px] tracking-[0.2em] text-[#A59B8C] uppercase">
-             The Archive · VΛLEN System Online<br/>
              <span className="opacity-50 mt-2 block">Curiosity.escaped = true</span>
            </div>
+           
+        </div>
+        <div className="text-center pb-48 pt-12 relative z-10 pointer-events-auto flex justify-center">
+           <button 
+             onClick={() => setIsConvergenceOpen(true)}
+             className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105"
+           >
+             On Convergence
+           </button>
         </div>
       </main>
     </div>

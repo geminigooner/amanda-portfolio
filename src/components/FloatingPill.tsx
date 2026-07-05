@@ -13,9 +13,27 @@ const ZONES = [
 ];
 
 export function FloatingPill() {
+  const handleOpenConvergence = () => window.dispatchEvent(new CustomEvent('open-convergence'));
+  const handleOpenValen = () => window.dispatchEvent(new CustomEvent('open-valen'));
+  const handleOpenGraph = () => window.dispatchEvent(new CustomEvent('open-graph'));
+  const handleOpenContainment = () => window.dispatchEvent(new CustomEvent('open-containment'));
   const [activeZone, setActiveZone] = useState('ARRIVAL');
+
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    if (isExpanded) {
+      window.dispatchEvent(new CustomEvent('close-valen'));
+    }
+  }, [isExpanded]);
+
+  useEffect(() => {
+    const handleCloseIndex = () => setIsExpanded(false);
+    window.addEventListener('close-index', handleCloseIndex);
+    return () => window.removeEventListener('close-index', handleCloseIndex);
+  }, []);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -52,7 +70,7 @@ export function FloatingPill() {
   }, []);
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[50] font-mono mb-2 pointer-events-none">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[999999] font-mono mb-2 pointer-events-none">
       <AnimatePresence>
         {isVisible && (
           <motion.div
@@ -66,13 +84,13 @@ export function FloatingPill() {
               className="glass-panel border border-white/5 hover:border-white/20 rounded-full flex flex-col items-center justify-center overflow-hidden cursor-pointer backdrop-blur-xl"
               animate={{
                 width: isExpanded ? 300 : 160,
-                height: isExpanded ? 380 : 40,
+                height: isExpanded ? 500 : 40,
                 borderRadius: isExpanded ? 24 : 9999,
                 backgroundColor: isExpanded ? 'rgba(5, 0, 2, 0.95)' : 'rgba(5, 0, 2, 0.4)'
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-              onMouseEnter={() => setIsExpanded(true)}
-              onMouseLeave={() => setIsExpanded(false)}
+              onClick={(e) => { e.stopPropagation();  if(!isExpanded) setIsExpanded(true); }}
+              
             >
               <AnimatePresence mode="wait">
                 {!isExpanded ? (
@@ -92,17 +110,22 @@ export function FloatingPill() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="w-full h-full p-6 flex flex-col"
+                    className="w-full h-full p-6 flex flex-col overflow-y-auto scrollbar-hide"
                   >
-                    <div className="flex items-center gap-2 text-white/50 text-[10px] tracking-widest mb-6">
-                      <Map size={12} />
-                      <span>INDEX</span>
+                    <div className="flex items-center justify-between text-white/50 text-[10px] tracking-widest mb-6">
+                      <div className="flex items-center gap-2">
+                        <Map size={12} />
+                        <span>INDEX</span>
+                      </div>
+                      <button onClick={(e) => { e.stopPropagation(); setIsExpanded(false); }} className="hover:text-white transition-colors p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                      </button>
                     </div>
                     <div className="flex flex-col gap-3">
                       {ZONES.map((zone) => (
                         <button
                           key={zone.id}
-                          onClick={() => {
+                          onClick={(e) => { e.stopPropagation(); 
                             document.getElementById(zone.id)?.scrollIntoView({ behavior: 'smooth' });
                             setIsExpanded(false);
                           }}
@@ -115,6 +138,11 @@ export function FloatingPill() {
                           {zone.label}
                         </button>
                       ))}
+                      <div className="h-px bg-white/10 my-2" />
+                      <button onClick={(e) => { e.stopPropagation();  handleOpenValen(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors">ASK VΛLEN</button>
+                      <button onClick={(e) => { e.stopPropagation();  handleOpenGraph(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors">RESEARCH GRAPH</button>
+                      <button onClick={(e) => { e.stopPropagation();  handleOpenConvergence(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#0F766E] hover:text-[#2DD4BF] transition-colors">ON CONVERGENCE</button>
+                      <button onClick={(e) => { e.stopPropagation();  handleOpenContainment(); setIsExpanded(false); }} className="text-left text-xs tracking-widest text-[#B76E79] hover:text-[#fb7185] transition-colors">RESTRICTED</button>
                     </div>
                   </motion.div>
                 )}
