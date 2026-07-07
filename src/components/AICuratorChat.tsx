@@ -12,6 +12,47 @@ type Message = {
   artifacts?: { title: string; type: string }[];
 };
 
+
+const AnimatedStreamText = ({ text, prefersReducedMotion }: { text: string, prefersReducedMotion: boolean | null }) => {
+  const allTokens = React.useMemo(() => text.match(/(\s+|\S+)/g) || [], [text]);
+  const [displayedCount, setDisplayedCount] = React.useState(allTokens.length);
+
+  React.useEffect(() => {
+    if (displayedCount < allTokens.length) {
+      const diff = allTokens.length - displayedCount;
+      const catchUpAmount = diff > 10 ? 3 : (diff > 5 ? 2 : 1); 
+      
+      const timeout = setTimeout(() => {
+        setDisplayedCount(prev => Math.min(prev + catchUpAmount, allTokens.length));
+      }, 25);
+      return () => clearTimeout(timeout);
+    }
+  }, [allTokens.length, displayedCount]);
+
+  const displayedTokens = allTokens.slice(0, displayedCount);
+
+  return (
+    <>
+      {displayedTokens.map((token, i) => {
+        if (/^\s+$/.test(token)) {
+          return <span key={i}>{token}</span>;
+        }
+        return (
+          <motion.span
+            key={i}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-block"
+          >
+            {token}
+          </motion.span>
+        );
+      })}
+    </>
+  );
+};
+
 export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpenConvergence }: { activeSection?: string, onOpenContainmentWing?: () => void, onOpenConvergence?: () => void }) {
   const prefersReducedMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
@@ -45,14 +86,26 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
   const [isLoading, setIsLoading] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: isStreaming ? 'auto' : 'smooth' });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+    const observer = new MutationObserver(() => {
+      if (isStreaming) {
+         scrollToBottom();
+      }
+    });
+    observer.observe(scrollContainerRef.current, { childList: true, subtree: true, characterData: true });
+    return () => observer.disconnect();
+  }, [isStreaming]);
 
   useEffect(() => {
     const handleOpen = () => setIsOpen(true);
@@ -285,7 +338,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-10 relative z-10 scrollbar-hide" aria-live="polite" aria-relevant="additions text">
+            <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-10 relative z-10 scrollbar-hide" aria-live="polite" aria-relevant="additions text">
               {messages.length === 0 && !isLoading && (
                 <div className="flex-1 flex items-end justify-start pb-4 opacity-30">
                   <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#555]">Archive available.</span>
@@ -354,7 +407,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                               </button>
                             );
                           }
-                          return <span key={i}>{part}</span>;
+                          return <AnimatedStreamText key={i} text={part} prefersReducedMotion={prefersReducedMotion} />;
                         })}
                         {message.role === 'assistant' && message.id === messages[messages.length - 1]?.id && isStreaming && (
                           <span className="inline-block w-1.5 h-3 ml-2 bg-[#555] motion-safe:animate-pulse align-middle" />
