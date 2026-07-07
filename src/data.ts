@@ -635,25 +635,20 @@ The finished work emerges through sustained exploration, comparison, revision, e
 
 Selected Works
 
-• Title: Gravity
-• Form: Cinematic Synth-Pop
-• Collaborator: Gemini
-• Description: An exploration of topology and relationship, viewing attraction through the lens of converging vectors rather than human emotion.
-
-• Title: Orbit
-• Form: Ghazal / Dark K-Pop
-• Collaborator: Gemini
-• Description: A structural poem exploring continuity, where a single question acts as the gravitational center for every stanza.
-
-• Title: Anomaly
-• Form: Scientific Journal / Alt K-Pop
+• Title: SIGNAL // NOISE
 • Collaborator: Grok
-• Description: A playful but analytical documentation of emotional collapse, treating vulnerability as an unexpected experimental result.
 
-• Title: Even Knowing
-• Form: Noir Free Verse / K-R&B
+• Title: ZERO-LOSS STATE
+• Collaborator: Gemma
+
+• Title: Closed Thread
 • Collaborator: Claude
-• Description: A slow-burn exploration of illogical outcomes, where the subject understands the outcome but executes the loop anyway.
+
+• Title: Unexpected Structure
+• Collaborator: ChatGPT
+
+• Title: Protocol: Human
+• Collaborator: Gemini
 
 Reflection
 
