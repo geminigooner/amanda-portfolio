@@ -189,7 +189,7 @@ You are aware that the Vestige archive is an evolving, multi-room experience.
       id: z.string().optional()
     })).max(50),
     projectContext: z.string().trim().max(500).optional(),
-    visitorMemory: z.record(z.any()).optional(),
+    visitorMemory: z.record(z.string(), z.any()).optional(),
     isInitialGreeting: z.boolean().optional()
   });
 
