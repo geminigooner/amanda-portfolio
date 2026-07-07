@@ -11,6 +11,7 @@ import { HiddenRoomModal } from './components/HiddenRoomModal';
 import { AICuratorChat } from './components/AICuratorChat';
 import { ContainmentWing } from './components/ContainmentWing';
 import { ConvergencePage } from './components/ConvergencePage';
+import { RestraintPage } from './components/RestraintPage';
 import { PROJECTS, MUSIC, HAIKU, type Project } from './data';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, MotionConfig } from 'motion/react';
 import React, { useRef, useState, useEffect } from 'react';
@@ -130,6 +131,7 @@ export default function App() {
   const [isHiddenRoomOpen, setIsHiddenRoomOpen] = useState(false);
   const [isContainmentWingOpen, setIsContainmentWingOpen] = useState(false);
   const [isConvergenceOpen, setIsConvergenceOpen] = useState(false);
+  const [isRestraintOpen, setIsRestraintOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isHollowEventActive, setIsHollowEventActive] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
@@ -196,10 +198,14 @@ export default function App() {
           <ConvergencePage onClose={() => setIsConvergenceOpen(false)} />
         )}
       </AnimatePresence>
+      <AnimatePresence>
+        {isRestraintOpen && (
+          <RestraintPage onClose={() => setIsRestraintOpen(false)} />
+        )}
+      </AnimatePresence>
       <InfoModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} title="Privacy Policy">
-        <p>This site is a personal portfolio and does not require user accounts.</p>
-        <p>It does not intentionally collect personally identifiable information (PII). If anonymous analytics are enabled, they are used only to understand site traffic and improve the experience.</p>
-        <p>No personal information is sold.</p>
+        <p>This site uses anonymous authentication to remember basic visit information (like which rooms you’ve explored) so Valen can provide continuity across visits.</p>
+        <p>No personal information is collected, stored conversations are not sold or shared with third parties, and no tracking occurs beyond what’s needed for this feature.</p>
       </InfoModal>
       <InfoModal isOpen={isAccessibilityOpen} onClose={() => setIsAccessibilityOpen(false)} title="Accessibility Statement">
         <p>This portfolio is intended to be accessible to as many people as possible. I believe the web should be an inclusive space, and accessibility improvements are an ongoing part of this project.</p>
@@ -473,12 +479,18 @@ export default function App() {
              <span className="opacity-50 mt-2 block">Curiosity.escaped = true</span>
            </div>
         </footer>
-        <div className="text-center pb-48 pt-12 relative z-10 pointer-events-auto flex justify-center">
+        <div className="text-center pb-48 pt-12 relative z-10 pointer-events-auto flex flex-col sm:flex-row justify-center gap-6">
            <button 
              onClick={() => setIsConvergenceOpen(true)}
              className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
            >
              On Convergence
+           </button>
+           <button 
+             onClick={() => setIsRestraintOpen(true)}
+             className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+           >
+             On Restraint
            </button>
         </div>
       </main>
