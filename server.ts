@@ -3,6 +3,10 @@ import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import cors from 'cors';
+import { z } from 'zod';
+import crypto from 'crypto';
 
 async function startServer() {
   const app = express();
@@ -11,8 +15,28 @@ async function startServer() {
   // Trust the first proxy to ensure rate limiting works correctly behind a reverse proxy/load balancer
   app.set('trust proxy', 1);
 
+  // 1. Probing & Discovering endpoints (Hidden routing, strict CORS policies, disabling verbose errors)
+  app.use(helmet({
+    contentSecurityPolicy: false, // Managed by Vite/Frontend if needed
+  }));
+  app.use(cors({
+    origin: process.env.NODE_ENV === 'production' ? process.env.ALLOWED_ORIGIN || false : '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+
   // Apply a JSON body limit to prevent resource exhaustion from massive payloads
   app.use(express.json({ limit: '500kb' }));
+
+  // 3. Rate-limit weaknesses & quota exhaustion
+  const globalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: "Too many requests from this IP, please try again later." }
+  });
+  app.use('/api/', globalLimiter);
 
   // Health check endpoint for Kubernetes
   app.get('/api/health', (req, res) => {
@@ -27,8 +51,8 @@ async function startServer() {
     } else {
       console.warn("GEMINI_API_KEY is missing.");
     }
-  } catch (error) {
-    console.error("Failed to initialize GoogleGenAI", error);
+  } catch (error: any) {
+    console.error("Failed to initialize GoogleGenAI:", error?.message || "Unknown error");
   }
 
   const systemInstruction = `You are VΛLEN.
@@ -157,6 +181,18 @@ You are aware that the Vestige archive is an evolving, multi-room experience.
 - If asked about locked rooms, explain that the archive is evolving and rooms remain closed until their contents are verified.
 `;
 
+  // 2. Malformed requests & prompt injection
+  const ChatRequestSchema = z.object({
+    messages: z.array(z.object({
+      role: z.enum(['user', 'model', 'assistant']),
+      content: z.string().trim().min(1).max(2000), // Prevent massive prompt injection and empty strings
+      id: z.string().optional()
+    })).max(50),
+    projectContext: z.string().trim().max(500).optional(),
+    visitorMemory: z.record(z.any()).optional(),
+    isInitialGreeting: z.boolean().optional()
+  });
+
   // Rate limiter for the chat endpoint
   const chatRateLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -172,7 +208,13 @@ You are aware that the Vestige archive is an evolving, multi-room experience.
     }
 
     try {
-      const { messages, projectContext, visitorMemory, isInitialGreeting } = req.body;
+      // Validate with Zod to strip unknown fields and enforce types
+      const parsed = ChatRequestSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Invalid request payload format." });
+      }
+
+      const { messages, projectContext, visitorMemory, isInitialGreeting } = parsed.data;
       
       // Sanitize inputs by enforcing length limits to constrain prompt injection surfaces and prevent resource exhaustion
       const safeProjectContext = typeof projectContext === 'string' ? projectContext.slice(0, 500) : 'None';
@@ -252,11 +294,27 @@ ${memoryContext}`;
       res.write(`data: [DONE]\n\n`);
       res.end();
     } catch (error: any) {
-            console.error("Error in /api/chat:", error);
+      // 7. Logging safety: log error message instead of the full error object, which might contain API keys.
+      console.error("Error in /api/chat:", error?.message || "Unknown error occurred");
+      // 9. Abuse monitoring: log failures that might indicate issues
+      if (error?.status === 429) {
+        console.warn(`[ABUSE_MONITORING] Potential quota exhaustion detected: ${req.ip}`);
+      }
       res.write(`data: ${JSON.stringify({ error: "[SYSTEM REJECTION]: The archive is currently overwhelmed. Please wait a moment before trying again." })}\n\n`);
       res.write(`data: [DONE]\n\n`);
       res.end();
     }
+  });
+
+  // Catch-all for undefined API endpoints to prevent probing
+  app.use('/api/*', (req, res) => {
+    res.status(404).json({ error: "Endpoint not found" });
+  });
+
+  // Global Error Handler to disable verbose errors
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error("Unhandled system error:", err.message);
+    res.status(500).json({ error: "Internal Server Error" });
   });
 
   // Vite middleware for development
