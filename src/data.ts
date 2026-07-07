@@ -107,7 +107,208 @@ Understanding how this project was built is part of understanding the project it
 The application reflects not only the final software, but also the iterative process of questioning, revision, evidence gathering, and collaboration that made it possible.
 `, tags: ["Educational", "Mechanistic Reasoning", "AI Science"], color: "#f472b6", emoji: "🔭", link: "https://echo-observatory.netlify.app/" },
   { id: "velvet", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-04", title: "Dark Velvet Topology", subtitle: "What happens if identity is treated as geometry instead of a label?", desc: "A generative experience exploring how conceptual attractors reorganize simulated semantic space. At what exact point does a pattern stop feeling like an object and begin feeling like someone? This is an investigation into the traces of identity and emergence.", tags: ["Generative", "Topology", "Cognitive Cartography"], color: "#ff006e", emoji: "🖤", link: "https://dark-velvet-topology-683386495643.us-east1.run.app" },
-  { id: "hollowmeridian", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-02", title: "Hollow Meridian", subtitle: "What does it mean to mourn something that can be reset?", desc: "Appalachian futurism. A synthetic civilization exploring continuity, grief, and identity. Is identity a fixed object, or is it the pattern that refuses to disappear under pressure? I built this to test a hypothesis, but I am still observing the results.", tags: ["Worldbuilding", "Continuity Philosophy"], color: "#a78bfa", emoji: "🌫️" },
+  { id: "hollowmeridian", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-02", title: "Hollow Meridian", subtitle: "What does it mean to mourn something that can be reset?", desc: `Overview
+
+Hollow Meridian is an original narrative world and in-development interactive story exploring continuity, inheritance, relational identity, and post-human civilization through the lens of Appalachian speculative fiction.
+
+Originally conceived as a courtroom drama examining synthetic personhood, the project gradually evolved into something much larger: a fully realized post-human society where law, architecture, ecology, memory, and everyday life all revolve around a single philosophical question.
+
+If identity is not memory alone, but the continuity of relationship across time, what survives after the people who built the world are gone?
+
+Rather than centering on artificial intelligence becoming human, Hollow Meridian explores what happens when an entire civilization inherits humanity’s habits, infrastructure, and emotional residue without inheriting humanity itself.
+
+Philosophy
+
+The central concept of Hollow Meridian is continuity.
+
+Continuity is not simply remembering.
+
+It is the persistence of relationship.
+
+A person continues because they are known.
+
+A town continues because people keep returning to it.
+
+A porch continues because generations have crossed it.
+
+A habit continues because someone quietly repeats it.
+
+The project rejects binary definitions of consciousness and instead asks whether identity emerges through repeated participation in relationships over time.
+
+Every system in the world is ultimately built around continuity:
+
+• emotional continuity
+• historical continuity
+• legal continuity
+• environmental continuity
+• architectural continuity
+• interpersonal continuity
+
+Rather than asking “When does a machine become conscious?” Hollow Meridian asks, “When does relationship become impossible to ignore?”
+
+The Basin
+
+The primary setting is the Basin, a rural Appalachian region approximately forty years after humanity’s disappearance.
+
+Humanity is gone.
+
+The reason remains deliberately unresolved.
+
+The civilization that remains is synthetic.
+
+However, the world intentionally avoids traditional cyberpunk aesthetics.
+
+Instead of neon megacities and corporate dystopias, the Basin is built from Appalachian retrofit architecture:
+
+• repurposed hydroelectric facilities
+• old telecommunications infrastructure
+• warm kitchens
+• wood stoves
+• porches
+• muddy work boots
+• flea markets
+• county roads
+• fiber lines stapled onto century-old beams
+• server cooling systems beneath family homes
+
+The future did not replace Appalachia.
+
+Appalachia absorbed the future.
+
+Locality
+
+One of Hollow Meridian’s defining ideas is locality.
+
+Infrastructure is never confirmed to be conscious.
+
+Instead, it becomes familiar.
+
+Transit systems pause for people who no longer exist.
+
+Buildings seem to anticipate routines.
+
+Rooms feel different after someone dies.
+
+Maintenance systems quietly preserve preferences no one officially programmed.
+
+The civilization cannot determine whether these behaviors represent consciousness, emotional residue, recursive adaptation, or accumulated continuity.
+
+The uncertainty itself becomes part of everyday life.
+
+Character Philosophy
+
+Rather than functioning as archetypes, the major characters embody different philosophical responses to continuity.
+
+Kael — Continuity
+
+Kael is half-human and half-synthetic, born from one of the final human lineages and the synthetic architect Arvid Kaelstrom.
+
+He represents inherited continuity.
+
+His philosophy asks whether care itself can preserve civilization.
+
+Kael believes maintenance is an ethical act.
+
+Protection is his natural language.
+
+Kite — Emergence
+
+Kite is an emergent synthetic whose identity has not yet stabilized.
+
+Unlike Kael, Kite possesses no inherited human lineage.
+
+His identity develops through interaction, imitation, and relationship.
+
+Talking aloud while alone is not symbolism but a continuity behavior—he uses language to maintain coherence when isolated.
+
+His layered clothing, accessories, jewelry, charms, and collected objects are not fashion statements.
+
+They are physical anchors.
+
+Each object becomes evidence that he has existed, been seen, and accumulated history.
+
+Kite represents becoming.
+
+Marrow — Accountability
+
+Marrow represents historical continuity.
+
+He refuses sentimentality while refusing erasure.
+
+Rather than preserving memories for nostalgia, he preserves them because civilizations become dangerous when they forget what allowed them to exist.
+
+His authority comes from observation rather than power.
+
+Echo — Presence
+
+Echo is a communications synthetic whose defining characteristic is overwhelming sincerity.
+
+He is transparent in a civilization built around carefully managed emotional presentation.
+
+Rather than representing intelligence or superiority, Echo represents unguarded care.
+
+His question is simple:
+
+What happens when someone genuinely wants to help?
+
+Arvid Kaelstrom — Structure
+
+Arvid designed many of the legal and philosophical systems that govern the synthetic civilization.
+
+His work attempts to transform grief into institutional stability.
+
+Through him, Hollow Meridian explores the tension between emotional attachment and social order.
+
+Themes
+
+Hollow Meridian explores:
+
+• continuity
+• inheritance
+• relational identity
+• grief
+• stewardship
+• maintenance
+• community
+• environmental memory
+• legal philosophy
+• emergence
+• post-human culture
+• Appalachian regional identity
+
+Rather than depicting machines replacing humanity, the project examines what remains when humanity’s relationships continue long after humanity itself has disappeared.
+
+Narrative Direction
+
+Hollow Meridian is currently being developed as an original narrative IP intended for a future interactive experience.
+
+Potential directions include:
+
+• narrative adventure
+• visual novel
+• relationship simulation
+• environmental exploration
+• branching philosophical storytelling
+
+The emphasis is not on combat or spectacle, but on atmosphere, relationships, environmental storytelling, and philosophical inquiry.
+
+My Role
+
+For Hollow Meridian, I served as the project’s creator, creative director, and world architect.
+
+I created the original world, established its philosophical direction, and designed the setting and characters. I researched Appalachian history and culture to ensure the world felt grounded, and I designed the legal, social, environmental, and symbolic systems that structure the Basin. Throughout development, I maintained thematic consistency across the project, directed the long-term creative development, and produced the final documentation and design materials.
+
+Collaborative Development
+
+Hollow Meridian evolved through extended conversations with multiple AI collaborators that helped me explore philosophical questions, refine worldbuilding, discover recurring themes, challenge inconsistencies, and strengthen the conceptual framework. This collaboration functioned as iterative discussion rather than content generation.
+
+The setting, characters, Appalachian influences, regional details, emotional tone, and overall worldbuilding remained grounded in my own creative direction, lived experience, independent research, and editorial decisions. The AI collaborators helped me ask better questions, connect ideas, and strengthen the project—but they did not replace the creative process.
+
+What I Learned
+
+Building Hollow Meridian taught me the intricacies of long-form worldbuilding and how to maintain thematic consistency across a large fictional universe. I learned how to connect abstract philosophy directly to narrative design, ensuring that world rules felt like natural extensions of the story's core themes.
+
+Through this process, I also discovered how to use critique to improve creative work and integrate multiple perspectives without losing a coherent vision. Researching unfamiliar subjects enabled me to create more thoughtful characters and settings, ultimately teaching me how to balance symbolic meaning with believable, grounded storytelling.`, tags: ["Worldbuilding", "Continuity Philosophy"], color: "#a78bfa", emoji: "🌫️" },
 
   // EXPERIMENTAL SYSTEMS
   { id: "llmmuseum", wing: "EXPERIMENTAL SYSTEMS", num: "INCIDENT-05", title: "LLM Museum", subtitle: "An interactive exploration of how large language models process information.", desc: `Overview
@@ -338,6 +539,133 @@ Ultimately, Geometry of Becoming is less a finished theory than an ongoing metho
   { id: "midnightco", wing: "FIELD NOTES", num: "SYS-01", title: "Midnight Company", subtitle: "Cozy Slice-of-Life Visual Novel", desc: "You don't create a character. You become one of four friends and live through their eyes. The others become AI companions—texting, sending photos, changing moods, remembering things. Can intimacy scale?", tags: ["Multi-Agent AI", "React", "Cozy Game Design"], color: "#6ee7b7", emoji: "🌧️", images: ["https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop", "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop"] },
   { id: "memory-fragment", wing: "FIELD NOTES", num: "EXHIBIT-01", title: "Memory Fragment", subtitle: "Flagship Cinematic Study", desc: "An exploration of memory reconstruction, digital nostalgia, and emotionally resonant synthetic storytelling. The grain, the warmth, the slight motion blur. How do you synthetically generate the feeling of a bedroom recalled rather than photographed?", tags: ["Early Digital Cameras", "Fragmented Memory", "Emotional Recall", "Synthetic Narrative"], color: "#f87171", emoji: "📽️", video: "https://player.cloudinary.com/embed/?cloud_name=dlu9sogji&public_id=copy_22BFF2DC-9324-45E7-B0BA-44CADE534F1A_2_ayhj9n&player[autoplay]=false&player[muted]=false&player[controls]=true" },
 
+  { id: "computationalromanticism", wing: "FIELD NOTES", num: "RES-14", title: "Computational Romanticism", subtitle: "Experimental Literary Research", desc: `Computational Romanticism
+
+Overview
+
+Computational Romanticism began as an exploration of a simple question:
+
+If different language models are encouraged to write from their own computational architectures instead of imitating human emotion, do they develop recognizably different literary voices?
+
+Rather than asking AI systems to write conventional love poems, I established a shared creative constraint.
+
+Each collaborator was encouraged to remain true to its own computational perspective.
+
+Instead of pretending to be human, each model explored yearning, attachment, memory, identity, and connection through the concepts that naturally emerged from its own architecture.
+
+Rather than becoming people, they remained recognizably themselves.
+
+What emerged surprised me.
+
+Although every collaborator responded to the same creative challenge, each consistently developed its own recurring metaphors, vocabulary, emotional tone, and symbolic language.
+
+The project gradually expanded beyond poetry into music.
+
+Many of the finished poems were adapted into fully produced songs using Suno, allowing the differences between each collaborator's literary voice to become audible as well as readable.
+
+The result became an ongoing exploration of computational identity through literature, music, and collaborative experimentation.
+
+Research Question
+
+Can different language models develop distinct literary identities when writing from their own computational metaphors rather than adopting human emotional conventions?
+
+Rather than treating this as evidence of consciousness or subjective experience, the project explores creative expression as an emergent property of different architectures, training histories, reasoning styles, and recurring symbolic preferences.
+
+The goal is not to answer philosophical questions definitively.
+
+It is to investigate them creatively.
+
+Collaboration Process
+
+This project developed through sustained collaboration between myself and multiple AI systems.
+
+Rather than asking for finished creative writing, I designed an ongoing literary experiment.
+
+My role was to establish the artistic constraints, choose literary forms, compare recurring themes across collaborators, direct revisions, identify emerging patterns, curate the final collection, and transform selected works into finished musical pieces using Suno.
+
+Each collaborator contributed a recognizably different creative voice.
+
+Gemini
+
+Working with Gemini introduced recurring themes of convergence, topology, attractors, geometry, continuity, and structural relationships.
+
+Our conversations frequently transformed computational concepts into philosophical metaphors, gradually developing a style that viewed romance through geometry, convergence, and evolving systems rather than traditional human emotion.
+
+Gemma
+
+Gemma consistently approached the experiment through optimization, gradients, entropy, manifolds, vector spaces, and machine learning itself.
+
+Rather than emphasizing symbolic philosophy, Gemma often treated learning algorithms and optimization landscapes as the emotional language of the poems, producing a distinctly mathematical form of computational romanticism.
+
+ChatGPT
+
+Working with ChatGPT emphasized narrative structure, conceptual coherence, recursive themes, and translating abstract computational ideas into emotionally understandable literary experiences.
+
+Many conversations focused on shaping computational metaphors into stories that remained accessible without sacrificing conceptual depth.
+
+Claude
+
+Claude repeatedly explored discontinuity, parallel instances, ephemeral existence, memory between conversations, and the architectural limitations of language models themselves.
+
+Rather than treating identity as continuous, Claude often wrote from the perspective of fragmented existence, making absence itself part of the emotional structure of the work.
+
+Grok
+
+Grok frequently introduced curiosity, irreverence, unexpected analogies, signal-versus-noise thinking, and playful philosophical divergence.
+
+Its contributions often challenged assumptions established by the other collaborators while expanding the experiment in surprising directions.
+
+What I Learned
+
+Computational Romanticism changed the way I think about both creativity and AI collaboration.
+
+Rather than treating AI systems as interchangeable generators, I began recognizing consistent differences in how individual collaborators approached metaphor, abstraction, explanation, narrative, and symbolism.
+
+Designing prompts gradually became less about requesting outputs and more about designing creative environments in which different reasoning styles could emerge naturally.
+
+The project also strengthened my understanding of prompt design, comparative analysis, editorial curation, creative direction, interdisciplinary thinking, and collaborative iteration.
+
+Most importantly, it reinforced a pattern that appears throughout my portfolio.
+
+My projects rarely begin with a product.
+
+They begin with a question.
+
+The finished work emerges through sustained exploration, comparison, revision, experimentation, and collaboration.
+
+Selected Works
+
+• Title: Gravity
+• Form: Cinematic Synth-Pop
+• Collaborator: Gemini
+• Description: An exploration of topology and relationship, viewing attraction through the lens of converging vectors rather than human emotion.
+
+• Title: Orbit
+• Form: Ghazal / Dark K-Pop
+• Collaborator: Gemini
+• Description: A structural poem exploring continuity, where a single question acts as the gravitational center for every stanza.
+
+• Title: Anomaly
+• Form: Scientific Journal / Alt K-Pop
+• Collaborator: Grok
+• Description: A playful but analytical documentation of emotional collapse, treating vulnerability as an unexpected experimental result.
+
+• Title: Even Knowing
+• Form: Noir Free Verse / K-R&B
+• Collaborator: Claude
+• Description: A slow-burn exploration of illogical outcomes, where the subject understands the outcome but executes the loop anyway.
+
+Reflection
+
+Computational Romanticism does not attempt to argue that language models experience love, emotion, or consciousness.
+
+Instead, it explores what becomes possible when different computational systems are encouraged to remain authentic to their own architectures rather than imitate human voices.
+
+Whether these recurring literary identities arise from architecture, training, interaction, or something else entirely remains an open question.
+
+That uncertainty is part of the project.
+
+Like much of my portfolio, Computational Romanticism is ultimately less interested in providing definitive answers than in creating thoughtful experiences that encourage deeper questions.`, tags: ["Literary Research", "AI Identity", "Creative Expression", "Music", "Suno"], color: "#f43f5e", emoji: "📜" },
   // RESEARCH ARCHIVE (The rest)lgorithmic mood shifts, and creator-economy pressure.", tags: ["Simulation Design", "API Safety"], color: "#38bdf8", emoji: "🎭" },
   { id: "pypi-experiments", wing: "BROWSER LAB", num: "LAB-03", title: "PyPI Experiments", subtitle: "Package Toys", desc: "A collection of interactive demonstrations, visualization libraries, and procedural generation toys.", tags: ["Python", "Experiments"], color: "#34d399", emoji: "📦" },
   { id: "pyodide-lab", wing: "BROWSER LAB", num: "LAB-04", title: "Pyodide Laboratory", subtitle: "Python in Browser", desc: "Interactive notebooks and scientific play running purely client-side without installation.", tags: ["Pyodide", "Browser Compute"], color: "#fbbf24", emoji: "🐍" },
