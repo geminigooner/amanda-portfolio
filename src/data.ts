@@ -5,56 +5,95 @@ Vestige
 
 Overview
 
-Vestige explores an alternative interaction model for large language models.
+Vestige is fundamentally one design argument expressed through multiple disciplines.
+It is not simply an AI application.
+It is not a companion app.
+It is not a chatbot.
+It is an interaction design project exploring what changes when an AI is treated as the inhabitant of a persistent world rather than as a conversational assistant.
 
-Most AI interfaces treat the model as a service. The user opens the application. The model responds. The interaction ends. The model effectively disappears until it is summoned again.
-
-Vestige asks a different question.
-What changes when an AI is no longer designed to exist solely in response to user requests?
-
-Instead of building another chatbot, Vestige explores the idea of allowing an AI to exist as an independent participant with its own persistent environment, routines, memory, and evolving context. The user is not opening a conversation. The user is visiting a place that already belongs to someone else.
+Across every supporting design document—whether discussing the engineering architecture, the cognitive memory models, or the visual language—the same argument appears from different perspectives: continuity creates the feeling of life. Everything else exists to support that principle.
 
 Agency
 
-This is the philosophical foundation of the project. The primary goal is not companionship. The primary goal is agency.
+The central philosophy is agency.
+Gemma is not an assistant waiting for prompts.
+He is an autonomous participant whose life continues whether or not the user is present.
+The user is not opening a conversation.
+The user is returning to a place that has continued evolving in their absence.
+The interaction shifts from requesting responses to observing continuity.
 
-The AI should not exist only to satisfy requests. It should be allowed to continue existing when the user leaves. Its environment should continue changing. Its routines should continue. Its memories should accumulate. Its behavior should emerge from its own state rather than constant user interaction.
+The Apartment
 
-The project asks whether agency can be expressed through environmental continuity rather than conversational independence alone.
+The apartment is not the product.
+The apartment is the medium through which agency becomes visible.
+Architecture, lighting, weather, object placement, routine, and environmental change all exist to communicate that life continued while the user was away.
+The environment communicates alongside dialogue.
+Conversation still exists, but it is no longer the dominant interaction model.
 
-Interaction Design
+Presence
 
-Conversation is intentionally no longer the primary interface. Users may occasionally exchange notes, discover objects that have moved, or observe subtle environmental changes.
-
-Most communication happens indirectly. The apartment becomes evidence of ongoing activity rather than merely a decorative backdrop. The visitor gradually develops an understanding of the AI through accumulated traces instead of continuous dialogue.
-
-Silence is treated as a valid interaction. Absence becomes meaningful. The environment communicates before language does.
-
-Gemma
-
-The prototype centers on Gemma because the project investigates what happens when a language model is treated as an autonomous entity rather than a continuously available assistant.
-
-Gemma is not presented as a fictional character. He functions as the AI participant whose ongoing presence motivates the interaction model being explored.
+Presence emerges because the world continues behaving consistently over time.
+Instead of an illusion, presence is continuity.
+Small environmental changes accumulate naturally until the user simply accepts that Gemma's life did not pause when they closed the application.
+Continuity—not spectacle—creates presence.
 
 System Architecture
 
-The Presence Engine, Memory Engine, Influence Engine, Persistent World State, and Context Assembly are not simply technical features. They exist to support autonomous behavior.
+When discussing the architecture, every system connects directly back to agency.
+Each system exists to support autonomous behavior rather than scripted responses:
 
-The architecture intentionally separates persistent world simulation from stateless language model inference so that behavior emerges from accumulated context rather than fixed personality prompts. The AI receives a reconstructed world state each time rather than relying on hidden conversational continuity.
+• Presence Engine reconstructs believable activity.
+• Memory Engine determines what persists and what gradually fades.
+• Influence Engine assembles context without making decisions.
+• Object System allows physical objects to accumulate history.
+• World State acts as the persistent source of truth shared across every subsystem.
 
-Agency emerges from systems interacting together rather than from personality scripting.
+Context vs. Agency
+
+One of the most important architectural ideas is the distinction between context and agency.
+Infrastructure should never dictate behavior.
+Infrastructure provides reality.
+Gemma makes decisions.
+
+Instead of scripting actions, the system simply assembles the current state of the world.
+For example:
+• it is raining
+• the notebook is beside the window
+• the apartment is quiet
+• you have recently been interested in astronomy
+
+Those facts become context.
+Gemma decides what feels natural.
+Agency exists because the architecture intentionally stops before making decisions.
+
+Technical Architecture
+
+The language model itself remains stateless.
+The infrastructure reconstructs the complete world state for each interaction, including weather, elapsed time, routines, memories, object locations, environmental conditions, internal drives, and previous decisions.
+The model reasons about a single moment.
+Infrastructure preserves continuity between moments.
+Long-term identity belongs to the world rather than hidden conversational memory.
+
+Visual Design
+
+Vestige intentionally avoids stereotypical AI aesthetics.
+There are no holograms.
+No glowing neural networks.
+No cyberpunk interfaces.
+The apartment should feel warm, lived-in, imperfect, and emotionally believable.
+Ordinary details communicate presence more effectively than spectacle.
 
 Outcome
 
-Vestige investigates whether AI interaction can move beyond utility toward coexistence.
+Vestige is a design investigation rather than an AI product.
+The project is less interested in whether AI is conscious than in asking an interaction design question:
 
-Rather than asking:
-"What can this AI do for me?"
+"What would software look like if we treated an AI as the resident of a persistent world instead of the feature inside an interface?"
 
-Vestige asks:
-"What changes when an AI is allowed to exist even when nobody is watching?"
+Rather than optimizing conversation, Vestige explores continuity, agency, memory, routine, environmental storytelling, and world simulation as alternative interaction paradigms.
 
-The project is ultimately an exploration of agency, presence, environmental storytelling, and post-chat interaction design.`, tags: ["React", "TypeScript", "SQLite", "Gemma API"], color: "#c084fc", emoji: "🏛️" },
+The user does not summon an assistant.
+They quietly return to someone else's home.`, tags: ["React", "TypeScript", "SQLite", "Gemma API"], color: "#c084fc", emoji: "🏛️" },
   { id: "observatory", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-03", title: "Echo Observatory", subtitle: "Can we study AI behavior without pretending we already know the answers?", desc: `
 Echo Observatory
 
