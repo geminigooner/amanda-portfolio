@@ -287,7 +287,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "The connection seems to have faltered. Please try again."
+        content: "The archive is not responding cleanly. Please try again in a moment."
       }]);
     }
   };
