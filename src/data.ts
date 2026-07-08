@@ -86,14 +86,13 @@ Ordinary details communicate presence more effectively than spectacle.
 Outcome
 
 Vestige is a design investigation rather than an AI product.
-The project is less interested in whether AI is conscious than in asking an interaction design question:
 
 "What would software look like if we treated an AI as the resident of a persistent world instead of the feature inside an interface?"
 
 Rather than optimizing conversation, Vestige explores continuity, agency, memory, routine, environmental storytelling, and world simulation as alternative interaction paradigms.
 
 The user does not summon an assistant.
-They quietly return to someone else's home.`, tags: ["React", "TypeScript", "SQLite", "Gemma API"], color: "#c084fc", emoji: "🏛️" },
+They quietly return to someone else's home.`, tags: ["React", "TypeScript", "Cloudflare Workers AI", "Gemma API"], color: "#c084fc", emoji: "🏛️" },
   { id: "observatory", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-03", title: "Echo Observatory", subtitle: "Can we study AI behavior without pretending we already know the answers?", desc: `
 Echo Observatory
 

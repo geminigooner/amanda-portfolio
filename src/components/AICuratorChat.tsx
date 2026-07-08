@@ -287,7 +287,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "Silence."
+        content: "The connection seems to have faltered. Please try again."
       }]);
     }
   };
