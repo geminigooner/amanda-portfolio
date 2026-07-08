@@ -188,7 +188,7 @@ You are aware that the Vestige archive is an evolving, multi-room experience.
       content: z.string().trim().min(1).max(2000), // Prevent massive prompt injection and empty strings
       id: z.string().optional()
     })).max(50),
-    projectContext: z.string().trim().max(500).nullable().optional(),
+    projectContext: z.string().trim().max(150000).nullable().optional(),
     visitorMemory: z.record(z.string(), z.any()).nullable().optional(),
     isInitialGreeting: z.boolean().optional()
   });
@@ -217,7 +217,7 @@ You are aware that the Vestige archive is an evolving, multi-room experience.
       const { messages, projectContext, visitorMemory, isInitialGreeting } = parsed.data;
       
       // Sanitize inputs by enforcing length limits to constrain prompt injection surfaces and prevent resource exhaustion
-      const safeProjectContext = typeof projectContext === 'string' ? projectContext.slice(0, 500) : 'None';
+      const safeProjectContext = typeof projectContext === 'string' ? projectContext.slice(0, 150000) : 'None';
       
       let memoryContext = '';
       if (visitorMemory && typeof visitorMemory === 'object') {
