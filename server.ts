@@ -188,8 +188,8 @@ You are aware that the Vestige archive is an evolving, multi-room experience.
       content: z.string().trim().min(1).max(2000), // Prevent massive prompt injection and empty strings
       id: z.string().optional()
     })).max(50),
-    projectContext: z.string().trim().max(500).optional(),
-    visitorMemory: z.record(z.string(), z.any()).optional(),
+    projectContext: z.string().trim().max(500).nullable().optional(),
+    visitorMemory: z.record(z.string(), z.any()).nullable().optional(),
     isInitialGreeting: z.boolean().optional()
   });
 
