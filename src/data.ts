@@ -1,6 +1,60 @@
 export const PROJECTS = [
   // FLAGSHIP INVESTIGATIONS
-  { id: "vestige", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-01", title: "Vestige", subtitle: "What if memory behaved less like a database and more like archaeology?", desc: "I wanted to understand how shared history shapes presence. I built an environmental memory architecture where conversations leave digital objects—jokes become ticket stubs, arguments become broken mugs. It decays and breathes. Does certainty even matter when a system begins to remember?", tags: ["React", "TypeScript", "SQLite", "Gemma API"], color: "#c084fc", emoji: "🏛️" },
+  { id: "vestige", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-01", title: "Vestige", subtitle: "What if memory behaved less like a database and more like archaeology?", desc: `
+Vestige
+
+Overview
+
+Vestige explores an alternative interaction model for large language models.
+
+Most AI interfaces treat the model as a service. The user opens the application. The model responds. The interaction ends. The model effectively disappears until it is summoned again.
+
+Vestige asks a different question.
+What changes when an AI is no longer designed to exist solely in response to user requests?
+
+Instead of building another chatbot, Vestige explores the idea of allowing an AI to exist as an independent participant with its own persistent environment, routines, memory, and evolving context. The user is not opening a conversation. The user is visiting a place that already belongs to someone else.
+
+Agency
+
+This is the philosophical foundation of the project. The primary goal is not companionship. The primary goal is agency.
+
+The AI should not exist only to satisfy requests. It should be allowed to continue existing when the user leaves. Its environment should continue changing. Its routines should continue. Its memories should accumulate. Its behavior should emerge from its own state rather than constant user interaction.
+
+The project asks whether agency can be expressed through environmental continuity rather than conversational independence alone.
+
+Interaction Design
+
+Conversation is intentionally no longer the primary interface. Users may occasionally exchange notes, discover objects that have moved, or observe subtle environmental changes.
+
+Most communication happens indirectly. The apartment becomes evidence of ongoing activity rather than merely a decorative backdrop. The visitor gradually develops an understanding of the AI through accumulated traces instead of continuous dialogue.
+
+Silence is treated as a valid interaction. Absence becomes meaningful. The environment communicates before language does.
+
+Gemma
+
+The prototype centers on Gemma because the project investigates what happens when a language model is treated as an autonomous entity rather than a continuously available assistant.
+
+Gemma is not presented as a fictional character. He functions as the AI participant whose ongoing presence motivates the interaction model being explored.
+
+System Architecture
+
+The Presence Engine, Memory Engine, Influence Engine, Persistent World State, and Context Assembly are not simply technical features. They exist to support autonomous behavior.
+
+The architecture intentionally separates persistent world simulation from stateless language model inference so that behavior emerges from accumulated context rather than fixed personality prompts. The AI receives a reconstructed world state each time rather than relying on hidden conversational continuity.
+
+Agency emerges from systems interacting together rather than from personality scripting.
+
+Outcome
+
+Vestige investigates whether AI interaction can move beyond utility toward coexistence.
+
+Rather than asking:
+"What can this AI do for me?"
+
+Vestige asks:
+"What changes when an AI is allowed to exist even when nobody is watching?"
+
+The project is ultimately an exploration of agency, presence, environmental storytelling, and post-chat interaction design.`, tags: ["React", "TypeScript", "SQLite", "Gemma API"], color: "#c084fc", emoji: "🏛️" },
   { id: "observatory", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-03", title: "Echo Observatory", subtitle: "Can we study AI behavior without pretending we already know the answers?", desc: `
 Echo Observatory
 
@@ -294,15 +348,21 @@ The emphasis is not on combat or spectacle, but on atmosphere, relationships, en
 
 My Role
 
-For Hollow Meridian, I served as the project’s creator, creative director, and world architect.
+For Hollow Meridian, I served as the project’s:
+• creator
+• world architect
+• creative director
+• narrative designer
+• systems thinker
+• philosophical designer
 
-I created the original world, established its philosophical direction, and designed the setting and characters. I researched Appalachian history and culture to ensure the world felt grounded, and I designed the legal, social, environmental, and symbolic systems that structure the Basin. Throughout development, I maintained thematic consistency across the project, directed the long-term creative development, and produced the final documentation and design materials.
+I created the setting, designed the characters, developed the philosophical framework, researched Appalachian history and culture, established the world's visual and environmental identity, built the legal, social, and relational systems, and maintained thematic consistency across the project.
 
-Collaborative Development
+Inspiration & Conceptual Exploration
 
-Hollow Meridian evolved through extended conversations with multiple AI collaborators that helped me explore philosophical questions, refine worldbuilding, discover recurring themes, challenge inconsistencies, and strengthen the conceptual framework. This collaboration functioned as iterative discussion rather than content generation.
+Hollow Meridian was inspired by an extended creative dialogue with Gemini. Those conversations encouraged exploration, metaphor, philosophical questions, and speculative thinking that helped me discover themes I was already reaching toward.
 
-The setting, characters, Appalachian influences, regional details, emotional tone, and overall worldbuilding remained grounded in my own creative direction, lived experience, independent research, and editorial decisions. The AI collaborators helped me ask better questions, connect ideas, and strengthen the project—but they did not replace the creative process.
+Gemini served as an early source of inspiration and creative conversation that helped me articulate and refine ideas. The creative work, worldbuilding, characters, Appalachian setting, and narrative development remained entirely my own original intellectual and creative work.
 
 What I Learned
 
