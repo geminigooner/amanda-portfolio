@@ -232,16 +232,17 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: prefersReducedMotion ? 0 : 1.5, delay: prefersReducedMotion ? 0 : 0.5 }}
                 >
-                  <div className="font-mono text-[10px] tracking-[0.3em] text-[#A59B8C] uppercase mb-8">
+                  <div className="font-mono text-[10px] tracking-[0.3em] text-[#A59B8C] uppercase mb-4 flex items-center justify-center gap-3">
+                    <span className="w-8 h-[1px] bg-[#333]"></span>
                     {VESTIGE_PROJECT.num} // {VESTIGE_PROJECT.wing}
                   </div>
-                  <h1 className="font-display text-5xl md:text-7xl font-light text-[#F4EFE6] mb-8 tracking-tight">
+                  <h2 className="font-display text-2xl tracking-tight text-[#F4EFE6] mb-8">
                     {VESTIGE_PROJECT.title}
-                  </h1>
-                  <p className="font-mono text-sm tracking-widest text-[#C8A96A] uppercase mb-12">
+                  </h2>
+                  <h3 className="font-mono text-sm tracking-widest uppercase mb-4 text-[#C8A96A]">
                     "{VESTIGE_PROJECT.subtitle}"
-                  </p>
-                  <p className="text-[#D8CFC0] font-sans text-xl md:text-2xl font-light leading-relaxed max-w-2xl mx-auto mb-16">
+                  </h3>
+                  <p className="text-base text-[#D8CFC0] leading-relaxed font-sans font-light whitespace-pre-wrap text-left max-w-2xl mx-auto mb-16">
                     {VESTIGE_PROJECT.desc}
                   </p>
                   <div className="w-[1px] h-32 bg-gradient-to-b from-[#8F7746]/50 to-transparent mx-auto" />
@@ -261,13 +262,13 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
                           <div className="font-mono text-[10px] tracking-[0.4em] text-[#A59B8C] uppercase mb-6">
                             {VESTIGE_PROJECT.num} // {room.title}
                           </div>
-                          <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">
+                          <h2 className="font-display text-2xl tracking-tight text-[#F4EFE6] mb-8">
                             {room.name}
                           </h2>
                           <div className="font-mono text-[11px] tracking-[0.3em] text-[#A59B8C] uppercase border border-[#A59B8C]/20 px-6 py-2 mb-8">
                             LOCKED
                           </div>
-                          <p className="text-[#D8CFC0] font-sans text-sm font-light leading-relaxed max-w-xl">
+                          <p className="text-base text-[#D8CFC0] leading-relaxed font-sans font-light whitespace-pre-wrap text-center max-w-xl mx-auto">
                             Available in a future archive release.
                           </p>
                         </div>
@@ -284,10 +285,10 @@ export function VestigeExperience({ onClose }: { onClose: () => void }) {
                       <div className="font-mono text-[10px] tracking-[0.4em] text-[#A59B8C] uppercase mb-6">
                         {room.title}
                       </div>
-                      <h2 className="font-display text-4xl md:text-5xl font-light text-[#F4EFE6] mb-8 tracking-tight">
+                      <h2 className="font-display text-2xl tracking-tight text-[#F4EFE6] mb-8">
                         {room.name}
                       </h2>
-                      <p className="text-[#D8CFC0] font-sans text-lg font-light leading-relaxed max-w-xl mb-16">
+                      <p className="text-base text-[#D8CFC0] leading-relaxed font-sans font-light whitespace-pre-wrap text-center max-w-xl mx-auto mb-16">
                         {room.caption}
                       </p>
                       
