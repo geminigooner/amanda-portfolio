@@ -24,7 +24,6 @@
 }
 
 html, body {
-  overflow-x: hidden;
   background-color: var(--color-void);
   color: var(--color-cream);
   scroll-behavior: smooth;

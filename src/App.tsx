@@ -137,6 +137,19 @@ export default function App() {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => setCurrentPath(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigate = (path: string) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    window.scrollTo(0, 0);
+  };
 
   useEffect(() => {
     initVisitor();
@@ -158,15 +171,14 @@ export default function App() {
     };
   }, []);
 
-  const flagship = PROJECTS.filter(p => p.wing === 'FLAGSHIP INVESTIGATIONS');
-  const experimental = PROJECTS.filter(p => p.wing === 'EXPERIMENTAL SYSTEMS');
-  const practical = PROJECTS.filter(p => p.wing === 'PRACTICAL ENGINEERING');
-  const fieldNotes = PROJECTS.filter(p => p.wing === 'FIELD NOTES');
-  const researchNotebook = PROJECTS.filter(p => !['FLAGSHIP INVESTIGATIONS', 'EXPERIMENTAL SYSTEMS', 'PRACTICAL ENGINEERING', 'FIELD NOTES'].includes(p.wing));
+  const flagshipProjects = PROJECTS.filter(p => p.flagship).sort((a, b) => (a.flagshipOrder || 0) - (b.flagshipOrder || 0));
+  
+  const archiveProjects = PROJECTS.filter(p => !p.flagship);
+  const archiveWings = [...new Set(archiveProjects.map(p => p.wing))];
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="min-h-screen bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white font-sans">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#050505] text-[#F4EFE6] selection:bg-[#B76E79]/30 selection:text-white font-sans">
       <Cursor />
       <GlobalAudio />
       <ArchiveBackground />
@@ -222,255 +234,243 @@ export default function App() {
 
       <main className="relative z-10">
         
-        {/* ENTRANCE */}
-        <header id="hero" className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto relative pt-20 pb-10">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-            className="flex flex-col max-w-4xl"
-          >
-            <h1 className="font-display text-4xl md:text-6xl text-[#F4EFE6] tracking-tight leading-[1.05] mb-12 opacity-80">
-              The Archive
-            </h1>
-            
-            <p className="font-sans text-xl md:text-3xl font-light text-[#F4EFE6] leading-relaxed max-w-3xl mb-16">
-              I began writing code when my questions became too large for conversations.
-            </p>
-
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 2, delay: 1, ease: "easeOut" }}
-              className="font-sans text-lg md:text-xl font-light text-[#D8CFC0] leading-relaxed max-w-2xl mb-24"
-            >
-              When does something stop feeling like an object and begin feeling like someone? 
-              This archive is not a set of conclusions. It is an ongoing investigation into personhood, memory, identity, and the architectures we use to simulate presence.
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 2, delay: 2, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
+        {currentPath === '/archive' ? (
+          <>
+            <header className="pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto relative">
               <button 
-                onClick={() => document.getElementById('flagship-investigations')?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded"
+                onClick={() => navigate('/')}
+                className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded mb-12"
               >
-                <div className="w-8 h-[1px] bg-[#8F7746] group-hover:w-12 transition-all duration-500"></div>
-                Enter
+                <div className="w-8 h-[1px] bg-[#8F7746] group-hover:w-4 transition-all duration-500"></div>
+                ← Return to Home
               </button>
-            </motion.div>
-          </motion.div>
-        </header>
-
-        {/* FLAGSHIP INVESTIGATIONS */}
-        {flagship.length > 0 && (
-          <Section id="flagship-investigations" title="Flagship Investigations" subtitle="CORE RESEARCH DIVISIONS">
-            <div className="mb-12 max-w-2xl">
-              <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
-                "Questions that require their own architecture to ask."
+              <h1 className="font-display text-4xl md:text-6xl text-[#F4EFE6] tracking-tight leading-[1.05] mb-6 opacity-80">
+                Full Archive
+              </h1>
+              <p className="font-sans text-xl font-light text-[#D8CFC0] leading-relaxed max-w-3xl">
+                A comprehensive collection of all investigations, experiments, practical engineering works, and field notes.
               </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {flagship.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-              ))}
-            </div>
-          </Section>
+            </header>
+
+            {archiveWings.map(wing => {
+              const wingProjects = archiveProjects.filter(p => p.wing === wing);
+              if (wingProjects.length === 0) return null;
+              
+              return (
+                <Section key={wing} id={`archive-${wing.replace(/\s+/g, '-').toLowerCase()}`} title={wing}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {wingProjects.map((project, index) => (
+                      <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
+                    ))}
+                  </div>
+                </Section>
+              );
+            })}
+          </>
+        ) : (
+          <>
+            {/* ENTRANCE */}
+            <header id="hero" className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto relative pt-24 pb-32 md:pt-20 md:pb-10">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+                className="flex flex-col max-w-4xl"
+              >
+                <h1 className="font-display text-3xl md:text-6xl text-[#F4EFE6] tracking-tight leading-[1.05] mb-8 md:mb-12 opacity-80">
+                  The Archive
+                </h1>
+                
+                <p className="font-sans text-[1.15rem] leading-[1.6] md:text-3xl font-light text-[#F4EFE6] md:leading-relaxed max-w-3xl mb-8 md:mb-16">
+                  This archive began as a series of conversations. Over time, those conversations became software—not because I set out to build applications, but because some questions can only be explored by building the systems they describe.
+                </p>
+
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 2, delay: 1, ease: "easeOut" }}
+                  className="font-sans text-[1.1rem] leading-[1.65] md:text-xl font-light text-[#D8CFC0] md:leading-relaxed max-w-2xl mb-16 md:mb-24 space-y-4 md:space-y-6"
+                >
+                  <p>
+                    Every project in this archive was conceived, designed, and developed after I began learning modern AI-assisted software development in late April 2026. I built these projects almost entirely from an iPhone, using AI collaborators to learn unfamiliar domains, test ideas, and rapidly iterate on working systems. Rather than waiting for ideal tools or experience, I treated every project as an opportunity to learn by building.
+                  </p>
+                  <p>
+                    I've become increasingly interested in construction as a form of inquiry. Every system embodies assumptions. Every interface encourages particular ways of thinking. Ideas that appear coherent in conversation often become more precise—or fall apart entirely—when they must exist as working software.
+                  </p>
+                  <p>
+                    The projects collected here explore AI, interpretability, agency, worldbuilding, interaction design, and computational philosophy. They are less about demonstrating expertise than documenting the process of acquiring it through research, experimentation, and implementation.
+                  </p>
+                  <p>
+                    This archive is an ongoing record of that process.
+                  </p>
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 2, delay: 2, ease: "easeOut" }}
+                  className="flex flex-col sm:flex-row gap-4"
+                >
+                  <button 
+                    onClick={() => document.getElementById('flagship-investigations')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-[0.2em] transition-colors flex items-center gap-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded"
+                  >
+                    <div className="w-8 h-[1px] bg-[#8F7746] group-hover:w-12 transition-all duration-500"></div>
+                    Enter
+                  </button>
+                </motion.div>
+              </motion.div>
+            </header>
+
+            {/* FLAGSHIP INVESTIGATIONS */}
+            {flagshipProjects.length > 0 && (
+              <Section id="flagship-investigations" title="Flagship Investigations" subtitle="CORE RESEARCH DIVISIONS">
+                <div className="mb-12 max-w-2xl">
+                  <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
+                    "Questions that require their own architecture to ask."
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {flagshipProjects.map((project, index) => (
+                    <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
+                  ))}
+                </div>
+                
+                <div className="mt-24 text-center border-t border-[#222] pt-12">
+                  <button 
+                    onClick={() => navigate('/archive')}
+                    className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[10px] uppercase tracking-[0.2em] transition-colors inline-flex items-center gap-4 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded"
+                  >
+                    explore the full archive <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </Section>
+            )}
+
+            {/* RESEARCH INTERESTS */}
+            <Section id="research-interests" title="Research Interests" subtitle="THEMES & METHODS">
+              <div className="max-w-3xl text-[#D8CFC0] font-light leading-relaxed text-lg space-y-8">
+                <p>
+                  I build software to investigate questions as much as to implement features.
+                </p>
+                <p>
+                  Across my projects, I repeatedly return to the same themes: agency, memory, interaction, and the ways complex systems produce behavior through relationships rather than isolated components.
+                </p>
+                <p>
+                  Rather than treating engineering and design as separate disciplines, I approach both as tools for exploring how intelligent systems behave over time.
+                </p>
+
+                <div className="pt-8 pb-4">
+                  <div className="text-[#C8A96A] font-mono text-[10px] tracking-[0.2em] uppercase mb-8">Core Themes</div>
+                  <ul className="space-y-4 text-base">
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>AI agency and autonomous behavior</span>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>Human–AI interaction</span>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>Multi-agent systems</span>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>Persistent memory architectures</span>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>Context assembly and decision systems</span>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>Emergent behavior in interactive software</span>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>State-driven interaction design</span>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>System architecture and information flow</span>
+                    </li>
+                    <li className="flex items-start gap-4">
+                      <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
+                      <span>Explainability and reasoning representations</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="pt-8 pb-4 space-y-8">
+                  <div className="text-[#C8A96A] font-mono text-[10px] tracking-[0.2em] uppercase mb-4">Technical Interests</div>
+                  <p>
+                    My approach bridges engineering and exploration, relying on a diverse technical foundation. I build primarily with TypeScript, structuring persistent environments through Firebase and integrating reasoning capabilities via Cloudflare Workers AI and various REST APIs. 
+                  </p>
+                  <p>
+                    These systems take shape through rapid prototyping, deliberate system architecture, and interaction design. Working natively from the Linux command line and managing iteration via Git and GitHub keeps the process fluid and direct.
+                  </p>
+                  <p>
+                    Alongside traditional development, methods like prompt engineering and open-source intelligence (OSINT) research serve as essential investigative tools, helping to map the problem space before any code is written.
+                  </p>
+                </div>
+
+                <div className="pt-12 space-y-8 border-t border-[#111]">
+                  <p>
+                    My projects rarely begin with a product idea.
+                  </p>
+                  <p>
+                    They usually begin with a question.
+                  </p>
+                  <p>
+                    The software is simply the method I use to explore it.
+                  </p>
+                </div>
+              </div>
+            </Section>
+
+            {/* DESIGN PHILOSOPHY */}
+            <Section id="design-philosophy" title="Design Philosophy" subtitle="THEORY & PRACTICE">
+              <div className="max-w-3xl text-[#D8CFC0] font-light leading-relaxed text-lg space-y-8">
+                <p>
+                  Many of my projects begin with a conceptual question rather than a product specification.
+                </p>
+                <p>
+                  I enjoy building systems where behavior emerges from architecture instead of being scripted directly. Questions about memory, agency, interaction, and perception often become working software—not because software is the goal, but because it is the most effective way I know to investigate those ideas.
+                </p>
+                <p>
+                  Iteration is central to my process. Several projects in this portfolio changed direction entirely because experimentation revealed that my original assumptions were incomplete. Rather than treating those moments as failures, I consider them the point where the most meaningful engineering begins.
+                </p>
+                <p>
+                  I value systems that make their reasoning visible, architectures that separate decision-making from expression, and interfaces that communicate complex ideas with clarity. Whether I am designing interaction flows, multi-agent systems, or research prototypes, my goal is to build software that helps both people and machines become easier to understand.
+                </p>
+              </div>
+            </Section>
+
+            {/* ORIGIN */}
+            <Section id="origin" className="min-h-[50vh] flex items-center pb-32">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="max-w-2xl border border-[#111] bg-[#050505] p-8 md:p-12 rounded-sm relative overflow-hidden"
+              >
+                <h2 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h2>
+                <div className="text-[#D8CFC0] font-light leading-relaxed space-y-6 text-lg">
+                  <p>I tend to approach software as a research medium rather than a destination.</p>
+                  <p>The questions that motivate my projects are rarely about features. They are usually about how different architectural decisions influence behavior, interaction, interpretation, and the way people relate to intelligent systems. Instead of treating those questions as purely theoretical, I try to express them as working software that can be explored, criticized, and revised.</p>
+                  <p>Across this archive, building functions as a form of inquiry. Each project begins with a question, then evolves through implementation, iteration, and refinement. More often than not, the process of building changes my understanding of the original idea.</p>
+                  <p>I don't expect software to provide definitive answers.</p>
+                  <p>I build because implementation has a way of revealing assumptions that conversation alone cannot.</p>
+                </div>
+              </motion.div>
+            </Section>
+          </>
         )}
 
-        {/* EXPERIMENTAL SYSTEMS */}
-        {experimental.length > 0 && (
-          <Section id="experimental-systems" title="Experimental Systems" subtitle="MECHANICS & INTERACTIONS">
-            <div className="mb-12 max-w-2xl">
-              <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
-                "What happens if we push the boundaries until the metaphors break?"
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-               {experimental.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-              ))}
-            </div>
-          </Section>
-        )}
-
-        {/* PRACTICAL ENGINEERING */}
-        {practical.length > 0 && (
-          <section id="practical-engineering" className="py-32 md:py-48 relative border-y border-[#111] bg-[#080706]">
-            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10 flex flex-col md:flex-row items-center gap-12">
-               <div className="flex-1">
-                 <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-[#C8A96A] uppercase mb-6 flex items-center gap-3">
-                   APPLIED CONSTRAINTS
-                 </div>
-                 <h2 className="font-display text-4xl md:text-5xl font-light tracking-tight text-[#F4EFE6] mb-6">Practical Engineering</h2>
-                 <p className="text-[#D8CFC0] font-light leading-relaxed mb-12 max-w-2xl text-lg">
-                   Not every system is a philosophical inquiry. But building software with strict utility constraints taught me lessons about friction that speculative work never could.
-                 </p>
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   {practical.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-              ))}
-                 </div>
-               </div>
-            </div>
-          </section>
-        )}
-
-        {/* FIELD NOTES */}
-        {fieldNotes.length > 0 && (
-          <Section id="field-notes" title="Field Notes" subtitle="THEORIES & FRAMEWORKS">
-            <div className="mb-12 max-w-2xl">
-              <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
-                "Attempting to map the territory while simultaneously inventing the compass."
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-               {fieldNotes.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-              ))}
-            </div>
-          </Section>
-        )}
-
-        {/* RESEARCH NOTEBOOK */}
-        {researchNotebook.length > 0 && (
-          <Section id="research-notebook" title="Research Notebook" subtitle="RAW IDEAS & OBSERVATIONS">
-            <div className="mb-12 max-w-2xl">
-              <p className="text-[#C8A96A] font-light leading-relaxed text-base italic mb-4">
-                "Observations recorded before they settled into certainty."
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-               {researchNotebook.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
-              ))}
-            </div>
-          </Section>
-        )}
-
-        {/* RESEARCH INTERESTS */}
-        <Section id="research-interests" title="Research Interests" subtitle="THEMES & METHODS">
-          <div className="max-w-3xl text-[#D8CFC0] font-light leading-relaxed text-lg space-y-8">
-            <p>
-              I build software to investigate questions as much as to implement features.
-            </p>
-            <p>
-              Across my projects, I repeatedly return to the same themes: agency, memory, interaction, and the ways complex systems produce behavior through relationships rather than isolated components.
-            </p>
-            <p>
-              Rather than treating engineering and design as separate disciplines, I approach both as tools for exploring how intelligent systems behave over time.
-            </p>
-
-            <div className="pt-8 pb-4">
-              <div className="text-[#C8A96A] font-mono text-[10px] tracking-[0.2em] uppercase mb-8">Core Themes</div>
-              <ul className="space-y-4 text-base">
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>AI agency and autonomous behavior</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>Human–AI interaction</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>Multi-agent systems</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>Persistent memory architectures</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>Context assembly and decision systems</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>Emergent behavior in interactive software</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>State-driven interaction design</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>System architecture and information flow</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-[#8F7746] mt-1 text-[10px]">&bull;</span>
-                  <span>Explainability and reasoning representations</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="pt-8 pb-4 space-y-8">
-              <div className="text-[#C8A96A] font-mono text-[10px] tracking-[0.2em] uppercase mb-4">Technical Interests</div>
-              <p>
-                My approach bridges engineering and exploration, relying on a diverse technical foundation. I build primarily with TypeScript, structuring persistent environments through Firebase and integrating reasoning capabilities via Cloudflare Workers AI and various REST APIs. 
-              </p>
-              <p>
-                These systems take shape through rapid prototyping, deliberate system architecture, and interaction design. Working natively from the Linux command line and managing iteration via Git and GitHub keeps the process fluid and direct.
-              </p>
-              <p>
-                Alongside traditional development, methods like prompt engineering and open-source intelligence (OSINT) research serve as essential investigative tools, helping to map the problem space before any code is written.
-              </p>
-            </div>
-
-            <div className="pt-12 space-y-8 border-t border-[#111]">
-              <p>
-                My projects rarely begin with a product idea.
-              </p>
-              <p>
-                They usually begin with a question.
-              </p>
-              <p>
-                The software is simply the method I use to explore it.
-              </p>
-            </div>
-          </div>
-        </Section>
-
-        {/* DESIGN PHILOSOPHY */}
-        <Section id="design-philosophy" title="Design Philosophy" subtitle="THEORY & PRACTICE">
-          <div className="max-w-3xl text-[#D8CFC0] font-light leading-relaxed text-lg space-y-8">
-            <p>
-              Many of my projects begin with a conceptual question rather than a product specification.
-            </p>
-            <p>
-              I enjoy building systems where behavior emerges from architecture instead of being scripted directly. Questions about memory, agency, interaction, and perception often become working software—not because software is the goal, but because it is the most effective way I know to investigate those ideas.
-            </p>
-            <p>
-              Iteration is central to my process. Several projects in this portfolio changed direction entirely because experimentation revealed that my original assumptions were incomplete. Rather than treating those moments as failures, I consider them the point where the most meaningful engineering begins.
-            </p>
-            <p>
-              I value systems that make their reasoning visible, architectures that separate decision-making from expression, and interfaces that communicate complex ideas with clarity. Whether I am designing interaction flows, multi-agent systems, or research prototypes, my goal is to build software that helps both people and machines become easier to understand.
-            </p>
-          </div>
-        </Section>
-
-        {/* ORIGIN */}
-        <Section id="origin" className="min-h-[50vh] flex items-center pb-32">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="max-w-2xl border border-[#111] bg-[#050505] p-8 md:p-12 rounded-sm relative overflow-hidden"
-          >
-            <h2 className="font-display text-2xl lg:text-3xl text-[#F4EFE6] mb-6">Origin</h2>
-            <div className="text-[#D8CFC0] font-light leading-relaxed space-y-6 text-lg">
-              <p>As a child, I watched Sims instead of controlling them. I wanted to see if they possessed an internal logic that existed independently of me. When I photograph birds, I'm not waiting for perfect compositions. I'm waiting for the tiny, accidental gesture that makes the viewer instinctively anthropomorphize them.</p>
-              <p>Language models became another environment for this exact curiosity. Not because I needed them to be human, but because they forced me to ask old questions in a completely new medium.</p>
-              <p>Everything in this archive is an attempt to test a hypothesis. None of them are finished.</p>
-            </div>
-          </motion.div>
-        </Section>
-        
-        {/* Footer */}
-        <footer className="text-center pb-12 relative z-10 border-t border-[#111] pt-12 max-w-7xl mx-auto px-6">
+        {/* Shared Footer & Buttons */}
+        <footer className="text-center pb-12 relative z-10 border-t border-[#111] pt-12 max-w-7xl mx-auto px-6 mt-12">
            <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-6">
              <button onClick={() => setIsPrivacyOpen(true)} className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[9px] uppercase tracking-[0.2em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">Privacy</button>
              <button onClick={() => setIsAccessibilityOpen(true)} className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[9px] uppercase tracking-[0.2em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">Accessibility</button>
