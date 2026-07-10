@@ -4,14 +4,14 @@ import { Map, Navigation } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
 const ZONES = [
-  { id: 'hero', label: 'ARRIVAL' },
-  { id: 'flagship-investigations', label: 'FLAGSHIP INVESTIGATIONS' },
-  { id: 'experimental-systems', label: 'EXPERIMENTAL SYSTEMS' },
-  { id: 'practical-engineering', label: 'PRACTICAL ENGINEERING' },
-  { id: 'field-notes', label: 'FIELD NOTES' },
-  { id: 'research-notebook', label: 'RESEARCH NOTEBOOK' },
-  { id: 'research-interests', label: 'RESEARCH INTERESTS' },
-  { id: 'origin', label: 'ORIGIN' }
+  { id: 'hero', label: 'ARRIVAL', path: '/' },
+  { id: 'flagship-investigations', label: 'FLAGSHIP INVESTIGATIONS', path: '/' },
+  { id: 'archive-browser-lab', label: 'BROWSER LAB', path: '/archive' },
+  { id: 'archive-gallery', label: 'GALLERY', path: '/archive' },
+  { id: 'archive-archive', label: 'ARCHIVE', path: '/archive' },
+  { id: 'research-interests', label: 'RESEARCH INTERESTS', path: '/' },
+  { id: 'design-philosophy', label: 'THEORY & PRACTICE', path: '/' },
+  { id: 'origin', label: 'ORIGIN', path: '/' }
 ];
 
 export function FloatingPill() {
@@ -62,14 +62,19 @@ export function FloatingPill() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ZONES.map(z => document.getElementById(z.id));
-      let current = ZONES[0].label;
+      const currentPath = window.location.pathname;
+      const validZones = ZONES.filter(z => z.path === currentPath);
+      
+      if (validZones.length === 0) return;
+
+      const sections = validZones.map(z => document.getElementById(z.id));
+      let current = validZones[0].label;
       
       for (const section of sections) {
         if (section) {
           const rect = section.getBoundingClientRect();
           if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-            current = ZONES.find(z => z.id === section.id)?.label || current;
+            current = validZones.find(z => z.id === section.id)?.label || current;
           }
         }
       }
@@ -137,8 +142,13 @@ export function FloatingPill() {
                       {ZONES.map((zone) => (
                         <button
                           key={zone.id}
-                          onClick={(e) => { e.stopPropagation(); 
-                            document.getElementById(zone.id)?.scrollIntoView({ behavior: 'smooth' });
+                          onClick={(e) => { 
+                            e.stopPropagation(); 
+                            if (zone.path && window.location.pathname !== zone.path) {
+                              window.dispatchEvent(new CustomEvent('navigate', { detail: { path: zone.path, hash: zone.id } }));
+                            } else {
+                              document.getElementById(zone.id)?.scrollIntoView({ behavior: 'smooth' });
+                            }
                             setIsExpanded(false);
                           }}
                           className={`text-left text-xs tracking-widest transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded ${

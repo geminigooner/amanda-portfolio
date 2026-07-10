@@ -142,13 +142,32 @@ export default function App() {
   useEffect(() => {
     const handlePopState = () => setCurrentPath(window.location.pathname);
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    
+    const handleNavigateEvent = (e: any) => {
+      if (e.detail?.path) {
+        navigate(e.detail.path);
+        
+        if (e.detail.hash) {
+          setTimeout(() => {
+            document.getElementById(e.detail.hash)?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    };
+    window.addEventListener('navigate', handleNavigateEvent);
+    
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('navigate', handleNavigateEvent);
+    };
   }, []);
 
   const navigate = (path: string) => {
     window.history.pushState({}, '', path);
     setCurrentPath(path);
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   };
 
   useEffect(() => {
