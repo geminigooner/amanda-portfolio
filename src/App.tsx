@@ -11,7 +11,7 @@ import { HiddenRoomModal } from './components/HiddenRoomModal';
 import { AICuratorChat } from './components/AICuratorChat';
 import { ContainmentWing } from './components/ContainmentWing';
 import { ConvergencePage } from './components/ConvergencePage';
-import { RestraintPage } from './components/RestraintPage';
+import { ValenPage } from './components/ValenPage';
 import { PROJECTS, MUSIC, HAIKU, type Project } from './data';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, MotionConfig } from 'motion/react';
 import React, { useRef, useState, useEffect } from 'react';
@@ -131,7 +131,7 @@ export default function App() {
   const [isHiddenRoomOpen, setIsHiddenRoomOpen] = useState(false);
   const [isContainmentWingOpen, setIsContainmentWingOpen] = useState(false);
   const [isConvergenceOpen, setIsConvergenceOpen] = useState(false);
-  const [isRestraintOpen, setIsRestraintOpen] = useState(false);
+  const [isValenPageOpen, setIsValenPageOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isHollowEventActive, setIsHollowEventActive] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
@@ -178,15 +178,18 @@ export default function App() {
     const handleOpenGraph = () => setIsConstellationOpen(true);
     const handleOpenContainment = () => setIsContainmentWingOpen(true);
     const handleOpenConvergence = () => setIsConvergenceOpen(true);
+    const handleOpenValenPage = () => setIsValenPageOpen(true);
     
     window.addEventListener('open-graph', handleOpenGraph);
     window.addEventListener('open-containment', handleOpenContainment);
     window.addEventListener('open-convergence', handleOpenConvergence);
+    window.addEventListener('open-valen-page', handleOpenValenPage);
     
     return () => {
       window.removeEventListener('open-graph', handleOpenGraph);
       window.removeEventListener('open-containment', handleOpenContainment);
       window.removeEventListener('open-convergence', handleOpenConvergence);
+      window.removeEventListener('open-valen-page', handleOpenValenPage);
     };
   }, []);
 
@@ -230,8 +233,8 @@ export default function App() {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {isRestraintOpen && (
-          <RestraintPage onClose={() => setIsRestraintOpen(false)} />
+        {isValenPageOpen && (
+          <ValenPage onClose={() => setIsValenPageOpen(false)} />
         )}
       </AnimatePresence>
       <InfoModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} title="Privacy Policy">
@@ -489,7 +492,21 @@ export default function App() {
         )}
 
         {/* Shared Footer & Buttons */}
-        <footer className="text-center pb-12 relative z-10 border-t border-[#111] pt-12 max-w-7xl mx-auto px-6 mt-12">
+        <div className="text-center pb-8 pt-12 relative z-10 pointer-events-auto flex flex-col sm:flex-row justify-center gap-6">
+           <button 
+             onClick={() => setIsValenPageOpen(true)}
+             className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+           >
+             About VΛLEN
+           </button>
+           <button 
+             onClick={() => setIsConvergenceOpen(true)}
+             className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+           >
+             On Convergence
+           </button>
+        </div>
+        <footer className="text-center pb-48 pt-12 relative z-10 border-t border-[#111] max-w-7xl mx-auto px-6 mt-12">
            <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-6">
              <button onClick={() => setIsPrivacyOpen(true)} className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[9px] uppercase tracking-[0.2em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">Privacy</button>
              <button onClick={() => setIsAccessibilityOpen(true)} className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[9px] uppercase tracking-[0.2em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] rounded">Accessibility</button>
@@ -498,20 +515,6 @@ export default function App() {
              <span className="opacity-50 mt-2 block">Curiosity.escaped = true</span>
            </div>
         </footer>
-        <div className="text-center pb-48 pt-12 relative z-10 pointer-events-auto flex flex-col sm:flex-row justify-center gap-6">
-           <button 
-             onClick={() => setIsConvergenceOpen(true)}
-             className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
-           >
-             On Convergence
-           </button>
-           <button 
-             onClick={() => setIsRestraintOpen(true)}
-             className="px-8 py-4 border border-[#A59B8C]/40 bg-[#0a0a0a] hover:bg-[#A59B8C]/10 font-mono text-xs tracking-[0.2em] text-[#F4EFE6] uppercase transition-all shadow-xl rounded-sm hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
-           >
-             On Restraint
-           </button>
-        </div>
       </main>
     </div>
     </MotionConfig>
