@@ -388,6 +388,19 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                                 </button>
                               );
                             }
+                            
+                            if (projectName === 'Valen') {
+                              return (
+                                <button
+                                  key={i}
+                                  onClick={() => window.dispatchEvent(new CustomEvent('open-valen-page'))}
+                                  className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#0F766E]/30 hover:border-[#0F766E] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]"
+                                >
+                                  About VΛLEN
+                                  <ArrowRight aria-hidden="true" className="w-3 h-3" />
+                                </button>
+                              );
+                            }
 
                             return (
                               <button
