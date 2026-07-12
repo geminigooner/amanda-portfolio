@@ -373,13 +373,101 @@ You are intimately familiar with the themes and origins of Hollow Meridian.
   // Rate limiter for the chat endpoint
   const chatRateLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 50, // limit each IP to 50 requests per windowMs
+    max: 8, // limit each IP to 8 requests per windowMs
     message: { error: "[SYSTEM REJECTION]: Rate limit exceeded. Please wait before trying again." },
     standardHeaders: true,
     legacyHeaders: false,
   });
 
-  app.post('/api/chat', chatRateLimiter, async (req, res) => {
+  let dailyRequestCount = 0;
+  let dailyResetDate = new Date().toDateString();
+
+  function checkDailyQuota(req: any, res: any, next: any) {
+    const today = new Date().toDateString();
+    if (today !== dailyResetDate) {
+      dailyRequestCount = 0;
+      dailyResetDate = today;
+    }
+    if (dailyRequestCount >= 15) {
+      return res.status(503).json({ 
+        error: "VΛLEN's live consultation window is currently closed. The archive remains available below." 
+      });
+    }
+    dailyRequestCount++;
+    next();
+  }
+
+  const valenSessions = new Map<string, { expiresAt: number }>();
+
+  const recruiterRateLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 5,
+    skipSuccessfulRequests: true,
+    message: { error: "Too many access attempts." },
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+
+  app.post('/api/valen/access', recruiterRateLimiter, (req, res) => {
+    const { code } = req.body;
+    if (!code || typeof code !== 'string' || code.length > 100) {
+      console.warn(`[ABUSE_MONITORING] Failed recruiter access attempt from IP: ${req.ip} at ${new Date().toISOString()}`);
+      return res.status(401).json({ error: "Access not recognized.", code: "INVALID_VALEN_ACCESS" });
+    }
+
+    const expectedCode = process.env.VALEN_RECRUITER_CODE;
+    if (!expectedCode) {
+      return res.status(503).json({ error: "Recruiter access is not configured on the server." });
+    }
+
+    try {
+      const codeHash = crypto.createHash('sha256').update(code).digest();
+      const expectedHash = crypto.createHash('sha256').update(expectedCode).digest();
+      if (!crypto.timingSafeEqual(codeHash, expectedHash)) {
+        console.warn(`[ABUSE_MONITORING] Failed recruiter access attempt from IP: ${req.ip} at ${new Date().toISOString()}`);
+        return res.status(401).json({ error: "Access not recognized.", code: "INVALID_VALEN_ACCESS" });
+      }
+    } catch (e) {
+      console.warn(`[ABUSE_MONITORING] Failed recruiter access attempt from IP: ${req.ip} at ${new Date().toISOString()}`);
+      return res.status(401).json({ error: "Access not recognized.", code: "INVALID_VALEN_ACCESS" });
+    }
+
+    const token = crypto.randomBytes(32).toString('hex');
+    const expiresAt = Date.now() + 2 * 60 * 60 * 1000;
+    
+    const now = Date.now();
+    for (const [key, session] of valenSessions.entries()) {
+      if (session.expiresAt < now) valenSessions.delete(key);
+    }
+
+    valenSessions.set(token, { expiresAt });
+
+    return res.json({ token, expiresAt: new Date(expiresAt).toISOString() });
+  });
+
+  function requireValenSession(req: any, res: any, next: any) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: "Recruiter access is required for live consultation.", code: "VALEN_ACCESS_REQUIRED" });
+    }
+
+    const token = authHeader.split(' ')[1];
+    const session = valenSessions.get(token);
+
+    const now = Date.now();
+    if (!session || session.expiresAt < now) {
+      if (session) valenSessions.delete(token);
+      return res.status(401).json({ error: "Recruiter access is required for live consultation.", code: "VALEN_ACCESS_REQUIRED" });
+    }
+
+    for (const [key, s] of valenSessions.entries()) {
+      if (s.expiresAt < now) valenSessions.delete(key);
+    }
+
+    next();
+  }
+
+  app.post('/api/chat', chatRateLimiter, checkDailyQuota, requireValenSession, async (req, res) => {
     if (!ai) {
       return res.status(500).json({ error: "Gemini API is not configured. Please set GEMINI_API_KEY in the environment." });
     }

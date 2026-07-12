@@ -85,6 +85,48 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
+  const [recruiterToken, setRecruiterToken] = useState<string | null>(() => sessionStorage.getItem('valen_recruiter_token'));
+  const [remainingCount, setRemainingCount] = useState<number>(recruiterToken ? 5 : 0);
+  const [isUnlocking, setIsUnlocking] = useState(false);
+  const [accessCode, setAccessCode] = useState('');
+  const [accessError, setAccessError] = useState('');
+  const [isConsultationComplete, setIsConsultationComplete] = useState(false);
+
+  const handleUnlock = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!accessCode.trim()) return;
+    
+    setAccessError('');
+    try {
+      const res = await fetch('/api/valen/access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: accessCode.trim() })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setAccessError(data.error || 'Access denied.');
+        return;
+      }
+      sessionStorage.setItem('valen_recruiter_token', data.token);
+      setRecruiterToken(data.token);
+      setRemainingCount(data.remaining);
+      setAccessCode('');
+      setIsUnlocking(false);
+      setIsConsultationComplete(false);
+    } catch (err) {
+      setAccessError('Failed to connect.');
+    }
+  };
+
+  const handlePreviewChoice = (choiceText: string, assistantResponse: string) => {
+    setMessages(prev => [
+      ...prev,
+      { id: Date.now().toString() + '-u', role: 'user', content: choiceText },
+      { id: Date.now().toString() + '-a', role: 'assistant', content: assistantResponse }
+    ]);
+  };
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -140,12 +182,54 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
     setIsLoading(true);
 
     try {
-      const projectContext = `Visitor is currently observing section: ${activeSection}\n\n` + PROJECTS.map(p => `${p.title} (${p.wing}): ${p.desc} [Tags: ${p.tags.join(', ')}]${(p as any).sourceLink ? ' [Source code available]' : ''}`).join('\n');
+      const normalizeText = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const recentUserMessages = [...messages, userMessage].filter(m => m.role === 'user').slice(-3);
+      const relevanceString = recentUserMessages.map(m => normalizeText(m.content)).join('');
+
+      const matchedProjects = PROJECTS.filter(p => {
+        const normalizedTitle = normalizeText(p.title);
+        return relevanceString.includes(normalizedTitle);
+      });
+
+      matchedProjects.sort((a, b) => {
+        const idxA = relevanceString.lastIndexOf(normalizeText(a.title));
+        const idxB = relevanceString.lastIndexOf(normalizeText(b.title));
+        return idxB - idxA;
+      });
+
+      const topMatchedProjects = matchedProjects.slice(0, 3);
+
+      const compactIndex = PROJECTS.map(p => {
+        const anyP = p as any;
+        let line = `- ${p.title} (${p.wing})`;
+        if (anyP.subtitle) line += `: ${anyP.subtitle}`;
+        if (p.tags && p.tags.length > 0) line += ` [Tags: ${p.tags.join(', ')}]`;
+        if (anyP.flagship) line += ` [Flagship${anyP.flagshipOrder ? ` ${anyP.flagshipOrder}` : ''}]`;
+        if (anyP.link) line += ` [Public link]`;
+        if (anyP.sourceLink) line += ` [Source/PDF link]`;
+        if (anyP.images && anyP.images.length > 0) line += ` [Images available]`;
+        return line;
+      }).join('\n');
+
+      let projectContext = `Visitor is currently observing section: ${activeSection}\n\n`;
+      projectContext += `COMPACT ARCHIVE INDEX\n${compactIndex}\n\n`;
+      
+      if (topMatchedProjects.length > 0) {
+        projectContext += `RELEVANT PROJECT DETAIL\n`;
+        projectContext += topMatchedProjects.map(p => `${p.title}:\n${p.desc}`).join('\n\n');
+      } else {
+        projectContext += `RELEVANT PROJECT DETAIL\nNo specific project detail was requested.`;
+      }
       const visitorMemory = await getVisitorMemory();
+
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (recruiterToken) {
+        headers['Authorization'] = `Bearer ${recruiterToken}`;
+      }
 
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
           messages: [...messages, userMessage].map(m => ({
             role: m.role,
@@ -156,7 +240,32 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
         }),
       });
 
+      const remainingHeader = response.headers.get('X-Valen-Remaining');
+      if (remainingHeader !== null) {
+        const remaining = parseInt(remainingHeader, 10);
+        setRemainingCount(remaining);
+        if (remaining <= 0) {
+          setIsConsultationComplete(true);
+          sessionStorage.removeItem('valen_recruiter_token');
+          setRecruiterToken(null);
+        }
+      }
+
       if (!response.ok) {
+        let errorData;
+        try { errorData = await response.json(); } catch(e) {}
+        
+        if (response.status === 401 && errorData?.code === 'VALEN_ACCESS_REQUIRED') {
+          sessionStorage.removeItem('valen_recruiter_token');
+          setRecruiterToken(null);
+          throw new Error('VALEN_ACCESS_REQUIRED');
+        } else if (response.status === 429 && errorData?.code === 'VALEN_SESSION_COMPLETE') {
+          setRemainingCount(0);
+          sessionStorage.removeItem('valen_recruiter_token');
+          setRecruiterToken(null);
+          setIsConsultationComplete(true);
+          throw new Error('VALEN_SESSION_COMPLETE');
+        }
         throw new Error('Failed to fetch response');
       }
 
@@ -385,18 +494,61 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
-            <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }} className="px-6 py-5 border-t border-[#111]">
-              <div className="relative flex items-center">
-                <input aria-label="Message Valen"
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="..."
-                  className="w-full bg-transparent border-none text-[13px] font-light tracking-wide text-[#F4EFE6] placeholder-[#333] focus:outline-none transition-all duration-300"
-                />
+            {/* Input or Access UI */}
+            {recruiterToken ? (
+              <>
+                {isConsultationComplete ? (
+                  <div className="px-6 py-5 border-t border-[#111] text-[#A59B8C] font-mono text-[10px] uppercase tracking-widest text-center">
+                    VΛLEN’s live consultation is complete. The archive remains available below.
+                  </div>
+                ) : (
+                  <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e); }} className="px-6 py-5 border-t border-[#111]">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-[#0F766E] font-mono text-[9px] uppercase tracking-[0.2em]">LIVE CONSULTATION · {remainingCount} MESSAGES</span>
+                    </div>
+                    <div className="relative flex items-center">
+                      <input aria-label="Message Valen"
+                        type="text"
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        placeholder="..."
+                        className="w-full bg-transparent border-none text-[13px] font-light tracking-wide text-[#F4EFE6] placeholder-[#333] focus:outline-none transition-all duration-300"
+                        disabled={isLoading}
+                      />
+                    </div>
+                  </form>
+                )}
+              </>
+            ) : (
+              <div className="px-6 py-5 border-t border-[#111]">
+                {!isUnlocking ? (
+                  <div className="space-y-4">
+                    <div className="flex flex-col gap-2">
+                      <button type="button" onClick={() => handlePreviewChoice("Where should I begin?", "Begin with K-ONSET for agency architecture, Echo Observatory for interpretability and epistemic restraint, or Gemini Inertia for persistent conversational state.\n\n[ARTIFACT:K-ONSET]\n[ARTIFACT:Echo Observatory]\n[ARTIFACT:Gemini Inertia]")} className="text-left px-4 py-2 border border-[#333] hover:border-[#A59B8C] text-[#A59B8C] hover:text-[#F4EFE6] text-[11px] font-mono tracking-widest uppercase transition-colors">Where should I begin?</button>
+                      <button type="button" onClick={() => handlePreviewChoice("Which projects are finished?", "Echo Observatory and Dark Velvet Topology are finished and live. Several other featured investigations are functional prototypes, active development projects, or architecture specifications.\n\n[ARTIFACT:Echo Observatory]\n[ARTIFACT:Dark Velvet Topology]")} className="text-left px-4 py-2 border border-[#333] hover:border-[#A59B8C] text-[#A59B8C] hover:text-[#F4EFE6] text-[11px] font-mono tracking-widest uppercase transition-colors">Which projects are finished?</button>
+                      <button type="button" onClick={() => handlePreviewChoice("What connects the work?", "The archive repeatedly asks what must be structurally true—not merely performed—before machine agency, continuity, memory, identity, or presence can become meaningful.\n\n[ARTIFACT:K-ONSET]\n[ARTIFACT:Vestige]\n[ARTIFACT:Gemini Inertia]")} className="text-left px-4 py-2 border border-[#333] hover:border-[#A59B8C] text-[#A59B8C] hover:text-[#F4EFE6] text-[11px] font-mono tracking-widest uppercase transition-colors">What connects the work?</button>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <button type="button" onClick={() => setIsUnlocking(true)} className="text-[#333] hover:text-[#0F766E] font-mono text-[9px] tracking-[0.2em] uppercase transition-colors">Recruiter Access</button>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleUnlock} className="flex flex-col gap-2 relative">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="password"
+                        value={accessCode}
+                        onChange={(e) => setAccessCode(e.target.value)}
+                        placeholder="Access Code"
+                        className="flex-1 bg-transparent border-b border-[#333] focus:border-[#0F766E] text-[13px] font-light text-[#F4EFE6] placeholder-[#333] focus:outline-none transition-all py-1"
+                      />
+                      <button type="submit" className="text-[#A59B8C] hover:text-[#F4EFE6] font-mono text-[9px] tracking-[0.2em] uppercase transition-colors border border-[#A59B8C] hover:border-[#F4EFE6] px-3 py-1.5">Unlock</button>
+                    </div>
+                    {accessError && <span className="text-[#B76E79] font-mono text-[9px] uppercase">{accessError}</span>}
+                  </form>
+                )}
               </div>
-            </form>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
