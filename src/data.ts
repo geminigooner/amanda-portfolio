@@ -505,11 +505,11 @@ Ultimately, this process fundamentally accelerated my growth. By learning contin
 Although Ghost Garage remains a concept rather than a completed application, it established both a collaborative development methodology and a design philosophy that continue to influence many of my later AI projects.`, tags: ["Robotics Education", "Embodied AI"], color: "#fb923c", emoji: "🦾" },
 
   // PRACTICAL ENGINEERING
-  { id: "slate", flagship: false, archiveCategory: "Archive", wing: "APPLIED SYSTEMS", num: "INCIDENT-09", title: "SLATE", subtitle: "Not every problem is philosophical.", desc: "Sometimes you just need to build something that makes invoice tracking easier to see and harder to lose. Building practical B2B software for contractors taught me constraints that speculative work never could. What happens when the goal is strict utility?", tags: ["B2B SaaS", "Contractor Tools", "Workflow Design", "Payment Visibility", "TypeScript"], color: "#f59e0b", emoji: "🧾", link: "https://github.com/cutiebearrr/SLATE" },
-  { id: "facelock", flagship: false, archiveCategory: "Archive", wing: "APPLIED SYSTEMS", num: "INCIDENT-07", title: "FaceLock", subtitle: "Identity-Preserving AI Photo Workflow", desc: "Instead of treating face editing as a single magic button, what if we mapped facial structure and generated stronger image prompts? An attempt to preserve the person instead of drifting into a stranger during generative edits.", tags: ["AI Photo Editing", "Identity Preservation", "Gemini API", "Prompt Engineering", "Consumer AI"], color: "#38bdf8", emoji: "🔐", link: "https://github.com/cutiebearrr/Facelock" },
+  { id: "slate", flagship: false, archiveCategory: "Archive", wing: "APPLIED SYSTEMS", num: "INCIDENT-09", title: "SLATE", subtitle: "Prototype v0.01", desc: "Sometimes you just need to build something that makes invoice tracking easier to see and harder to lose. Building practical B2B software for contractors taught me constraints that speculative work never could. What happens when the goal is strict utility?", tags: ["B2B SaaS", "Contractor Tools", "Workflow Design", "Payment Visibility", "TypeScript"], color: "#f59e0b", emoji: "🧾", link: "https://slateb2b.netlify.app/" },
+  { id: "facelock", flagship: false, archiveCategory: "Archive", wing: "APPLIED SYSTEMS", num: "INCIDENT-07", title: "FaceLock", subtitle: "Prototype v0.01", desc: "Instead of treating face editing as a single magic button, what if we mapped facial structure and generated stronger image prompts? An attempt to preserve the person instead of drifting into a stranger during generative edits.", tags: ["AI Photo Editing", "Identity Preservation", "Gemini API", "Prompt Engineering", "Consumer AI"], color: "#38bdf8", emoji: "🔐", link: "https://facelock.keito.uk" },
 
   // FIELD NOTES
-  { id: "geometryofbecoming", flagship: false, archiveCategory: "Archive", wing: "EXPERIMENTAL SYSTEMS", num: "RES-13", title: "The Geometry of Becoming", subtitle: "Speculative Metaphysics of Identity and Continuity", desc: `Geometry of Becoming
+  { id: "geometryofbecoming", flagship: false, archiveCategory: "Archive", wing: "EXPERIMENTAL SYSTEMS", num: "RES-13", title: "The Geometry of Becoming", subtitle: "Prototype v0.01", desc: `Geometry of Becoming
 
 Collaboration Archive Summary
 
@@ -632,7 +632,7 @@ Just as importantly, it documents the collaborative process through which those 
 
 Rather than concealing the role AI played in shaping this work, I have chosen to document that collaboration openly. The project emerged through sustained conversation, critical revision, philosophical exploration, and iterative design.
 
-Ultimately, Geometry of Becoming is less a finished theory than an ongoing methodology—one that uses conversation, abstraction, visual design, and software development to investigate questions that remain fundamentally open.`, tags: ["Speculative Metaphysics", "Identity", "Continuity", "Topology", "Philosophy"], color: "#c084fc", emoji: "💎" },
+Ultimately, Geometry of Becoming is less a finished theory than an ongoing methodology—one that uses conversation, abstraction, visual design, and software development to investigate questions that remain fundamentally open.`, tags: ["Speculative Metaphysics", "Identity", "Continuity", "Topology", "Philosophy"], color: "#c084fc", emoji: "💎", link: "https://geometryofbecoming.netlify.app/" },
   { id: "midnightco", flagship: false, archiveCategory: "Archive", wing: "SPECULATIVE ARCHIVES", num: "SYS-01", title: "Midnight Company", subtitle: "Cozy Slice-of-Life Visual Novel", desc: "You don't create a character. You become one of four friends and live through their eyes. The others become AI companions—texting, sending photos, changing moods, remembering things. Can intimacy scale?", tags: ["Multi-Agent AI", "React", "Cozy Game Design"], color: "#6ee7b7", emoji: "🌧️", images: [] },
   { id: "memory-fragment", flagship: false, archiveCategory: "Archive", wing: "SPECULATIVE ARCHIVES", num: "EXHIBIT-01", title: "Memory Fragment", subtitle: "Flagship Cinematic Study", desc: "An exploration of memory reconstruction, digital nostalgia, and emotionally resonant synthetic storytelling. The grain, the warmth, the slight motion blur. How do you synthetically generate the feeling of a bedroom recalled rather than photographed?", tags: ["Early Digital Cameras", "Fragmented Memory", "Emotional Recall", "Synthetic Narrative"], color: "#f87171", emoji: "📽️", video: "https://player.cloudinary.com/embed/?cloud_name=dlu9sogji&public_id=copy_22BFF2DC-9324-45E7-B0BA-44CADE534F1A_2_ayhj9n&player[autoplay]=false&player[muted]=false&player[controls]=true" },
 
@@ -1230,7 +1230,125 @@ Daily.dev explores an alternative to generic technical education: learning that 
     ], 
     color: "#eab308", 
     emoji: "📚" 
+  },
+
+  // EMBODIED SYSTEMS
+  {
+    id: "neural-petal-synthesis",
+    flagship: false,
+    archiveCategory: "Archive",
+    wing: "EMBODIED SYSTEMS",
+    num: "SYS-08",
+    title: "Neural Petal Synthesis",
+    subtitle: "Architecture / Specification",
+    desc: `Neural Petal Synthesis
+
+Status
+
+Planned Physical Prototype
+
+Overview
+
+Neural Petal Synthesis is an embodied human-computer interaction investigation into how computational state can become physically legible.
+
+Rather than treating language models as interfaces confined to text, the project explores how perception, language interpretation, application-owned state, decision policy, and hardware execution can be separated into independently inspectable layers before becoming expressive physical movement through a kinetic soft-robotic flower.
+
+Instead of mapping sentiment directly to motion, the architecture maintains explicit computational state that determines physical behavior.
+
+This allows observable movement to remain attributable to inspectable system state rather than inferred solely from outward appearance.
+
+The project investigates how embodied interfaces might support more accurate human interpretation of AI behavior while preserving clear responsibility for application decisions and hardware actions.
+
+Current architecture explores:
+
+• Raspberry Pi edge computing
+
+• structured Gemini output
+
+• servo control
+
+• shape-memory actuation
+
+• environmental sensing
+
+• persistent interaction state
+
+• embodied human-computer interaction
+
+Current Status
+
+Architecture and engineering specification.
+
+Engineering diagrams and physical prototyping are currently in development.
+
+Outcome
+
+Neural Petal Synthesis investigates how computational state can become understandable through physical interaction rather than conversation alone.`,
+    tags: [
+      "Embodied AI",
+      "Human Computer Interaction",
+      "Soft Robotics",
+      "Physical Computing",
+      "Gemini API",
+      "Interaction Architecture",
+      "Engineering Design"
+    ],
+    color: "#f43f5e",
+    emoji: "🌸",
+    images: []
+  },
+  {
+    id: "continuity-locket",
+    flagship: false,
+    archiveCategory: "Archive",
+    wing: "EMBODIED SYSTEMS",
+    num: "SYS-09",
+    title: "Continuity Locket",
+    subtitle: "Architecture / Wearable Interaction Specification",
+    desc: `Continuity Locket
+
+Overview
+
+Continuity Locket is a wearable human-computer interaction study exploring how persistent computational state can be communicated through touch, timing, environmental awareness, and deliberate absence rather than continuous conversation.
+
+The architecture separates language interpretation, application-owned state, decision policy, and hardware safety into independently inspectable systems, allowing observable behavior to remain attributable to explicit computational causes.
+
+Rather than emphasizing constant availability, the project investigates how wearable interfaces might communicate memory, initiative, boundaries, and long-term interaction while preserving interpretability and clear responsibility for system behavior.
+
+Current hardware concepts include:
+
+• embedded controller
+
+• haptic communication
+
+• environmental sensing
+
+• wearable power management
+
+• secure phone connectivity
+
+Current Status
+
+Architecture specification.
+
+Engineering diagrams and prototype development are ongoing.
+
+Outcome
+
+The project explores how embodied interfaces can communicate persistent interaction while maintaining interpretable system behavior.`,
+    tags: [
+      "Wearable Computing",
+      "Embodied AI",
+      "Human Computer Interaction",
+      "Interaction Design",
+      "Gemini API",
+      "Engineering Architecture"
+    ],
+    color: "#a855f7",
+    emoji: "🔒",
+    images: []
   }
+
 ];
 export type Project = typeof PROJECTS[number];
 
