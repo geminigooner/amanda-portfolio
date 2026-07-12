@@ -1135,7 +1135,69 @@ It is trying to determine what would have to be structurally true before agreeme
     ], 
     color: "#38bdf8", 
     emoji: "■■", 
-    images: [] 
+    images: [],
+    mediaGroups: [
+      {
+        title: "Prototype Video — Minjae",
+        video: "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/VIDEO/MSEEDANCE.MOV"
+      },
+      {
+        title: "Accessories Demonstration",
+        video: "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/VIDEO/MINJAEGEMINILONG.MOV"
+      },
+      {
+        title: "Prototype Video — Jinwoo",
+        video: "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/VIDEO/JINWOOSEEDANCE.MOV"
+      },
+      {
+        title: "Engineering Documentation",
+        images: [
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/ENGINEERING/VCORE%20FINAL.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/ENGINEERING/IDENTITY.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/ENGINEERING/MEMORYRELATIONSHIP.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/ENGINEERING/LIVINGWORLD.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/ENGINEERING/I-PIPELINE.PNG"
+        ]
+      },
+      {
+        title: "Agent Specifications",
+        images: [
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/MINJAE/MINJAEFULLSHEET.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/JINWOO/JINWOOFULLSHEET.PNG"
+        ]
+      },
+      {
+        title: "Behavior Reference — Minjae",
+        images: [
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/MINJAE/minjaeSELFIE.PNG"
+        ]
+      },
+      {
+        title: "Behavior Reference — Jinwoo",
+        images: [
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/JINWOO/JINWOOSELFIE.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/JINWOO/J-WELCOME.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/JINWOO/J-LAUGH.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/JINWOO/JINWOOWARM.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/JINWOO/J-TOUCHED.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/JINWOO/JINPERPLEX.PNG"
+        ]
+      },
+      {
+        title: "Environment Reference",
+        images: [
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/JINWOO/JINWOOROOMCONCEPT.PNG"
+        ]
+      },
+      {
+        title: "Multi-Agent Studies",
+        images: [
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/MXJ%20BOTH/JxMEMOTIONSHEET.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/MXJ%20BOTH/JXMCOZY.PNG",
+          "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/KONSET%20PHOTOS%20AND%20VIDEOS/MXJ%20BOTH/JXMCIRCLE.PNG"
+        ]
+      }
+    ]
   }
 ,
   { 
