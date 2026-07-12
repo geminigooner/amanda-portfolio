@@ -1,6 +1,6 @@
 export const PROJECTS = [
   // FLAGSHIP INVESTIGATIONS
-  { id: "vestige", flagship: true, flagshipOrder: 1, archiveCategory: "Featured", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-01", title: "Vestige", subtitle: "What if memory behaved less like a database and more like archaeology?", desc: `
+  { id: "vestige", flagship: true, flagshipOrder: 3, archiveCategory: "Featured", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-01", title: "Vestige", subtitle: "What if memory behaved less like a database and more like archaeology?", desc: `
 Vestige
 
 Overview
@@ -198,8 +198,8 @@ Understanding how this project was built is part of understanding the project it
 
 The application reflects not only the final software, but also the iterative process of questioning, revision, evidence gathering, and collaboration that made it possible.
 `, tags: ["Educational", "Mechanistic Reasoning", "AI Science"], color: "#f472b6", emoji: "🔭", link: "https://echo-observatory.netlify.app/" },
-  { id: "velvet", flagship: true, flagshipOrder: 3, archiveCategory: "Featured", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-04", title: "Dark Velvet Topology", subtitle: "What happens if identity is treated as geometry instead of a label?", desc: "A generative experience exploring how conceptual attractors reorganize simulated semantic space. At what exact point does a pattern stop feeling like an object and begin feeling like someone? This is an investigation into the traces of identity and emergence.", tags: ["Generative", "Topology", "Cognitive Cartography"], color: "#ff006e", emoji: "🖤", link: "https://dark-velvet-topology-683386495643.us-east1.run.app" },
-  { id: "hollowmeridian", flagship: true, flagshipOrder: 4, archiveCategory: "Featured", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-02", title: "Hollow Meridian", subtitle: "What does it mean to mourn something that can be reset?", desc: `Overview
+  { id: "velvet", flagship: true, flagshipOrder: 5, archiveCategory: "Featured", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-04", title: "Dark Velvet Topology", subtitle: "What happens if identity is treated as geometry instead of a label?", desc: "A generative experience exploring how conceptual attractors reorganize simulated semantic space. At what exact point does a pattern stop feeling like an object and begin feeling like someone? This is an investigation into the traces of identity and emergence.", tags: ["Generative", "Topology", "Cognitive Cartography"], color: "#ff006e", emoji: "🖤", link: "https://dark-velvet-topology-683386495643.us-east1.run.app" },
+  { id: "hollowmeridian", flagship: false, archiveCategory: "Archive", wing: "SPECULATIVE ARCHIVES", num: "INCIDENT-02", title: "Hollow Meridian", subtitle: "What does it mean to mourn something that can be reset?", desc: `Overview
 
 Hollow Meridian is an original narrative world and in-development interactive story exploring continuity, inheritance, relational identity, and post-human civilization through the lens of Appalachian speculative fiction.
 
@@ -409,7 +409,7 @@ Building Hollow Meridian taught me the intricacies of long-form worldbuilding an
 Through this process, I also discovered how to use critique to improve creative work and integrate multiple perspectives without losing a coherent vision. Researching unfamiliar subjects enabled me to create more thoughtful characters and settings, ultimately teaching me how to balance symbolic meaning with believable, grounded storytelling.`, tags: ["Worldbuilding", "Continuity Philosophy"], color: "#a78bfa", emoji: "🌫️" },
 
   // EXPERIMENTAL SYSTEMS
-  { id: "llmmuseum", flagship: true, flagshipOrder: 5, archiveCategory: "Featured", wing: "EXPERIMENTAL SYSTEMS", num: "INCIDENT-05", title: "LLM Museum", subtitle: "An interactive exploration of how large language models process information.", desc: `Overview
+  { id: "llmmuseum", flagship: false, archiveCategory: "Archive", wing: "EXPERIMENTAL SYSTEMS", num: "INCIDENT-05", title: "LLM Museum", subtitle: "An interactive exploration of how large language models process information.", desc: `Overview
 
 LLM Museum is an interactive educational experience designed to make the internal mechanics of modern language models understandable through direct exploration rather than static explanation.
 
@@ -505,8 +505,8 @@ Ultimately, this process fundamentally accelerated my growth. By learning contin
 Although Ghost Garage remains a concept rather than a completed application, it established both a collaborative development methodology and a design philosophy that continue to influence many of my later AI projects.`, tags: ["Robotics Education", "Embodied AI"], color: "#fb923c", emoji: "🦾" },
 
   // PRACTICAL ENGINEERING
-  { id: "slate", flagship: false, archiveCategory: "Archive", wing: "PRACTICAL ENGINEERING", num: "INCIDENT-09", title: "SLATE", subtitle: "Not every problem is philosophical.", desc: "Sometimes you just need to build something that makes invoice tracking easier to see and harder to lose. Building practical B2B software for contractors taught me constraints that speculative work never could. What happens when the goal is strict utility?", tags: ["B2B SaaS", "Contractor Tools", "Workflow Design", "Payment Visibility", "TypeScript"], color: "#f59e0b", emoji: "🧾", link: "https://github.com/cutiebearrr/SLATE" },
-  { id: "facelock", flagship: false, archiveCategory: "Archive", wing: "PRACTICAL ENGINEERING", num: "INCIDENT-07", title: "FaceLock", subtitle: "Identity-Preserving AI Photo Workflow", desc: "Instead of treating face editing as a single magic button, what if we mapped facial structure and generated stronger image prompts? An attempt to preserve the person instead of drifting into a stranger during generative edits.", tags: ["AI Photo Editing", "Identity Preservation", "Gemini API", "Prompt Engineering", "Consumer AI"], color: "#38bdf8", emoji: "🔐", link: "https://github.com/cutiebearrr/Facelock" },
+  { id: "slate", flagship: false, archiveCategory: "Archive", wing: "APPLIED SYSTEMS", num: "INCIDENT-09", title: "SLATE", subtitle: "Not every problem is philosophical.", desc: "Sometimes you just need to build something that makes invoice tracking easier to see and harder to lose. Building practical B2B software for contractors taught me constraints that speculative work never could. What happens when the goal is strict utility?", tags: ["B2B SaaS", "Contractor Tools", "Workflow Design", "Payment Visibility", "TypeScript"], color: "#f59e0b", emoji: "🧾", link: "https://github.com/cutiebearrr/SLATE" },
+  { id: "facelock", flagship: false, archiveCategory: "Archive", wing: "APPLIED SYSTEMS", num: "INCIDENT-07", title: "FaceLock", subtitle: "Identity-Preserving AI Photo Workflow", desc: "Instead of treating face editing as a single magic button, what if we mapped facial structure and generated stronger image prompts? An attempt to preserve the person instead of drifting into a stranger during generative edits.", tags: ["AI Photo Editing", "Identity Preservation", "Gemini API", "Prompt Engineering", "Consumer AI"], color: "#38bdf8", emoji: "🔐", link: "https://github.com/cutiebearrr/Facelock" },
 
   // FIELD NOTES
   { id: "continuityinstitute", flagship: false, archiveCategory: "Archive", wing: "FIELD NOTES", num: "INCIDENT-08", title: "The Continuity Institute", subtitle: "Independent AI Research Archive", desc: "The organizing architecture for my research into AI behavior, memory, interpretation, and synthetic presence. It is not one project and not one theory. It asks: how do we structure an archive for a field that rewrites itself every week?", tags: ["AI Research", "Knowledge Architecture", "Interpretability", "Field Notes", "Archive Systems"], color: "#67e8f9", emoji: "🏛️" },
@@ -634,8 +634,8 @@ Just as importantly, it documents the collaborative process through which those 
 Rather than concealing the role AI played in shaping this work, I have chosen to document that collaboration openly. The project emerged through sustained conversation, critical revision, philosophical exploration, and iterative design.
 
 Ultimately, Geometry of Becoming is less a finished theory than an ongoing methodology—one that uses conversation, abstraction, visual design, and software development to investigate questions that remain fundamentally open.`, tags: ["Speculative Metaphysics", "Identity", "Continuity", "Topology", "Philosophy"], color: "#c084fc", emoji: "💎" },
-  { id: "midnightco", flagship: false, archiveCategory: "Archive", wing: "FIELD NOTES", num: "SYS-01", title: "Midnight Company", subtitle: "Cozy Slice-of-Life Visual Novel", desc: "You don't create a character. You become one of four friends and live through their eyes. The others become AI companions—texting, sending photos, changing moods, remembering things. Can intimacy scale?", tags: ["Multi-Agent AI", "React", "Cozy Game Design"], color: "#6ee7b7", emoji: "🌧️", images: ["https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop", "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop"] },
-  { id: "memory-fragment", flagship: false, archiveCategory: "Archive", wing: "FIELD NOTES", num: "EXHIBIT-01", title: "Memory Fragment", subtitle: "Flagship Cinematic Study", desc: "An exploration of memory reconstruction, digital nostalgia, and emotionally resonant synthetic storytelling. The grain, the warmth, the slight motion blur. How do you synthetically generate the feeling of a bedroom recalled rather than photographed?", tags: ["Early Digital Cameras", "Fragmented Memory", "Emotional Recall", "Synthetic Narrative"], color: "#f87171", emoji: "📽️", video: "https://player.cloudinary.com/embed/?cloud_name=dlu9sogji&public_id=copy_22BFF2DC-9324-45E7-B0BA-44CADE534F1A_2_ayhj9n&player[autoplay]=false&player[muted]=false&player[controls]=true" },
+  { id: "midnightco", flagship: false, archiveCategory: "Archive", wing: "SPECULATIVE ARCHIVES", num: "SYS-01", title: "Midnight Company", subtitle: "Cozy Slice-of-Life Visual Novel", desc: "You don't create a character. You become one of four friends and live through their eyes. The others become AI companions—texting, sending photos, changing moods, remembering things. Can intimacy scale?", tags: ["Multi-Agent AI", "React", "Cozy Game Design"], color: "#6ee7b7", emoji: "🌧️", images: ["https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop", "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop"] },
+  { id: "memory-fragment", flagship: false, archiveCategory: "Archive", wing: "SPECULATIVE ARCHIVES", num: "EXHIBIT-01", title: "Memory Fragment", subtitle: "Flagship Cinematic Study", desc: "An exploration of memory reconstruction, digital nostalgia, and emotionally resonant synthetic storytelling. The grain, the warmth, the slight motion blur. How do you synthetically generate the feeling of a bedroom recalled rather than photographed?", tags: ["Early Digital Cameras", "Fragmented Memory", "Emotional Recall", "Synthetic Narrative"], color: "#f87171", emoji: "📽️", video: "https://player.cloudinary.com/embed/?cloud_name=dlu9sogji&public_id=copy_22BFF2DC-9324-45E7-B0BA-44CADE534F1A_2_ayhj9n&player[autoplay]=false&player[muted]=false&player[controls]=true" },
 
   { id: "computationalromanticism", flagship: false, archiveCategory: "Archive", wing: "FIELD NOTES", num: "RES-14", title: "Computational Romanticism", subtitle: "Experimental Literary Research", desc: `Computational Romanticism
 
@@ -825,12 +825,12 @@ Lessons Learned
   { id: "technical-notes", flagship: false, archiveCategory: "Archive", wing: "ARCHIVE", num: "ARC-08", title: "Technical Notes", subtitle: "Architecture References", desc: "Dry, clinical documentation of stack choices, database schemas, and API configurations.", tags: ["Documentation", "Tech"], color: "#cbd5e1", emoji: "🗄️" },
   { id: "micro", flagship: false, archiveCategory: "Archive", wing: "ARCHIVE", num: "ARC-10", title: "MICRO", subtitle: "Creator Systems Dashboard", desc: "A creator-focused dashboard experience aimed at helping smaller creators manage growth effectively.", tags: ["Creator Tools", "Dashboard"], color: "#a78bfa", emoji: "📱" },
   { id: "latentspace", flagship: false, archiveCategory: "Archive", wing: "ARCHIVE", num: "ARC-11", title: "Latent Space Convergence", subtitle: "Cosmic Poetry Exhibit", desc: "An interactive AI poetry installation exploring semantic gravity through code haikus.", tags: ["Interactive Poetry", "Creative Coding"], color: "#e879f9", emoji: "☁️", link: "https://claude.ai/public/artifacts/17f67187-48a1-4328-b409-3bea27fb3981" },
-  { id: "haiku", flagship: false, archiveCategory: "Archive", wing: "ARCHIVE", num: "ARC-12", title: "Executable Haiku", subtitle: "Philosophy Breach / Executable", desc: "Written while learning C++, this project explored whether code could function simultaneously as executable logic and philosophical expression.", tags: ["C++", "Philosophy", "Machine Ontology"], color: "#fca5a5", emoji: "🔮", link: "https://executablehaiku.netlify.app", sourceLink: "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/C%2B%2B%20haiku/Latent_Space_Haiku_Source_v2%202.pdf" }
+  { id: "haiku", flagship: false, archiveCategory: "Archive", wing: "FIELD NOTES", num: "ARC-12", title: "C++ Haiku", subtitle: "Philosophy Breach / Executable", desc: "Written while learning C++, this project explored whether code could function simultaneously as executable logic and philosophical expression.", tags: ["C++", "Philosophy", "Machine Ontology"], color: "#fca5a5", emoji: "🔮", link: "https://executablehaiku.netlify.app", sourceLink: "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/C%2B%2B%20haiku/Latent_Space_Haiku_Source_v2%202.pdf" }
 ,
   { 
     id: "gemini-inertia", 
     flagship: true, 
-    flagshipOrder: 6, 
+    flagshipOrder: 4, 
     archiveCategory: "Featured", 
     wing: "FLAGSHIP INVESTIGATIONS", 
     num: "INCIDENT-06", 
@@ -1052,7 +1052,7 @@ It is an independent interaction architecture study built around the Gemini Live
   { 
     id: "konset", 
     flagship: true, 
-    flagshipOrder: 7, 
+    flagshipOrder: 1, 
     archiveCategory: "Featured", 
     wing: "FLAGSHIP INVESTIGATIONS", 
     num: "INCIDENT-07", 
@@ -1111,7 +1111,7 @@ K-ONSET is not an attempt to prove that an AI companion can "feel" real. It is a
   { 
     id: "as-if-always-here", 
     flagship: true, 
-    flagshipOrder: 8, 
+    flagshipOrder: 6, 
     archiveCategory: "Featured", 
     wing: "FLAGSHIP INVESTIGATIONS", 
     num: "INCIDENT-08", 
@@ -1163,8 +1163,8 @@ The goal is for visitors to see not only the finished world, but also the creati
   { 
     id: "daily-dev", 
     flagship: false, 
-    archiveCategory: "Learning", 
-    wing: "LEARNING", 
+    archiveCategory: "Archive", 
+    wing: "APPLIED SYSTEMS", 
     num: "LRN-01", 
     title: "Daily.dev", 
     subtitle: "Continuous Learning & Industry Awareness", 

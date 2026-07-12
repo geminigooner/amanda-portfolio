@@ -196,7 +196,26 @@ export default function App() {
   const flagshipProjects = PROJECTS.filter(p => p.flagship).sort((a, b) => (a.flagshipOrder || 0) - (b.flagshipOrder || 0));
   
   const archiveProjects = PROJECTS.filter(p => !p.flagship);
-  const archiveWings = [...new Set(archiveProjects.map(p => p.wing))];
+  
+  const WING_ORDER = [
+    "EXPERIMENTAL SYSTEMS",
+    "APPLIED SYSTEMS",
+    "FIELD NOTES",
+    "SPECULATIVE ARCHIVES",
+    "BROWSER LAB",
+    "GALLERY",
+    "ARCHIVE"
+  ];
+  
+  const archiveWings = [...new Set(archiveProjects.map(p => p.wing))].sort((a, b) => {
+    const indexA = WING_ORDER.indexOf(a);
+    const indexB = WING_ORDER.indexOf(b);
+    if (indexA === -1 && indexB === -1) return 0;
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
+
 
   return (
     <MotionConfig reducedMotion="user">
