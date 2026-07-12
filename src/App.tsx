@@ -311,19 +311,19 @@ export default function App() {
         ) : (
           <>
             {/* ENTRANCE */}
-            <header id="hero" className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 max-w-7xl mx-auto relative pt-24 pb-32 md:pt-20 md:pb-10">
+            <header id="hero" className="min-h-[100dvh] flex flex-col px-6 md:px-12 max-w-7xl mx-auto relative pt-24 pb-32 md:pt-20 md:pb-10">
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 2, ease: "easeOut" }}
-                className="flex flex-col max-w-4xl"
+                className="flex flex-col max-w-4xl my-auto"
               >
                 <h1 className="font-display text-3xl md:text-6xl text-[#F4EFE6] tracking-tight leading-[1.05] mb-8 md:mb-12 opacity-80">
                   The Archive
                 </h1>
                 
                 <p className="font-sans text-[1.15rem] leading-[1.6] md:text-3xl font-light text-[#F4EFE6] md:leading-relaxed max-w-3xl mb-8 md:mb-16">
-                  This archive began as a series of conversations. Over time, those conversations became software—not because I set out to build applications, but because some questions can only be explored by building the systems they describe.
+                  Since late April 2026, I've designed, built, and iteratively rebuilt these systems while learning modern AI-assisted software development from nothing—working almost entirely from an iPhone, in collaboration with multiple AI systems taking on distinct roles across architecture, implementation, and critique. Building became the method, not just the outcome. Some questions about AI behavior are easier to investigate by constructing a system than by discussing one.
                 </p>
 
                 <motion.div 
@@ -333,16 +333,13 @@ export default function App() {
                   className="font-sans text-[1.1rem] leading-[1.65] md:text-xl font-light text-[#D8CFC0] md:leading-relaxed max-w-2xl mb-16 md:mb-24 space-y-4 md:space-y-6"
                 >
                   <p>
-                    Every project in this archive was conceived, designed, and developed after I began learning modern AI-assisted software development in late April 2026. I built these projects almost entirely from an iPhone, using AI collaborators to learn unfamiliar domains, test ideas, and rapidly iterate on working systems. Rather than waiting for ideal tools or experience, I treated every project as an opportunity to learn by building.
+                    These projects sit at the intersection of human–computer interaction, interaction architecture, and what I'd call <em>behavioral interpretability</em>—making AI behavior easier to inspect and reason about through application architecture, rather than through access to internal model reasoning.
                   </p>
                   <p>
-                    I've become increasingly interested in construction as a form of inquiry. Every system embodies assumptions. Every interface encourages particular ways of thinking. Ideas that appear coherent in conversation often become more precise—or fall apart entirely—when they must exist as working software.
+                    The recurring move across the archive is a deliberate separation: model-generated behavior on one side, application-owned state on the other. Relationships, environmental continuity, memory, and decision rights are handled by explicit software architecture rather than left implicit inside the language model. That separation doesn't make an AI system's behavior more accurate—it makes the mechanisms producing that behavior more legible and attributable, which is a more modest and more defensible claim, and the one I actually care about.
                   </p>
                   <p>
-                    The projects collected here explore AI, interpretability, agency, worldbuilding, interaction design, and computational philosophy. They are less about demonstrating expertise than documenting the process of acquiring it through research, experimentation, and implementation.
-                  </p>
-                  <p>
-                    This archive is an ongoing record of that process.
+                    Individually, the projects range across persistent agent architectures, real-time interaction systems, and environmental memory design. Together, they investigate one recurring question from several directions: what kinds of application architecture are necessary before memory, presence, or agency emerge as coherent properties of an interactive system? Rather than locating those properties inside the language model itself, the work explores how explicit state, persistence, embodiment, and interaction architecture contribute to them. Each project answers a version of that question with a working system rather than a proposal—the goal isn't a definitive answer, but architectures that make these questions easier to investigate, evaluate, and reason about.
                   </p>
                 </motion.div>
                 
