@@ -1159,9 +1159,34 @@ The goal is for visitors to see not only the finished world, but also the creati
     color: "#059669", 
     emoji: "🌲", 
     images: [] 
+  },
+  { 
+    id: "daily-dev", 
+    flagship: false, 
+    archiveCategory: "Learning", 
+    wing: "LEARNING", 
+    num: "LRN-01", 
+    title: "Daily.dev", 
+    subtitle: "Continuous Learning & Industry Awareness", 
+    desc: `Overview
+
+Daily.dev is one of the primary resources I use to build my software engineering and machine learning foundation.
+
+Since beginning my programming journey in late April 2026, I've used it as part of my daily learning routine to reinforce programming concepts, stay current with software engineering articles, and gradually build familiarity with the broader development ecosystem.
+
+Rather than relying on a single course or curriculum, I intentionally combine Daily.dev with documentation, research papers, engineering blogs, open-source projects, and hands-on experimentation. My learning process emphasizes building real projects while studying the underlying concepts that make them work.
+
+This resource represents one part of my commitment to continuous, self-directed learning alongside the portfolio projects documented throughout this archive.`, 
+    tags: [
+      "Learning",
+      "Software Engineering",
+      "Habits",
+      "Industry Context"
+    ], 
+    color: "#eab308", 
+    emoji: "📚" 
   }
 ];
-
 export type Project = typeof PROJECTS[number];
 
 export const MUSIC = [
