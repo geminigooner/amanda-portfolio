@@ -1017,7 +1017,16 @@ It is an independent interaction architecture study built around the Gemini Live
     ], 
     color: "#7c3aed", 
     emoji: "◇", 
-    images: [] 
+    video: "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/GEMINI%20INERTIA/video/copy_B18C164A-201F-4752-841A-E68EC5DAE4CB.mov",
+    images: [
+      "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/GEMINI%20INERTIA/diagram/8DB3295E-EA39-46DE-A0DF-08E101844897.png",
+      "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/GEMINI%20INERTIA/diagram/3FC18C0C-B8BE-4722-B5BD-8B1625C50CC9.png",
+      "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/GEMINI%20INERTIA/diagram/DC209ABF-0EF7-4B2A-9900-2C300B29F5AC.png",
+      "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/GEMINI%20INERTIA/diagram/BC89F8DE-22D6-43BA-8325-2FE0B4106A60.png",
+      "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/GEMINI%20INERTIA/diagram/F858F23C-FA91-44AD-8454-FE9743415859.png",
+      "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/GEMINI%20INERTIA/diagram/0B4C20F4-E4B9-4215-9B8A-EA96778B9C51.png",
+      "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/GEMINI%20INERTIA/diagram/2B74F891-E7F7-42B9-AB06-43962CB37A80.png"
+    ]
   }
 ,
   { 

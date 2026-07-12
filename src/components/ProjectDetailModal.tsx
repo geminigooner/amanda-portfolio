@@ -12,6 +12,33 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
   const [isMagnifying, setIsMagnifying] = useState(false);
   const [magnifierPosition, setMagnifierPosition] = useState({ x: 0, y: 0 });
 
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) {
+      nextImage();
+    }
+    if (isRightSwipe) {
+      prevImage();
+    }
+  };
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -26,7 +53,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
     setIsMagnifying(false);
   }, [project]);
 
-  const nextImage = (e?: React.MouseEvent) => {
+  const nextImage = (e?: React.MouseEvent | React.TouchEvent) => {
     e?.stopPropagation();
     if (project?.images) {
       setCurrentImageIndex((prev) => (prev + 1) % project.images!.length);
@@ -34,7 +61,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
     }
   };
 
-  const prevImage = (e?: React.MouseEvent) => {
+  const prevImage = (e?: React.MouseEvent | React.TouchEvent) => {
     e?.stopPropagation();
     if (project?.images) {
       setCurrentImageIndex((prev) => (prev - 1 + project.images!.length) % project.images!.length);
@@ -105,69 +132,85 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
             <div className={`p-6 md:p-10 flex flex-col gap-8 ${((project.images && project.images.length > 0) || project.video) ? 'lg:flex-row' : ''}`}>
               {/* Media Section */}
               {((project.images && project.images.length > 0) || project.video) && (
-                <div className="w-full lg:w-1/2 flex flex-col gap-4">
-                  {project.video ? (
-                    <div className="relative aspect-video rounded-sm overflow-hidden border border-[#111] bg-[#111]">
-                      <iframe
-                        src={project.video}
-                        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                        allowFullScreen
-                        frameBorder="0"
-                        className="absolute inset-0 w-full h-full"
-                      />
-                    </div>
-                  ) : (
-                    <div 
-                      className="relative aspect-video rounded-sm overflow-hidden border border-[#111] group bg-[#111] flex items-center justify-center cursor-crosshair"
-                      onMouseEnter={() => setIsMagnifying(true)}
-                      onMouseLeave={() => setIsMagnifying(false)}
-                      onMouseMove={handleMouseMove}
-                    >
-                      <AnimatePresence mode="wait">
-                        <motion.img
-                          key={currentImageIndex}
-                          src={project.images![currentImageIndex]}
-                          alt={`${project.title} screenshot ${currentImageIndex + 1}`}
-                          initial={{ opacity: 0, scale: 1.05 }}
-                          animate={{ 
-                            opacity: 1, 
-                            scale: isMagnifying ? 2 : 1,
-                          }}
-                          style={{
-                            transformOrigin: isMagnifying ? `${magnifierPosition.x}% ${magnifierPosition.y}%` : 'center'
-                          }}
-                          exit={{ opacity: 0, scale: 0.95 }}
-                          transition={{ duration: isMagnifying ? 0 : 0.3 }}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      </AnimatePresence>
-                      
-                      {project.images!.length > 1 && (
-                        <>
-                          <button 
-                            onClick={prevImage}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 border border-white/10 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur opacity-0 group-hover:opacity-100 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:opacity-100" aria-label="Previous image"
-                          >
-                            <ChevronLeft aria-hidden="true" className="w-5 h-5" />
-                          </button>
-                          <button 
-                            onClick={nextImage}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 border border-white/10 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur opacity-0 group-hover:opacity-100 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:opacity-100" aria-label="Next image"
-                          >
-                            <ChevronRight aria-hidden="true" className="w-5 h-5" />
-                          </button>
-                          
-                          <div className="absolute bottom-3 left-1/2 -translate-y-0 -translate-x-1/2 flex gap-1.5 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur border border-white/10">
-                            {project.images!.map((_, idx) => (
-                              <div 
-                                key={idx} 
-                                className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-white' : 'bg-white/30'}`} 
-                              />
-                            ))}
-                          </div>
-                        </>
+                <div className="w-full lg:w-1/2 flex flex-col gap-8">
+                  {project.video && (
+                    <div className="flex flex-col gap-3">
+                      {project.images && project.images.length > 0 && (
+                        <div className="font-mono text-[10px] tracking-widest text-[#A59B8C] uppercase">Video Overview</div>
                       )}
+                      <div className="relative aspect-video rounded-sm overflow-hidden border border-[#111] bg-[#111]">
+                        <iframe
+                          src={project.video}
+                          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                          allowFullScreen
+                          frameBorder="0"
+                          className="absolute inset-0 w-full h-full"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {project.images && project.images.length > 0 && (
+                    <div className="flex flex-col gap-3">
+                      {project.video && (
+                        <div className="font-mono text-[10px] tracking-widest text-[#A59B8C] uppercase">Engineering Diagrams</div>
+                      )}
+                      <div className="relative group/carousel">
+                        <div 
+                          className="relative aspect-video rounded-sm overflow-hidden border border-[#111] bg-[#111] flex items-center justify-center cursor-crosshair touch-pan-y"
+                          onMouseEnter={() => setIsMagnifying(true)}
+                          onMouseLeave={() => setIsMagnifying(false)}
+                          onMouseMove={handleMouseMove}
+                          onTouchStart={onTouchStart}
+                          onTouchMove={onTouchMove}
+                          onTouchEnd={onTouchEnd}
+                        >
+                          <AnimatePresence mode="wait">
+                            <motion.img
+                              key={currentImageIndex}
+                              src={project.images![currentImageIndex]}
+                              alt={`${project.title} screenshot ${currentImageIndex + 1}`}
+                              initial={{ opacity: 0, scale: 1.05 }}
+                              animate={{ 
+                                 opacity: 1, 
+                                 scale: isMagnifying ? 2 : 1,
+                              }}
+                              style={{
+                                transformOrigin: isMagnifying ? `${magnifierPosition.x}% ${magnifierPosition.y}%` : 'center'
+                              }}
+                              exit={{ opacity: 0, scale: 0.95 }}
+                              transition={{ duration: isMagnifying ? 0 : 0.3 }}
+                              className="w-full h-full object-contain"
+                              loading="lazy"
+                            />
+                          </AnimatePresence>
+                        </div>
+                        
+                        {project.images!.length > 1 && (
+                          <>
+                            <button 
+                              onClick={prevImage}
+                              className="absolute -left-3 md:-left-5 top-[calc(50%-1.5rem)] md:top-[calc(50%-2rem)] p-2 rounded-full bg-black border border-white/10 text-white/70 hover:text-white hover:bg-[#222] shadow-xl opacity-100 md:opacity-0 md:group-hover/carousel:opacity-100 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:opacity-100 z-10" aria-label="Previous image"
+                            >
+                              <ChevronLeft aria-hidden="true" className="w-5 h-5" />
+                            </button>
+                            <button 
+                              onClick={nextImage}
+                              className="absolute -right-3 md:-right-5 top-[calc(50%-1.5rem)] md:top-[calc(50%-2rem)] p-2 rounded-full bg-black border border-white/10 text-white/70 hover:text-white hover:bg-[#222] shadow-xl opacity-100 md:opacity-0 md:group-hover/carousel:opacity-100 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:opacity-100 z-10" aria-label="Next image"
+                            >
+                              <ChevronRight aria-hidden="true" className="w-5 h-5" />
+                            </button>
+                            
+                            <div className="flex justify-center gap-1.5 mt-3 mb-1">
+                              {project.images!.map((_, idx) => (
+                                <div 
+                                  key={idx} 
+                                  className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-white' : 'bg-white/30'}`} 
+                                />
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
