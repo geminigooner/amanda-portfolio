@@ -1,4 +1,6 @@
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+const fs = require('fs');
+
+const newContent = `import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { useEffect, useState, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { PROJECTS, type Project } from '../data';
@@ -67,7 +69,7 @@ function ProjectMediaGallery({
           <motion.img
             key={currentImageIndex}
             src={images[currentImageIndex]}
-            alt={`${title} screenshot ${currentImageIndex + 1}`}
+            alt={\`\${title} screenshot \${currentImageIndex + 1}\`}
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -108,7 +110,7 @@ function ProjectMediaGallery({
             {images.map((_, idx) => (
               <div
                 key={idx} 
-                className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-white' : 'bg-white/30'}`} 
+                className={\`w-1.5 h-1.5 rounded-full transition-colors \${idx === currentImageIndex ? 'bg-white' : 'bg-white/30'}\`} 
               />
             ))}
           </div>
@@ -262,7 +264,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
             </div>
 
             {/* Content */}
-            <div className={`flex-1 overflow-y-auto p-6 md:p-8 flex flex-col ${hasAnyMedia ? 'lg:flex-row' : ''} gap-12 lg:gap-16 scroll-smooth`}>
+            <div className={\`flex-1 overflow-y-auto p-6 md:p-8 flex flex-col \${hasAnyMedia ? 'lg:flex-row' : ''} gap-12 lg:gap-16 scroll-smooth\`}>
               {/* Media Section */}
               {hasAnyMedia && (
                 <div className="w-full lg:w-1/2 flex flex-col gap-10">
@@ -297,7 +299,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
               )}
 
               {/* Text Section */}
-              <div className={`flex flex-col gap-8 ${hasAnyMedia ? 'w-full lg:w-1/2' : 'w-full'}`}>
+              <div className={\`flex flex-col gap-8 \${hasAnyMedia ? 'w-full lg:w-1/2' : 'w-full'}\`}>
                 <div>
                   <h3 className="font-mono text-sm tracking-widest uppercase mb-4" style={{ color: project.color }}>
                     "{project.subtitle}"
@@ -381,9 +383,9 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
               onTouchEnd={onLightboxTouchEnd}
             >
               <motion.img
-                key={`lightbox-${lightboxIndex}`}
+                key={\`lightbox-\${lightboxIndex}\`}
                 src={lightboxGroup.images[lightboxIndex]}
-                alt={`${lightboxGroup.title} screenshot ${lightboxIndex + 1} full`}
+                alt={\`\${lightboxGroup.title} screenshot \${lightboxIndex + 1} full\`}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
@@ -414,7 +416,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                     <button
                       key={idx} 
                       onClick={(e) => { e.stopPropagation(); setLightboxIndex(idx); playHoverSound(); }}
-                      className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-colors ${idx === lightboxIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/50'}`} 
+                      className={\`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-colors \${idx === lightboxIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/50'}\`} 
                     />
                   ))}
                 </div>
@@ -426,3 +428,6 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
     </AnimatePresence>
   );
 }
+`;
+
+fs.writeFileSync('src/components/ProjectDetailModal.tsx', newContent);

@@ -1359,7 +1359,13 @@ The project explores how embodied interfaces can communicate persistent interact
   }
 
 ];
-export type Project = typeof PROJECTS[number];
+export interface MediaGroup {
+  title: string;
+  video?: string;
+  images?: string[];
+}
+
+export type Project = typeof PROJECTS[number] & { mediaGroups?: MediaGroup[] };
 
 export const MUSIC = [
   {
