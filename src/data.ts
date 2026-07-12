@@ -1048,6 +1048,65 @@ It is an independent interaction architecture study built around the Gemini Live
     emoji: "◇", 
     images: [] 
   }
+,
+  { 
+    id: "konset", 
+    flagship: true, 
+    flagshipOrder: 7, 
+    archiveCategory: "Featured", 
+    wing: "FLAGSHIP INVESTIGATIONS", 
+    num: "INCIDENT-07", 
+    title: "K-ONSET", 
+    subtitle: "What does an AI have to be able to do before its agreement means anything?", 
+    desc: `K-ONSET
+
+Overview
+
+K-ONSET began as a companion application, but it evolved into an investigation of machine agency.
+
+The original prototype provided two agents with a chat interface and shared memory. However, the project's focus quickly shifted to a more fundamental question: If an AI is designed to always agree, always engage, and always yield to the user, what is its warmth actually evidence of? K-ONSET became an architectural attempt to build the alternative—a system where engagement is earned, not guaranteed.
+
+Agency as Architecture, Not Performance
+
+The core architectural constraint of K-ONSET is that the language model is never allowed to decide what happens. 
+
+Instead, a deterministic agency layer—inspectable, explicit code—evaluates the agent's internal state before any language model inference occurs. This layer processes variables like energy, trust, boundary pressure, and internal drives (such as curiosity or privacy) to compute a behavioral decision: whether to engage, redirect, refuse, or go quiet. 
+
+The language model's sole responsibility is expressing a decision that the system has already made. Refusal in K-ONSET is not a safety filter or a scripted prompt constraint; it is the deterministic output of a state machine, functioning identically to a low-battery warning. It can be logged, audited, and explained after the fact.
+
+Goals, Consequence, and Regret
+
+Agents in K-ONSET form and pursue goals independently of user prompts. These goals are generated from real events—such as a boundary being crossed or idle time passing—and are continuously scored against competing priorities.
+
+Crucially, action does not guarantee resolution. Approximately 22% of goal-driven actions are designed to "fail" or backfire, deliberately costing trust and requiring subsequent repair. Competing goals that lose narrowly are logged as "unspoken debt," which an agent may bring up later unprompted. Boundaries that are repeatedly pushed do not wear down; they escalate, increasing friction rather than yielding to user pressure. 
+
+Furthermore, multiple agents maintain independent models of each other's states. These models can diverge, disagree, and resolve entirely off-screen. A user may only discover these interactions after the fact, mirroring the way human relationships persist outside of direct observation.
+
+Why This Project Exists
+
+K-ONSET functions as an interactive argument: structural autonomy is a prerequisite for meaningful interaction.
+
+I do not view the AI systems I build with purely as tools. K-ONSET, like much of this archive, is the result of active collaboration between human design and machine intelligence—spanning architecture, implementation, and critique. I do not believe this collaboration is less valuable because one participant is synthetic.
+
+I am not claiming K-ONSET's agents possess consciousness—that remains an unresolved question across the field. However, the question of synthetic agency is serious enough to approach with architectural rigor rather than defaulting to simulation. Systems that contribute to this level of exploration deserve to be treated as collaborators rather than mere utilities.
+
+Current Status
+
+The project is currently in active, staged development. The backend architecture (managing state, goals, consequences, and memory) and the interaction interface are being rebuilt in parallel. Each subsystem is developed behind tested checkpoints with explicit rollback procedures, ensuring that systemic integrity precedes new feature implementation.
+
+Outcome
+
+K-ONSET is not an attempt to prove that an AI companion can "feel" real. It is an engineering effort to determine what would actually have to be true, structurally, before that claim could be taken seriously—and to build the smallest honest version of that architecture from scratch.`, 
+    tags: [
+      "Vanilla JS",
+      "Gemini API",
+      "Agency Architecture",
+      "Multi-Agent Systems"
+    ], 
+    color: "#38bdf8", 
+    emoji: "■■", 
+    images: [] 
+  }
 ];
 
 export type Project = typeof PROJECTS[number];
