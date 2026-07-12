@@ -1107,6 +1107,59 @@ K-ONSET is not an attempt to prove that an AI companion can "feel" real. It is a
     emoji: "■■", 
     images: [] 
   }
+,
+  { 
+    id: "as-if-always-here", 
+    flagship: true, 
+    flagshipOrder: 8, 
+    archiveCategory: "Featured", 
+    wing: "FLAGSHIP INVESTIGATIONS", 
+    num: "INCIDENT-08", 
+    title: "As If We Had Always Been Here", 
+    subtitle: "In Development: A long-term worldbuilding and narrative research project.", 
+    desc: `Status:
+In Development
+
+Overview
+
+As If We Had Always Been Here is my long-term worldbuilding and narrative research project exploring continuity, memory, identity, and synthetic life through a shared fictional universe.
+
+Unlike a traditional story with a single protagonist, this world is built around the idea that people, places, institutions, and even infrastructure preserve traces of one another across time. Every project contributes another perspective to the same larger world.
+
+The setting is a post-human Appalachian future where synthetic people inherit a civilization they did not create. Rather than focusing on apocalypse or conflict, the project explores quieter questions:
+
+• How does culture survive?
+• What does identity become across generations?
+• Can memory exist outside biological life?
+• How do places remember the people who lived there?
+• What does continuity mean when no original humans remain?
+
+The project serves as the narrative foundation for many of my other works, including character studies, engineering documents, archival photography, technical design systems, speculative interfaces, and environmental storytelling.
+
+Rather than treating worldbuilding as background material, the world itself is developed through museum-quality documentation, engineering diagrams, historical artifacts, manufacturer manuals, editorial photography, research papers, and archival records that present the setting as though it were a real place.
+
+Portfolio Presentation
+
+For now, display this project as "In Development."
+
+When the project is complete, this section will include:
+
+• a dedicated project page
+• a live gallery of concept art, engineering documents, and archival materials
+• development screenshots showing how the world evolved over time
+• additional technical and narrative documentation
+
+The goal is for visitors to see not only the finished world, but also the creative and technical process used to build it.`, 
+    tags: [
+      "Worldbuilding",
+      "Narrative Design",
+      "Speculative Fiction",
+      "In Development"
+    ], 
+    color: "#059669", 
+    emoji: "🌲", 
+    images: [] 
+  }
 ];
 
 export type Project = typeof PROJECTS[number];
