@@ -115,78 +115,13 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
 
     useEffect(() => {
     if (isOpen && messages.length === 0 && !isLoading && !isStreaming) {
-      triggerInitialGreeting();
+      setMessages([{
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: "Welcome. I maintain this archive.\n\nName a project, ask where to begin, or tell me what kind of work brought you here."
+      }]);
     }
   }, [isOpen, messages.length]);
-
-  const triggerInitialGreeting = async () => {
-    setIsLoading(true);
-    try {
-      const projectContext = `Visitor is currently observing section: ${activeSection}\n\n` + PROJECTS.map(p => `${p.title} (${p.wing}): ${p.desc} [Tags: ${p.tags.join(', ')}]${(p as any).sourceLink ? ' [Source code available]' : ''}`).join('\n');
-      const visitorMemory = await getVisitorMemory();
-      
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [],
-          projectContext,
-          visitorMemory,
-          isInitialGreeting: true
-        }),
-      });
-
-      if (!response.ok) throw new Error('Failed to fetch response');
-      
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-      
-      setIsLoading(false);
-      setIsStreaming(true);
-      
-      const assistantMessageId = Date.now().toString();
-      setMessages([{
-        id: assistantMessageId,
-        role: 'assistant',
-        content: ''
-      }]);
-
-      let assistantMessageContent = '';
-      if (reader) {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          const chunk = decoder.decode(value, { stream: true });
-          const lines = chunk.split('\n');
-          for (const line of lines) {
-            if (line.startsWith('data: ')) {
-              const dataStr = line.slice(6);
-              if (dataStr === '[DONE]') break;
-                            try {
-                const parsed = JSON.parse(dataStr);
-                if (parsed.error) {
-                  assistantMessageContent += parsed.error;
-                  setMessages(prev => 
-                    prev.map(m => m.id === assistantMessageId ? { ...m, content: assistantMessageContent } : m)
-                  );
-                } else if (parsed.content) {
-                  assistantMessageContent += parsed.content;
-                  setMessages(prev => 
-                    prev.map(m => m.id === assistantMessageId ? { ...m, content: assistantMessageContent } : m)
-                  );
-                }
-              } catch (e) {}
-            }
-          }
-        }
-      }
-      setIsStreaming(false);
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-      setIsStreaming(false);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent, directMessage?: string) => {
     e?.preventDefault();
