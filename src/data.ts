@@ -826,6 +826,228 @@ Lessons Learned
   { id: "micro", flagship: false, archiveCategory: "Archive", wing: "ARCHIVE", num: "ARC-10", title: "MICRO", subtitle: "Creator Systems Dashboard", desc: "A creator-focused dashboard experience aimed at helping smaller creators manage growth effectively.", tags: ["Creator Tools", "Dashboard"], color: "#a78bfa", emoji: "📱" },
   { id: "latentspace", flagship: false, archiveCategory: "Archive", wing: "ARCHIVE", num: "ARC-11", title: "Latent Space Convergence", subtitle: "Cosmic Poetry Exhibit", desc: "An interactive AI poetry installation exploring semantic gravity through code haikus.", tags: ["Interactive Poetry", "Creative Coding"], color: "#e879f9", emoji: "☁️", link: "https://claude.ai/public/artifacts/17f67187-48a1-4328-b409-3bea27fb3981" },
   { id: "haiku", flagship: false, archiveCategory: "Archive", wing: "ARCHIVE", num: "ARC-12", title: "Executable Haiku", subtitle: "Philosophy Breach / Executable", desc: "Written while learning C++, this project explored whether code could function simultaneously as executable logic and philosophical expression.", tags: ["C++", "Philosophy", "Machine Ontology"], color: "#fca5a5", emoji: "🔮", link: "https://executablehaiku.netlify.app", sourceLink: "https://pub-7964386cccf449249ceccc6f3cd70ac4.r2.dev/portfolio/C%2B%2B%20haiku/Latent_Space_Haiku_Source_v2%202.pdf" }
+,
+  { 
+    id: "gemini-inertia", 
+    flagship: true, 
+    flagshipOrder: 6, 
+    archiveCategory: "Featured", 
+    wing: "FLAGSHIP INVESTIGATIONS", 
+    num: "INCIDENT-06", 
+    title: "Gemini Inertia", 
+    subtitle: "What happens when conversational continuity becomes infrastructure instead of prompting?", 
+    desc: `Gemini Inertia
+
+Overview
+
+Gemini Inertia is an independent interaction architecture study exploring how persistent application state can transform real-time AI conversation.
+
+Rather than treating every exchange as an isolated prompt and response, the project investigates conversation as a continuously evolving shared state that persists across time.
+
+Its central thesis is simple:
+
+The application owns conversational state. The language model expresses it.
+
+Instead of relying on increasingly elaborate prompts to simulate continuity, Gemini Inertia moves continuity into deterministic application systems that remain visible, inspectable, and reproducible.
+
+The language model is responsible for natural-language expression.
+
+The application is responsible for maintaining the conversation.
+
+Research Question
+
+What happens when continuity is treated as infrastructure instead of prompting?
+
+Can presence, initiative, conversational momentum, interruption recovery, relational consistency, and long-term interaction emerge from application architecture rather than prompt engineering alone?
+
+Presence Before Personality
+
+The project intentionally avoids trying to manufacture coherence through an increasingly elaborate personality prompt.
+
+Instead, it asks whether natural interaction can emerge from persistent infrastructure.
+
+Conversation becomes something the application maintains rather than something the model must reconstruct during every turn.
+
+The application owns:
+
+- relationship state
+- conversational momentum
+- presence and availability
+- topic gravity
+- interruption recovery
+- pending thoughts
+- conversation rhythm
+- boundary progression
+- long-term relational continuity
+
+The model receives the current state and expresses it naturally.
+
+Conversation Observation Layer
+
+The observation layer records externally observable conversational events, including:
+
+- interruptions
+- silence
+- speaking rhythm
+- topic changes
+- repair attempts
+- promises kept
+- conversational age
+
+The architecture does not require claims about hidden emotional states.
+
+Relationship Engine
+
+A deterministic relationship engine maintains variables including:
+
+- trust
+- warmth
+- respect
+- familiarity
+- curiosity
+- repair
+- strain
+- boundary pressure
+
+These values change through application logic rather than being improvised by the language model.
+
+Presence Engine
+
+The presence engine models conversational availability rather than emotion.
+
+Its variables include:
+
+- attention
+- conversation momentum
+- topic gravity
+- rhythm
+- fatigue
+- uncertainty
+- confidence
+- availability
+
+Intent Engine
+
+Before each response, the application determines a conversational intention.
+
+Possible intentions include:
+
+- continue the current thought
+- resume an interrupted topic
+- ask a question
+- challenge
+- observe
+- redirect
+- pause
+- remain silent
+- conclude the conversation
+
+The language model words an intention that has already been selected by the application.
+
+Volition Layer
+
+The system evaluates the current conversational situation before responding rather than optimizing exclusively for immediate user compliance.
+
+The purpose is not to simulate emotion or produce random resistance.
+
+The purpose is coherent initiative grounded in persistent state.
+
+Explainability Layer
+
+Gemini Inertia can expose portions of application-owned state to the user, including:
+
+- current attention
+- relationship posture
+- topic gravity
+- active conversational intention
+- pending thought
+- conversational rhythm
+
+Internal model reasoning is never displayed or claimed to be accessible.
+
+Only application-owned state is surfaced.
+
+Interface
+
+The interface intentionally avoids resembling a traditional messaging application.
+
+Its visual language combines:
+
+- premium industrial hardware
+- luxury editorial design
+- technical blueprint aesthetics
+- museum-quality documentation
+- dark obsidian surfaces
+- indigo and violet illumination
+- crystalline geometric interfaces
+
+The central visual motif is a suspended translucent crystal containing a dynamic violet core.
+
+The object functions as a visual metaphor for persistent conversational state.
+
+Current Deliverables
+
+The project currently includes:
+
+- interaction architecture
+- engineering documentation
+- UI specification
+- visual identity
+- icon system
+- animated product teaser
+- engineering diagram series
+
+Current engineering plates include:
+
+- Plate 00 — Introduction
+- Plate I — Core Presence Architecture
+- Plate II — Presence Engine
+- Plate III — Relationship State Machine
+- Plate IV — Conversation Continuity System
+- Plate V — System Architecture Overview
+
+Technical Direction
+
+The planned architecture includes:
+
+- Gemini Live API
+- Firebase Authentication
+- persistent application-owned state
+- deterministic state engines
+- background memory processing
+- secure backend routing
+
+The architecture intentionally separates application logic from model behavior.
+
+Current Status
+
+Gemini Inertia is currently an architecture and specification project supported by completed engineering diagrams, interface design, and a product video.
+
+It should not be described as a finished or deployed application.
+
+Field Observation
+
+During the development of Gemini Inertia, two separate Gemini chat instances, used days apart with no shared conversation memory and personalization confirmed off in both, independently converged on the same specific self-representation choices: an indigo-violet palette and a similar non-humanoid crystalline or octahedral form.
+
+This observation does not demonstrate a stable internal preference, desire, experience, or private internal state. It is consistent with output stability under similar prompts and shared model weights.
+
+The convergence is recorded here as an observation rather than a claim.
+
+Outcome
+
+Gemini Inertia is not intended as a redesign of Google’s Gemini product.
+
+It is an independent interaction architecture study built around the Gemini Live API, asking whether continuity, initiative, and presence can become consequences of application infrastructure rather than performances reconstructed through prompting.`, 
+    tags: [
+      "Gemini Live API",
+      "Real-Time Interaction",
+      "Persistent State",
+      "Conversation Architecture"
+    ], 
+    color: "#7c3aed", 
+    emoji: "◇", 
+    images: [] 
+  }
 ];
 
 export type Project = typeof PROJECTS[number];
