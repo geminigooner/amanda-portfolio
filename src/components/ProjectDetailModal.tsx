@@ -222,7 +222,7 @@ export function ProjectDetailModal({ project, onClose }: { project: Project | nu
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-transparent border border-[#333] hover:border-[#A59B8C] transition-all font-mono text-[10px] tracking-widest uppercase text-[#A59B8C] hover:text-[#F4EFE6] group rounded-sm flex-1 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]"
                       >
-                        Source Code
+                        {project.id === "haiku" ? "View PDF" : "Source Code"}
                         <ChevronRight aria-hidden="true" className="w-4 h-4 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                       </a>
                     )}

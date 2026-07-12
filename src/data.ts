@@ -1167,21 +1167,45 @@ The goal is for visitors to see not only the finished world, but also the creati
     wing: "APPLIED SYSTEMS", 
     num: "LRN-01", 
     title: "Daily.dev", 
-    subtitle: "Continuous Learning & Industry Awareness", 
-    desc: `Overview
+    subtitle: "Adaptive Learning Application", 
+    desc: `Status: In Development
 
-Daily.dev is one of the primary resources I use to build my software engineering and machine learning foundation.
+Overview
 
-Since beginning my programming journey in late April 2026, I've used it as part of my daily learning routine to reinforce programming concepts, stay current with software engineering articles, and gradually build familiarity with the broader development ecosystem.
+Daily.dev is a mobile-first adaptive learning application designed to teach one useful programming or artificial-intelligence concept each morning based on the work I am currently building.
 
-Rather than relying on a single course or curriculum, I intentionally combine Daily.dev with documentation, research papers, engineering blogs, open-source projects, and hands-on experimentation. My learning process emphasizes building real projects while studying the underlying concepts that make them work.
+It is not a coding bootcamp, productivity dashboard, terminal interface, or gamified course. It is conceived as a private intellectual studio: a calm, project-aware morning study journal where learning feels restorative rather than overwhelming.
 
-This resource represents one part of my commitment to continuous, self-directed learning alongside the portfolio projects documented throughout this archive.`, 
+Instead of following a fixed curriculum, the lesson engine considers:
+
+• current projects
+• recent lessons
+• concepts already understood
+• concepts frequently missed
+• the learner’s evolving knowledge profile
+
+That information feeds a lesson-priority and difficulty-calibration system, which selects one carefully sequenced morning lesson.
+
+Each lesson contains:
+
+• one new concept
+• context explaining why it matters
+• a clear explanation
+• one practical example
+• one small exercise
+• an application to a real project
+• a brief reflection
+• an update to the long-term knowledge archive
+
+The knowledge archive then influences future lesson generation, allowing the curriculum to develop alongside the learner’s actual work.
+
+Daily.dev explores an alternative to generic technical education: learning that responds to the systems someone is actively trying to build.`, 
     tags: [
-      "Learning",
-      "Software Engineering",
-      "Habits",
-      "Industry Context"
+      "Adaptive Learning",
+      "Mobile-First Product Design",
+      "Knowledge Architecture",
+      "AI Education",
+      "Project-Aware Curriculum"
     ], 
     color: "#eab308", 
     emoji: "📚" 

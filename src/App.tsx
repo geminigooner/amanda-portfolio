@@ -289,7 +289,7 @@ export default function App() {
                 Full Archive
               </h1>
               <p className="font-sans text-xl font-light text-[#D8CFC0] leading-relaxed max-w-3xl">
-                A comprehensive collection of all investigations, experiments, practical engineering works, and field notes.
+                A comprehensive collection of all investigations, experiments, applied systems, and field notes.
               </p>
             </header>
 
