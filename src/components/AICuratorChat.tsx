@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { X, ArrowRight, ShieldAlert, Database } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
-import { PROJECTS } from '../data';
+import { PROJECTS, Project } from '../data';
 import { getVisitorMemory, trackQuestionClick } from '../firebase';
 
 type Message = {
@@ -53,7 +53,7 @@ const AnimatedStreamText = ({ text, prefersReducedMotion }: { text: string, pref
   );
 };
 
-export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpenConvergence }: { activeSection?: string, onOpenContainmentWing?: () => void, onOpenConvergence?: () => void }) {
+export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpenConvergence, onSelectProject }: { activeSection?: string, onOpenContainmentWing?: () => void, onOpenConvergence?: () => void, onSelectProject?: (project: Project) => void }) {
   const prefersReducedMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useFocusTrap(isOpen);
@@ -302,6 +302,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                               return (
                                 <button
                                   key={i}
+                                  type="button"
                                   onClick={() => onOpenContainmentWing?.()}
                                   className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#B76E79]/30 hover:border-[#B76E79] text-[#B76E79] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B76E79]"
                                 >
@@ -315,6 +316,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                               return (
                                 <button
                                   key={i}
+                                  type="button"
                                   onClick={() => onOpenConvergence?.()}
                                   className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#A59B8C]/30 hover:border-[#A59B8C] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]"
                                 >
@@ -328,6 +330,7 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                               return (
                                 <button
                                   key={i}
+                                  type="button"
                                   onClick={() => window.dispatchEvent(new CustomEvent('open-valen-page'))}
                                   className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#0F766E]/30 hover:border-[#0F766E] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]"
                                 >
@@ -340,13 +343,19 @@ export function AICuratorChat({ activeSection = '', onOpenContainmentWing, onOpe
                             return (
                               <button
                                 key={i}
+                                type="button"
                                 onClick={() => {
-                                  const el = document.getElementById(projectName.toLowerCase().replace(/[^a-z0-9]/g, '-'));
-                                  if (el) {
-                                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                  const project = PROJECTS.find(
+                                    p => p.title.trim().toLowerCase() === projectName.trim().toLowerCase()
+                                  );
+                                  if (project) {
+                                    setIsOpen(false);
+                                    onSelectProject?.(project);
+                                  } else {
+                                    console.warn(`Project artifact not found: ${projectName}`);
                                   }
                                 }}
-                                className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#A59B8C]/30 hover:border-[#A59B8C] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C]"
+                                className="inline-flex items-center gap-2 px-3 py-1.5 mx-1 border-b border-[#A59B8C]/30 hover:border-[#A59B8C] text-[#F4EFE6] font-mono text-[10px] uppercase tracking-widest transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A59B8C] min-h-[44px] touch-manipulation"
                               >
                                 {projectName}
                                 <ArrowRight aria-hidden="true" className="w-3 h-3" />

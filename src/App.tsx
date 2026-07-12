@@ -224,7 +224,7 @@ export default function App() {
       <GlobalAudio />
       <ArchiveBackground />
       <FloatingPill />
-      <AICuratorChat activeSection={activeSection} onOpenContainmentWing={() => setIsContainmentWingOpen(true)} onOpenConvergence={() => setIsConvergenceOpen(true)} />
+      <AICuratorChat activeSection={activeSection} onOpenContainmentWing={() => setIsContainmentWingOpen(true)} onOpenConvergence={() => setIsConvergenceOpen(true)} onSelectProject={(project) => setSelectedProject(project)} />
       <ProgressIndicator />
       <HollowMeridianEvent isActive={isHollowEventActive} onClose={() => setIsHollowEventActive(false)} />
       
