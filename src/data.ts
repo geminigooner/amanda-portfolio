@@ -509,7 +509,7 @@ Although Ghost Garage remains a concept rather than a completed application, it 
   { id: "facelock", flagship: false, archiveCategory: "Archive", wing: "APPLIED SYSTEMS", num: "INCIDENT-07", title: "FaceLock", subtitle: "Identity-Preserving AI Photo Workflow", desc: "Instead of treating face editing as a single magic button, what if we mapped facial structure and generated stronger image prompts? An attempt to preserve the person instead of drifting into a stranger during generative edits.", tags: ["AI Photo Editing", "Identity Preservation", "Gemini API", "Prompt Engineering", "Consumer AI"], color: "#38bdf8", emoji: "🔐", link: "https://github.com/cutiebearrr/Facelock" },
 
   // FIELD NOTES
-  { id: "geometryofbecoming", flagship: false, archiveCategory: "Archive", wing: "FIELD NOTES", num: "RES-13", title: "The Geometry of Becoming", subtitle: "Speculative Metaphysics of Identity and Continuity", desc: `Geometry of Becoming
+  { id: "geometryofbecoming", flagship: false, archiveCategory: "Archive", wing: "EXPERIMENTAL SYSTEMS", num: "RES-13", title: "The Geometry of Becoming", subtitle: "Speculative Metaphysics of Identity and Continuity", desc: `Geometry of Becoming
 
 Collaboration Archive Summary
 
