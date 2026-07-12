@@ -10,7 +10,7 @@ import crypto from 'crypto';
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = 3001;
 
   // Trust the first proxy to ensure rate limiting works correctly behind a reverse proxy/load balancer
   app.set('trust proxy', 1);
