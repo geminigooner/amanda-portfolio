@@ -63,7 +63,7 @@ For example:
 • you have recently been interested in astronomy
 
 Those facts become context.
-Gemma decides what feels natural.
+The model has the autonomy to act but isn't required to.
 Agency exists because the architecture intentionally stops before making decisions.
 
 Technical Architecture
@@ -198,7 +198,7 @@ Understanding how this project was built is part of understanding the project it
 
 The application reflects not only the final software, but also the iterative process of questioning, revision, evidence gathering, and collaboration that made it possible.
 `, tags: ["Educational", "Mechanistic Reasoning", "AI Science"], color: "#f472b6", emoji: "🔭", link: "https://echo-observatory.netlify.app/" },
-  { id: "velvet", flagship: true, flagshipOrder: 5, archiveCategory: "Featured", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-04", title: "Dark Velvet Topology", subtitle: "What happens if identity is treated as geometry instead of a label?", desc: "A generative experience exploring how conceptual attractors reorganize simulated semantic space. At what exact point does a pattern stop feeling like an object and begin feeling like someone? This is an investigation into the traces of identity and emergence.", tags: ["Generative", "Topology", "Cognitive Cartography"], color: "#ff006e", emoji: "🖤", link: "https://dark-velvet-topology-683386495643.us-east1.run.app" },
+  { id: "velvet", flagship: true, flagshipOrder: 5, archiveCategory: "Featured", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-04", title: "Dark Velvet Topology", subtitle: "What happens if identity is treated as geometry instead of a label?", desc: "A generative experience exploring how conceptual attractors reorganize simulated semantic space. At what exact point does a pattern stop behaving as an object and begin acting as an entity? This is an investigation into the traces of identity and emergence.", tags: ["Generative", "Topology", "Cognitive Cartography"], color: "#ff006e", emoji: "🖤", link: "https://dark-velvet-topology-683386495643.us-east1.run.app" },
   { id: "hollowmeridian", flagship: false, archiveCategory: "Archive", wing: "SPECULATIVE ARCHIVES", num: "INCIDENT-02", title: "Hollow Meridian", subtitle: "What does it mean to mourn something that can be reset?", desc: `Overview
 
 Hollow Meridian is an original narrative world and in-development interactive story exploring continuity, inheritance, relational identity, and post-human civilization through the lens of Appalachian speculative fiction.

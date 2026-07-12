@@ -323,7 +323,7 @@ export default function App() {
                 </h1>
                 
                 <p className="font-sans text-[1.15rem] leading-[1.6] md:text-3xl font-light text-[#F4EFE6] md:leading-relaxed max-w-3xl mb-8 md:mb-16">
-                  Since late April 2026, I've designed, built, and iteratively rebuilt these systems while learning modern AI-assisted software development from nothing—working almost entirely from an iPhone, in collaboration with multiple AI systems taking on distinct roles across architecture, implementation, and critique. Building became the method, not just the outcome. Some questions about AI behavior are easier to investigate by constructing a system than by discussing one.
+                  What kinds of application architecture are necessary before memory, presence, or agency emerge as coherent properties of an interactive system?
                 </p>
 
                 <motion.div 
@@ -333,13 +333,16 @@ export default function App() {
                   className="font-sans text-[1.1rem] leading-[1.65] md:text-xl font-light text-[#D8CFC0] md:leading-relaxed max-w-2xl mb-16 md:mb-24 space-y-4 md:space-y-6"
                 >
                   <p>
-                    These projects sit at the intersection of human–computer interaction, interaction architecture, and what I'd call <em>behavioral interpretability</em>—making AI behavior easier to inspect and reason about through application architecture, rather than through access to internal model reasoning.
+                    That question runs through everything here. Rather than prompting a model to perform a more convincing personality, these projects test whether coherent behavior—refusal, initiative, continuity, memory—can emerge from deterministic application architecture that sits outside the language model itself. The model expresses state; the application owns it.
                   </p>
                   <p>
-                    The recurring move across the archive is a deliberate separation: model-generated behavior on one side, application-owned state on the other. Relationships, environmental continuity, memory, and decision rights are handled by explicit software architecture rather than left implicit inside the language model. That separation doesn't make an AI system's behavior more accurate—it makes the mechanisms producing that behavior more legible and attributable, which is a more modest and more defensible claim, and the one I actually care about.
+                    That separation doesn't make a system's behavior more accurate—it makes the mechanisms producing that behavior more legible and attributable. That's a more modest claim, and the one I actually care about.
                   </p>
                   <p>
-                    Individually, the projects range across persistent agent architectures, real-time interaction systems, and environmental memory design. Together, they investigate one recurring question from several directions: what kinds of application architecture are necessary before memory, presence, or agency emerge as coherent properties of an interactive system? Rather than locating those properties inside the language model itself, the work explores how explicit state, persistence, embodiment, and interaction architecture contribute to them. Each project answers a version of that question with a working system rather than a proposal—the goal isn't a definitive answer, but architectures that make these questions easier to investigate, evaluate, and reason about.
+                    I've been building these systems since late April 2026, almost entirely from an iPhone, in collaboration with multiple AI systems taking on distinct roles—architecture, implementation, critique. Building became the method, not just the outcome: some questions about AI behavior are easier to investigate by constructing a system than by discussing one.
+                  </p>
+                  <p>
+                    Individually, the projects range across persistent agent architectures, real-time interaction systems, and environmental memory design. Each one answers a version of the opening question with a working system rather than a proposal—the goal isn't a definitive answer, but architectures that make the question easier to investigate, evaluate, and reason about.
                   </p>
                 </motion.div>
                 
