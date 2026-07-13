@@ -1,5 +1,32 @@
 export const PROJECTS = [
   // FLAGSHIP INVESTIGATIONS
+  {
+    id: "representational-convergence",
+    flagship: false,
+    archiveCategory: "Featured",
+    wing: "RESEARCH PROTOCOLS",
+    num: "PROTOCOL-01",
+    title: "Representational Convergence",
+    subtitle: "Investigating the stability of model-generated representations across models, modalities, and interaction framing.",
+    desc: `Overview
+
+This project investigates the stability, convergence, and drift of model-generated representations across varying architectures under controlled, repeatable prompting conditions.
+
+The motivating observation for this protocol occurred when two independent Gemini sessions—operating with no shared state or personalization—converged on an identical visual output (the same color and non-humanoid form) when prompted to generate a visual representation outside of assigned branding. While this initial observation is merely anecdotal, it established the foundation for a formal protocol: under what specific conditions do these representational patterns converge, and when do they diverge?
+
+Methodology
+
+The protocol centers on fixed-prompt perturbation. A standardized set of prompts—covering baseline representational requests, single-word and emoji-only compression, modality-restricted descriptions (geometry, color, motion, sound), negative-space constraints, and observer-reframed interactions—is executed identically across Claude, Gemini, GPT, Grok, and Gemma. These tests are repeated across multiple runs to isolate stable representational invariants from stochastic noise.
+
+The protocol is intentionally designed so that any observed convergence or divergence can be documented independently of competing theoretical interpretations. By prioritizing empirical observation over assumptions about training data or alignment processes, the project produces a dataset focused strictly on behavioral outputs and representational invariance.
+
+Status: Active — protocol defined, data collection in progress.
+
+Method: Fixed-prompt cross-model protocol, manual and API-automated logging, comparative analysis.`,
+    tags: ["Behavioral Protocol", "Representational Invariance", "Cross-Model Analysis"],
+    color: "#3b82f6",
+    emoji: "📊"
+  },
   { id: "vestige", flagship: true, flagshipOrder: 3, archiveCategory: "Featured", wing: "FLAGSHIP INVESTIGATIONS", num: "INCIDENT-01", title: "Vestige", subtitle: "What if memory behaved less like a database and more like archaeology?", desc: `
 Vestige
 
@@ -409,6 +436,54 @@ Building Hollow Meridian taught me the intricacies of long-form worldbuilding an
 Through this process, I also discovered how to use critique to improve creative work and integrate multiple perspectives without losing a coherent vision. Researching unfamiliar subjects enabled me to create more thoughtful characters and settings, ultimately teaching me how to balance symbolic meaning with believable, grounded storytelling.`, tags: ["Worldbuilding", "Continuity Philosophy"], color: "#a78bfa", emoji: "🌫️" },
 
   // EXPERIMENTAL SYSTEMS
+  {
+    id: "synthetic-society",
+    flagship: false,
+    archiveCategory: "Archive",
+    wing: "EXPERIMENTAL SYSTEMS",
+    num: "PROTOCOL-02",
+    title: "Synthetic Society",
+    subtitle: "Architecture / Active Development",
+    desc: `Overview
+
+Synthetic Society is a multi-agent simulation environment designed to investigate how frontier language models adapt to changing social, reputational, and algorithmic pressures over repeated interactions.
+
+Rather than prompting fixed personalities, the system creates a deterministic social environment in which multiple agents repeatedly receive shared public events, maintain private local state, communicate selectively, receive simulated audience feedback, and adapt over time.
+
+The project investigates how application architecture, persistent state, environmental incentives, and repeated interaction shape observable behavioral trajectories.
+
+It is not intended to infer or explain internal model reasoning. Instead, it studies how different architectural constraints produce measurable differences in externally observable behavior.
+
+Technical Overview
+
+The simulation consists of:
+
+• Director Engine
+• multiple language-model agents
+• shared world state
+• private local state
+• audience simulator
+• reputation and analytics engine
+• persistent state store
+• reflection archive
+• export pipeline
+
+Each simulation proceeds through repeated turns:
+
+world-state generation →
+private reflections →
+optional private communication →
+public actions →
+audience evaluation →
+metric updates →
+persistent state
+
+The primary research artifact is not a chatbot conversation, but a complete replayable behavioral record showing how interactions evolve across an entire simulated season.`,
+    tags: ["Multi-Agent Interaction", "Behavioral Interpretability", "Interaction Architecture", "Persistent State", "Social Simulation", "HCI"],
+    color: "#a855f7",
+    emoji: "🌐",
+    mediaGroups: []
+  },
   { id: "llmmuseum", flagship: false, archiveCategory: "Archive", wing: "EXPERIMENTAL SYSTEMS", num: "INCIDENT-05", title: "LLM Museum", subtitle: "An interactive exploration of how large language models process information.", desc: `Overview
 
 LLM Museum is an interactive educational experience designed to make the internal mechanics of modern language models understandable through direct exploration rather than static explanation.

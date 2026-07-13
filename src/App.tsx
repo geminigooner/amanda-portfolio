@@ -194,10 +194,12 @@ export default function App() {
   }, []);
 
   const flagshipProjects = PROJECTS.filter(p => p.flagship).sort((a, b) => (a.flagshipOrder || 0) - (b.flagshipOrder || 0));
+  const researchProtocolProjects = PROJECTS.filter(p => p.wing === 'RESEARCH PROTOCOLS');
   
   const archiveProjects = PROJECTS.filter(p => !p.flagship);
   
   const WING_ORDER = [
+    "RESEARCH PROTOCOLS",
     "EXPERIMENTAL SYSTEMS",
     "APPLIED SYSTEMS",
     "FIELD NOTES",
@@ -373,6 +375,22 @@ export default function App() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                   {flagshipProjects.map((project, index) => (
+                    <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {/* RESEARCH PROTOCOLS */}
+            {researchProtocolProjects.length > 0 && (
+              <Section id="research-protocols" title="Research Protocols" subtitle="BEHAVIORAL INVESTIGATIONS">
+                <div className="mb-12 max-w-2xl">
+                  <p className="text-[#A59B8C] font-light leading-relaxed text-base italic mb-4">
+                    "Controlled methodologies for observing emergent behavior."
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {researchProtocolProjects.map((project, index) => (
                     <ProjectCard key={project.id} project={project} index={index} onClick={() => setSelectedProject(project)} />
                   ))}
                 </div>
